@@ -2,7 +2,7 @@
 <template>
     <div>
         <h1>Tag Cloud Generator!</h1>
-        
+
         <control-panel v-bind:username="username" 
                        v-bind:period="period" 
                        v-bind:max_artists="max_artists"
@@ -55,26 +55,7 @@ export default {
                      },
         generator:new Generator(),
     };
-},
-
-    /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Computed ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
-    computed:{
-        possessive_result_username: function () {
-            if (this.generator.result.username[this.generator.result.username.length-1].toLowerCase() == 's') {
-                return this.generator.result.username+"'"
-            } else {
-                return this.generator.result.username+"'s"
-            }
-        },
-        displayable_result_period: function () {
-            return {'7day':'the last 7 days',
-                    '1month':'the last month',
-                    '3month':'the last 3 months',
-                    '6month':'the last 6 months',
-                    '12month':'the last year',
-                    'overall':'overall'}[this.generator.result.period]
-        }
-    }
+  },
 }
 </script>
 
