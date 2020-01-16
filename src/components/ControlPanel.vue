@@ -48,7 +48,6 @@
     @media (orientation: portrait) {
         #container { 
             padding:1vw 1.5vw 1vw 1vw;
-            flex-direction:row;
         }
     }
 
@@ -61,14 +60,17 @@
         }
     }
 
-    button { margin:0 0 0 1vw; }
+    button { 
+        margin:0 0 0 1vw;
+    }
+    #button-container {
+        flex-grow:1;
+        display:flex;
+        justify-content:flex-end;
+    }
     @media (orientation: portrait) {
         #button-container { 
             flex-basis:30%;
-            align-self:flex-end;
-
-            display:flex;
-            justify-content:flex-end;
         }
     }
 

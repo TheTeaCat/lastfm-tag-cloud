@@ -1,7 +1,7 @@
 /* eslint-disable vue/require-v-for-key */
 <template>
     <div>
-        <h1>Tag Cloud Generator!</h1>
+        <h1 id="page-title">Tag Cloud Generator!</h1>
 
         <control-panel v-bind:username="username" 
                        v-bind:period="period" 
@@ -59,7 +59,17 @@
   }
 </script>
 
-<style>
+<style scoped>
   @import './assets/css/reset.css';
   @import './assets/css/styles.css';
+
+  #page-title {
+    margin: 1.5vw 0 1vw 2.5vw;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    display:inline-block;
+  }
+  @media (orientation: portrait) {
+    #page-title { margin: 3vw 0 2vw 5vw; }
+  }
 </style>
