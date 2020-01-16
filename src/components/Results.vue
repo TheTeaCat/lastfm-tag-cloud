@@ -43,7 +43,7 @@
 <style scoped>
     h2 { margin:0 0 1.2vw 0; }
     @media (orientation: portrait) {
-        h2 { margin:1vw 1vw 2vw 0; }
+        h2 { margin:1vw 1vw 1vw 0; }
     }
 
     #artists-list, #tags-list {
