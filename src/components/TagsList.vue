@@ -3,11 +3,13 @@
         <collapse-button v-bind:collapsed="collapsed" @collapse="collapse"/>
         <h2>Tags:</h2>
         <div v-if="!collapsed">
-            <li v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'><span class="tag">{{ tag }}</span>:
-                <ol class="artist-list">
-                    <li v-for='tagging in taggings[tag]' v-bind:key='tagging.artist'>{{ tagging.artist }}</li>
-                </ol>
-            </li>
+            <ol class="tag-list">
+                <li v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'><span class="tag">{{ tag }}</span>:
+                    <ol class="artist-list">
+                        <li v-for='tagging in taggings[tag]' v-bind:key='tagging.artist'>{{ tagging.artist }}</li>
+                    </ol>
+                </li>
+            </ol>
         </div>
     </div>
 </template>
@@ -36,6 +38,14 @@ export default {
 <style scoped>
 h2 {
     display:inline
+}
+
+.tag-list {
+    margin: 0.5vw 0 0 0;
+    padding: 1vw 0 1vw 2vw;
+
+    border-width:1px;
+    border-style:solid;
 }
 
 .tag {
