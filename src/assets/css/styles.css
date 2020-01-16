@@ -1,0 +1,25 @@
+body {
+    font-family:'Courier New', Courier, monospace;
+    font-size:11pt;
+}
+
+h1 {
+    font-size:200%;
+    font-weight:bold;
+}
+h2 {
+    font-size:150%;
+    font-weight:bold;
+}
+@media (orientation: portrait) {
+    h1 {
+        font-size: 150%;
+    }
+    h2 {
+        font-size:120%;
+    }
+}
+
+ul, ol {
+    list-style: circle inside;
+}

@@ -1,6 +1,8 @@
 /* eslint-disable vue/require-v-for-key */
 <template>
-    <div id="container">
+    <div>
+        <h1>Tag Cloud Generator!</h1>
+        
         <control-panel v-bind:username="username" 
                        v-bind:period="period" 
                        v-bind:max_artists="max_artists"
@@ -78,4 +80,5 @@ export default {
 
 <style>
   @import './assets/css/reset.css';
+  @import './assets/css/styles.css';
 </style>

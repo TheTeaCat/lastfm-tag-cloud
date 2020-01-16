@@ -1,14 +1,11 @@
 <template>
-    <p>Tags on your artists:
-        <br><br>
-        <ol id="tags-list">
-            <li v-for='tag in tags' v-bind:tag='tag'>{{ tag }}:
-                <ol class="taggings-list">
-                    <li v-for='tagging in taggings[tag]'>{{ tagging.artist }}</li>
-                </ol>
-            </li>
-        </ol>
-    </p>
+    <ol id="tag-list">
+        <li v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'><span class="tag">{{ tag }}</span>:
+            <ol class="artist-list">
+                <li v-for='tagging in taggings[tag]' v-bind:key='tagging.artist'>{{ tagging.artist }}</li>
+            </ol>
+        </li>
+    </ol>
 </template>
 
 <script>
@@ -16,3 +13,23 @@
         props: ['tags','taggings']
     }
 </script>
+
+<style scoped>
+.tag {
+    font-weight:bold;
+}
+
+.artist-list {
+    display:inline;
+}
+.artist-list li {
+    display:inline;
+}
+
+.artist-list li:before {
+    content:", "
+}
+.artist-list li:first-child:before {
+    content:""
+}
+</style>
