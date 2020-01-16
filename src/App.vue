@@ -6,6 +6,7 @@
         <control-panel v-bind:username="username" 
                        v-bind:period="period" 
                        v-bind:max_artists="max_artists"
+                       v-bind:state="generator.state"
                        @generate="generator.generate(username,period.selected,max_artists.selected)"/>
 
         <div id="results-container">

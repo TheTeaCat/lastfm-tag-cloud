@@ -24,14 +24,14 @@
         </div>
 
         <div class="option" id="button-container">
-            <button v-on:click="$emit('generate')">Load Data</button>
+            <button id="generate-button" :loading="state != undefined ? 'true' : 'false'" v-on:click="$emit('generate')">Load Data</button>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['username','period','max_artists']
+        props: ['username','period','max_artists','state']
     }
 </script>
 
@@ -44,6 +44,7 @@
 
         display: flex;
         flex-wrap:wrap;
+        align-items:center;
     }
     @media (orientation: portrait) {
         #container { 
@@ -72,6 +73,29 @@
         #button-container { 
             flex-basis:30%;
         }
+    }
+
+    @keyframes rainbow {
+        100%,0% {border-color:rgb(255,255,0)}
+        33% {border-color:rgb(255,0,255)}
+        66% {border-color:rgb(0,255,255)}
+    }
+    @keyframes loading {
+        0% {border-color:rgb(255,0,0)}
+        50% {border-color:rgb(0,255,0)}
+    }
+    #generate-button {
+        font-weight:bold;
+        background:#fff;
+        border-style:dashed;
+        border-width:3px;
+        box-sizing:border-box;
+    }
+    #generate-button[loading = "false"] {
+        animation:rainbow 10s linear infinite;
+    }
+    #generate-button[loading = "true"] {
+        animation: loading 0.5s steps(1,end) infinite;
     }
 
     span { 

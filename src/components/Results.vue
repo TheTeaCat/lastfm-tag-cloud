@@ -13,7 +13,7 @@
                 'overall':'overall'}[result.period] }}:
         </h2>
         <h2 v-else-if="state != undefined">
-            {{ state }}
+            <spinner/> {{ state }}
         </h2>
         <h2 v-else>
             Click "Load Data"!
@@ -28,11 +28,13 @@
 <script>
     import ArtistsList from "./ArtistsList.vue"
     import TagsList from "./TagsList.vue"
+    import Spinner from "./Spinner.vue"
 
     export default {
         components: {
             ArtistsList,
             TagsList,
+            Spinner,
         },
         props: ['state','result']
     }
