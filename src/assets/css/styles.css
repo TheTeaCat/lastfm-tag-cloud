@@ -1,4 +1,6 @@
 body {
+    margin:1vw;
+
     font-family:'Courier New', Courier, monospace;
     font-size:11pt;
 }
@@ -18,6 +20,21 @@ h2 {
     h2 {
         font-size:120%;
     }
+}
+
+.collapse-button {
+    margin:0.5vw;
+    padding:0;
+    width:1.5em;
+    height:1.5em;
+
+    font-family:'Courier New', Courier, monospace;
+    font-size:11pt;
+
+    background:#fff;
+    border-style:dashed;
+    border-width:1px;
+    border-color:#000;
 }
 
 ul, ol {

@@ -13,10 +13,8 @@
                 'overall':'overall'}[result.period] }}:
         </h2>
 
-        <h2>Artists:</h2>
         <artists-list id="artists-list" v-bind:artists="result.artists" v-bind:listens="result.listens"/>
 
-        <h2>Tags:</h2>
         <tags-list id="tags-list" v-bind:tags="result.tags" v-bind:taggings="result.taggings"></tags-list>
     </div>
 </template>
@@ -40,7 +38,7 @@ h2 {
 }
 
 #artists-list, #tags-list {
-    border-width:3px 0px 3px 0px;
+    border-width:1px 0px 1px 0px;
     border-style:solid;
     margin:1vw;
     padding:1vw;
