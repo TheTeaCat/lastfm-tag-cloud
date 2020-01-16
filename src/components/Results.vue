@@ -20,27 +20,25 @@
 </template>
 
 <script>
-import ArtistsList from "./ArtistsList.vue"
-import TagsList from "./TagsList.vue"
+    import ArtistsList from "./ArtistsList.vue"
+    import TagsList from "./TagsList.vue"
 
-export default {
-    components: {
-        ArtistsList,
-        TagsList,
-    },
-    props: ['result']
-}
+    export default {
+        components: {
+            ArtistsList,
+            TagsList,
+        },
+        props: ['result']
+    }
 </script>
 
 <style scoped>
-h2 {
-    margin:1vw;
-}
+    h2 { margin:1vw; }
 
-#artists-list, #tags-list {
-    border-width:1px 0px 1px 0px;
-    border-style:solid;
-    margin:1vw;
-    padding:1vw;
-}
+    #artists-list, #tags-list {
+        border-width:1px 0px 1px 0px;
+        border-style:solid;
+        margin:1vw;
+        padding:1vw;
+    }
 </style>

@@ -13,40 +13,35 @@
 </template>
 
 <script>
-import CollapseButton from "./CollapseButton.vue"
+    import CollapseButton from "./CollapseButton.vue"
 
-export default {
-    components: {
-        CollapseButton
-    },
-    props: ['artists','listens'],
-    data: function(){
-        return {
-            collapsed:true
-        }
-    },
-    methods: {
-        collapse: function(){
-            this.collapsed = !this.collapsed
+    export default {
+        components: {
+            CollapseButton
+        },
+        props: ['artists','listens'],
+        data: function(){
+            return {
+                collapsed:true
+            }
+        },
+        methods: {
+            collapse: function(){
+                this.collapsed = !this.collapsed
+            }
         }
     }
-}
 </script>
 
 <style scoped>
-h2 {
-    display:inline
-}
+    h2 { display:inline; }
 
-#artist-list {
-    margin: 0.5vw 0 0 0;
-    padding: 1vw 0 1vw 2vw;
+    #artist-list {
+        margin: 0.5vw 0 0 0;
+        padding: 1vw 0 1vw 2vw;
+        border-width:1px;
+        border-style:solid;
+    }
 
-    border-width:1px;
-    border-style:solid;
-}
-
-.artist {
-    font-weight:bold;
-}
+    .artist { font-weight:bold; }
 </style>

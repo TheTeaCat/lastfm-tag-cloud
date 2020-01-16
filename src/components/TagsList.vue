@@ -15,54 +15,41 @@
 </template>
 
 <script>
-import CollapseButton from "./CollapseButton.vue"
+    import CollapseButton from "./CollapseButton.vue"
 
-export default {
-    components: {
-        CollapseButton
-    },
-    props: ['tags','taggings'],
-    data: function(){
-        return {
-            collapsed:true
-        }
-    },
-    methods: {
-        collapse: function(){
-            this.collapsed = !this.collapsed
+    export default {
+        components: {
+            CollapseButton
+        },
+        props: ['tags','taggings'],
+        data: function(){
+            return {
+                collapsed:true
+            }
+        },
+        methods: {
+            collapse: function(){
+                this.collapsed = !this.collapsed
+            }
         }
     }
-}
 </script>
 
 <style scoped>
-h2 {
-    display:inline
-}
+    h2 { display:inline; }
 
-.tag-list {
-    margin: 0.5vw 0 0 0;
-    padding: 1vw 0 1vw 2vw;
+    .tag-list {
+        margin: 0.5vw 0 0 0;
+        padding: 1vw 0 1vw 2vw;
+        border-width:1px;
+        border-style:solid;
+    }
 
-    border-width:1px;
-    border-style:solid;
-}
+    .tag { font-weight:bold; }
 
-.tag {
-    font-weight:bold;
-}
+    .artist-list { display:inline; }
+    .artist-list li { display:inline; }
 
-.artist-list {
-    display:inline;
-}
-.artist-list li {
-    display:inline;
-}
-
-.artist-list li:before {
-    content:", "
-}
-.artist-list li:first-child:before {
-    content:""
-}
+    .artist-list li:before { content:", "; }
+    .artist-list li:first-child:before { content:""; }
 </style>

@@ -22,41 +22,41 @@
 </template>
 
 <script>
-import ControlPanel from "./components/ControlPanel.vue"
-import Results from "./components/Results.vue"
-import Generator from "./assets/js/Generator.js"
+  import ControlPanel from "./components/ControlPanel.vue"
+  import Results from "./components/Results.vue"
+  import Generator from "./assets/js/Generator.js"
 
-export default {
-    /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Components ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
-    components: {
-        Results,
-        ControlPanel,
+  export default {
+      /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Components ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+      components: {
+          Results,
+          ControlPanel,
+      },
+      
+      /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Data ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+      data: function() {
+        return {
+          username:'TheTeaCat',
+          period:{selected:'3month',
+                  options:[
+                      {text:'7 Days',value:'7day'},
+                      {text:'Month',value:'1month'},
+                      {text:'3 Months',value:'3month'},
+                      {text:'6 Months',value:'6month'},
+                      {text:'Year',value:'12month'},
+                      {text:'Overall',value:'overall'}]
+                  },
+          max_artists:{selected:25,
+                      options:[
+                          {text:'10',value:10},
+                          {text:'25',value:25},
+                          {text:'50',value:50},
+                          {text:'100',value:100}]
+                      },
+          generator:new Generator(),
+      };
     },
-    
-    /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Data ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
-    data: function() {
-      return {
-        username:'TheTeaCat',
-        period:{selected:'7day',
-                options:[
-                    {text:'7 Days',value:'7day'},
-                    {text:'Month',value:'1month'},
-                    {text:'3 Months',value:'3month'},
-                    {text:'6 Months',value:'6month'},
-                    {text:'Year',value:'12month'},
-                    {text:'Overall',value:'overall'}]
-                },
-        max_artists:{selected:10,
-                     options:[
-                         {text:'10',value:10},
-                         {text:'25',value:25},
-                         {text:'50',value:50},
-                         {text:'100',value:100}]
-                     },
-        generator:new Generator(),
-    };
-  },
-}
+  }
 </script>
 
 <style>
