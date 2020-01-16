@@ -7,11 +7,14 @@
                        @generate="generate"/>
 
         <div id="results-container">
-            <results v-if="result != undefined" 
+            <results v-if="result != undefined && state == undefined" 
                      v-bind:result="result"/>
+            <div v-else-if="state != undefined">
+              {{ state }}
+            </div>
             <div v-else>
                 Click "Load Data"!
-            </div>    
+            </div>
         </div>
     </div>
 </template>
@@ -46,7 +49,8 @@ export default {
                          {text:'50',value:50},
                          {text:'100',value:100}]
                      },
-        result:undefined
+        result:undefined,
+        state:undefined
     };
 },
         
@@ -64,11 +68,17 @@ export default {
                 tag_meta:{},
                 scores:{}
             }
+            this.state = "Getting artists' data..."
             await this.get_artist_data()
+            this.state = "Pruning tags..."
             await this.prune_tags()
+            this.state = "Getting tags' data..."
             await this.get_tag_data()
+            this.state = "Scoring tags..."
             await this.score_tags()
+            this.state = "Sorting tags..."
             await this.sort_data()
+            this.state = undefined;
         },
 
         async get_artist_data() {
