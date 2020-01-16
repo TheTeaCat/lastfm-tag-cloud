@@ -12,4 +12,8 @@ h2 { font-size:150%; }
     h2 { font-size:120%; }
 }
 
+button, input, select {
+    font-family:'Courier New', Courier, monospace;
+}
+
 ul, ol { list-style: circle inside; }

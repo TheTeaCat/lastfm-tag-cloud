@@ -15,9 +15,6 @@
         width:1.5em;
         height:1.5em;
 
-        font-family:'Courier New', Courier, monospace;
-        font-size:11pt;
-
         background:#fff;
         border-style:dashed;
         border-width:1px;
