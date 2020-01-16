@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button v-on:click="collapse" class="collapse-button">{{ collapsed ? '>' : 'V' }}</button>
+        <collapse-button v-bind:collapsed="collapsed" @collapse="collapse"/>
         <h2>Tags:</h2>
         <div v-if="!collapsed">
             <li v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'><span class="tag">{{ tag }}</span>:
@@ -13,19 +13,24 @@
 </template>
 
 <script>
-    export default {
-        props: ['tags','taggings'],
-        data: function(){
-            return {
-                collapsed:true
-            }
-        },
-        methods: {
-            collapse: function(){
-                this.collapsed = !this.collapsed
-            }
+import CollapseButton from "./CollapseButton.vue"
+
+export default {
+    components: {
+        CollapseButton
+    },
+    props: ['tags','taggings'],
+    data: function(){
+        return {
+            collapsed:true
+        }
+    },
+    methods: {
+        collapse: function(){
+            this.collapsed = !this.collapsed
         }
     }
+}
 </script>
 
 <style scoped>
