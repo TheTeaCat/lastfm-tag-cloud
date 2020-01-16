@@ -2,11 +2,6 @@
     <div id="spinner"></div>
 </template>
 
-<script>
-    export default {
-    }
-</script>
-
 <style scoped>
     @keyframes spinner {
         0%,100%{content:"|"}
