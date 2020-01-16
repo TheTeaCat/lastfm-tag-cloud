@@ -9,14 +9,8 @@
                        @generate="generator.generate(username,period.selected,max_artists.selected)"/>
 
         <div id="results-container">
-            <results v-if="generator.result != undefined && generator.state == undefined" 
+            <results v-bind:state="generator.state"
                      v-bind:result="generator.result"/>
-            <div v-else-if="generator.state != undefined">
-              {{ generator.state }}
-            </div>
-            <div v-else>
-                Click "Load Data"!
-            </div>
         </div>
     </div>
 </template>
@@ -72,4 +66,17 @@
   @media (orientation: portrait) {
     #page-title { margin: 3vw 0 2vw 5vw; }
   }
+
+  #results-container {
+    border-width:1px;
+    border-style:solid;
+    margin:1vw 0 1vw 0;
+    padding:2vw 1vw 0.5vw 2vw;
+  }
+  @media (orientation: portrait) {
+      #results-container { 
+          padding:1.5vw 1.5vw 1.5vw 1.5vw;
+      }
+  }
+
 </style>

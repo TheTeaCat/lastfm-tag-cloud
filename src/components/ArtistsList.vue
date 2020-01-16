@@ -22,7 +22,7 @@
         props: ['artists','listens'],
         data: function(){
             return {
-                collapsed:true
+                collapsed:true,
             }
         },
         methods: {

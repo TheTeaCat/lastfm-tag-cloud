@@ -24,7 +24,7 @@
         props: ['tags','taggings'],
         data: function(){
             return {
-                collapsed:true
+                collapsed:true,
             }
         },
         methods: {

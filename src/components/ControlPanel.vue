@@ -74,6 +74,9 @@
         }
     }
 
-    span { margin:0 0.5vw 0 1vw; }
+    span { 
+        font-weight:bold;
+        margin:0 0.5vw 0 1vw;
+    }
     span:first-child { margin:0 0.5vw 0 0.5vw; }
 </style>

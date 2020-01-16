@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>
+        <h2 v-if="result != undefined && state == undefined">
             {{ result.username + (result.username[result.username.length-1].toLowerCase() == "s" ? "'" : "'s") }}
             tag cloud based upon their top 
             {{ result.artists.length }} 
@@ -12,10 +12,16 @@
                 '12month':'over the last year',
                 'overall':'overall'}[result.period] }}:
         </h2>
+        <h2 v-else-if="state != undefined">
+            {{ state }}
+        </h2>
+        <h2 v-else>
+            Click "Load Data"!
+        </h2>
 
-        <artists-list id="artists-list" v-bind:artists="result.artists" v-bind:listens="result.listens"/>
+        <artists-list v-if="result != undefined" id="artists-list" v-bind:artists="result.artists" v-bind:listens="result.listens"/>
 
-        <tags-list id="tags-list" v-bind:tags="result.tags" v-bind:taggings="result.taggings"></tags-list>
+        <tags-list v-if="result != undefined" id="tags-list" v-bind:tags="result.tags" v-bind:taggings="result.taggings"></tags-list>
     </div>
 </template>
 
@@ -28,12 +34,15 @@
             ArtistsList,
             TagsList,
         },
-        props: ['result']
+        props: ['state','result']
     }
 </script>
 
 <style scoped>
-    h2 { margin:1vw; }
+    h2 { margin:0 0 1.2vw 0; }
+    @media (orientation: portrait) {
+        h2 { margin:1vw 1vw 2vw 0; }
+    }
 
     #artists-list, #tags-list {
         border-width:1px 0px 1px 0px;
