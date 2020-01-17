@@ -34,10 +34,15 @@
             Click "Load Data"!
         </h2>
 
-        <div v-show="generatingCloud"
-             id="canvas-container">
-            <canvas id="tag-cloud-canvas" ref="tag-cloud-canvas"
-                    width="1920" height="1200"/>
+        <div v-show="cloudState != undefined"
+             id="cloud-container">
+            <div id="canvas-container">
+                <canvas id="tag-cloud-canvas" ref="tag-cloud-canvas"
+                        width="1920" height="1200"/>
+            </div>
+            <a v-show="cloudState=='generated'" ref="download-link" download="tag-cloud.png">
+                <button v-on:click="downloadTagCloud">Download Image</button>
+            </a>
         </div>
 
         <artists-list v-if="result != undefined && result.artists.length > 0" id="artists-list" v-bind:artists="result.artists" v-bind:listens="result.listens"/>
@@ -60,16 +65,20 @@
         props: ['state','result','error'],
         data: function(){
             return {
-                generatingCloud:false,
+                cloudState:undefined,
             }
         },
         methods: {
-            createTagCloud(generator) {
-                this.generatingCloud = true
-                generator.generate_tag_cloud(this.$refs["tag-cloud-canvas"])
-            },
             reset(){
-                this.generatingCloud = false
+                this.cloudState = undefined
+            },
+            async createTagCloud(generator) {
+                this.cloudState = "generating"
+                this.$refs["tag-cloud-canvas"].addEventListener("wordcloudstop",function(){this.cloudState="generated"}.bind(this))
+                await generator.generate_tag_cloud(this.$refs["tag-cloud-canvas"])
+            },
+            downloadTagCloud() {
+                this.$refs["download-link"].href = this.$refs["tag-cloud-canvas"].toDataURL()
             }
         }
     }
@@ -81,10 +90,20 @@
         h2 { margin:1vw 1vw 1vw 0; }
     }
 
+    #cloud-container {
+        width:100%;
+        display: flex;
+        justify-content: center;
+        flex-direction:column;
+    }
+    #cloud-container a {
+        align-self:flex-end;
+    }
+
     #canvas-container {
         width:100%;
         display: flex;
-        justify-content: center;        
+        justify-content: center;
     }
     canvas {
         max-height:90vh;
