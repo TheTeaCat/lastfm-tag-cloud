@@ -112,7 +112,7 @@
 
     #artists-list, #tags-list {
         border-width:1px 0px 1px 0px;
-        border-style:solid;
+        border-style:solid;        
         margin:1vw;
         padding:1vw;
     }

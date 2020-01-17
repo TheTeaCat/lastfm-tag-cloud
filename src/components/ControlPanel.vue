@@ -37,6 +37,7 @@
     #container {
         border-width:1px;
         border-style:solid;
+
         margin:1vw 0 1vw 0;
         padding:0.6vw 1vw 0.5vw 0.5vw;
 
@@ -73,7 +74,6 @@
     #generate-button {
         margin:0 0 0 1vw;
         font-weight:bold;
-        background:#fff;
         border-style:dashed;
         border-width:3px;
         box-sizing:border-box;

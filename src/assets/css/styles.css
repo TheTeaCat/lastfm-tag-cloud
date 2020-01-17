@@ -19,6 +19,7 @@ a {
 
 button, input, select {
     font-family:'Courier New', Courier, monospace;
+    background:#fff;
 }
 
 ul, ol { list-style: circle inside; }

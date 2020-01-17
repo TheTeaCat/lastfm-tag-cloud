@@ -15,9 +15,7 @@
         width:1.5em;
         height:1.5em;
 
-        background:#fff;
         border-style:dashed;
         border-width:1px;
-        border-color:#000;
     }
 </style>

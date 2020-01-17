@@ -82,6 +82,7 @@
     margin: 1.5vw 0 1vw 2.5vw;
     border-style: solid;
     border-width: 0 0 1px 0;
+    border-color:#f33;
     display:inline-block;
   }
   @media (orientation: portrait) {
@@ -90,7 +91,7 @@
 
   #results-container {
     border-width:1px;
-    border-style:solid;
+    border-style:solid;    
     margin:1vw 0 1vw 0;
     padding:2vw 1vw 0.5vw 2vw;
   }
