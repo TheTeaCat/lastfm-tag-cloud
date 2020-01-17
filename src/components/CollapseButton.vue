@@ -14,8 +14,5 @@
         padding:0;
         width:1.5em;
         height:1.5em;
-
-        border-style:dashed;
-        border-width:1px;
     }
 </style>

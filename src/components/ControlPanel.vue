@@ -17,7 +17,7 @@
                               v-on:update="$emit('update:max_artists',$event)"/>
 
         <div class="option" id="button-container">
-            <button id="generate-button" :loading="state != undefined ? 'true' : 'false'" v-on:click="$emit('generate')">Load Data</button>
+            <button :loading="state != undefined ? 'true' : 'false'" v-on:click="$emit('generate')">Load Data</button>
         </div>
     </div>
 </template>
@@ -71,25 +71,18 @@
         }
     }
 
-    #generate-button {
+    button {
         margin:0 0 0 1vw;
-        font-weight:bold;
-        border-style:dashed;
         border-width:3px;
         box-sizing:border-box;
     }
 
-    @keyframes rainbow {
-        100%,0% {border-color:rgb(255,255,0)}
-        33% {border-color:rgb(255,0,255)}
-        66% {border-color:rgb(0,255,255)}
-    }
     @keyframes loading {
-        0% {border-color:rgb(255,0,0)}
-        50% {border-color:rgb(0,255,0)}
+        0% {border-color:#f33}
+        50% {border-color:#000}
     }
-    #generate-button[loading = "false"] { animation:rainbow 2s linear infinite; }
-    #generate-button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
+    button[loading = "false"] { border-color:#f33 }
+    button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
 
     span { 
         font-weight:bold;

@@ -17,9 +17,15 @@ a {
     text-decoration: none;
 }
 
+input,select{
+    padding:0.5vw;
+}
 button, input, select {
     font-family:'Courier New', Courier, monospace;
     background:#fff;
+    border-color:#000;
+    border-width:1px;
 }
+button { border-style:dashed; font-weight:bold; }
 
 ul, ol { list-style: circle inside; }
