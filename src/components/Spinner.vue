@@ -1,5 +1,5 @@
 <template>
-    <div id="spinner"></div>
+    <div></div>
 </template>
 
 <style scoped>
@@ -9,10 +9,10 @@
         50%{content:"-"}
         75%{content:"\\"}
     }
-    #spinner {
+    div {
         display:inline-block;
     }
-    #spinner::after {
+    div::after {
         content:"";
         animation: spinner 1s steps(4,end) infinite;
     }

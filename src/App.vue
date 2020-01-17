@@ -13,9 +13,9 @@
                        @generate="generate"/>
 
         <results ref="results"
-                  v-bind:state="generator.state"
-                  v-bind:result="generator.result"
-                  v-bind:error="generator.error"/>
+                 v-bind:state="generator.state"
+                 v-bind:result="generator.result"
+                 v-bind:error="generator.error"/>
 
         <Footer/>
     </div>

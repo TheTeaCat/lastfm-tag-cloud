@@ -1,5 +1,5 @@
 <template>
-    <div class="section-container" id="container">
+    <div class="section-container">
         <div class="option">
             <span>Last.fm Username:</span>
             <input v-model="username" ref="username-input"
@@ -18,8 +18,9 @@
                               v-bind:selected="max_artists.selected"
                               v-on:update="$emit('update:max_artists',$event)"/>
 
-        <div id="button-container">
-            <button :loading="state != undefined ? 'true' : 'false'" v-on:click="$emit('generate')">Load Data</button>
+        <div id="generate-button-container">
+            <button id="generate-button" 
+                    :loading="state != undefined ? 'true' : 'false'" v-on:click="$emit('generate')">Load Data</button>
         </div>
     </div>
 </template>
@@ -36,13 +37,13 @@
 </script>
 
 <style scoped>
-    #container {
+    .section-container {
         display: flex;
         flex-wrap:nowrap;
         align-items:center;
     }
     @media (orientation: portrait) {
-        #container { flex-wrap:wrap; }
+        .section-container { flex-wrap:wrap; }
     }
 
     .option{
@@ -57,12 +58,12 @@
         }
     }
 
-    #button-container {
+    #generate-button-container {
         flex-grow:1;
         display:flex;
         justify-content:flex-end;
     }
-    button {
+    #generate-button-container button {
         border-width:3px;
         box-sizing:border-box;
     }
@@ -71,8 +72,8 @@
         0% {border-color:#f33}
         50% {border-color:#000}
     }
-    button[loading = "false"] { border-color:#f33 }
-    button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
+    #generate-button[loading = "false"] { border-color:#f33 }
+    #generate-button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
 
     >>> span { 
         font-weight:bold;

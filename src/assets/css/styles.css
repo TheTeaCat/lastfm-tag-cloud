@@ -12,15 +12,10 @@ h2 { font-size:150%; }
     h2 { font-size:120%; }
 }
 
-a {
-    font-weight: bold;
-    text-decoration: none;
-}
+a { font-weight: bold; text-decoration: none; }
 
-input,select,button{
-    padding:0.5vw;
-}
 button, input, select {
+    padding:0.5vw;
     font-family:'Courier New', Courier, monospace;
     background:#fff;
     border-color:#000;
