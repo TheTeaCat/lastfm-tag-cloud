@@ -1,24 +1,17 @@
 # tag-cloud
+A last.fm tag cloud generator build on Vue!
 
-## Project setup
-```
-npm install
-```
+Give it a whirl: [pedanticat.github.io/tag-cloud/](https://pedanticat.github.io/tag-cloud/)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## How it do? Why are big and small? Grandpa?
 
-### Lints and fixes files
-```
-npm run lint
-```
+If you want to have a scrawl over how exactly this picks out tags, you'll want to have a look at [/src/assets/js/Generator.js](https://github.com/PedantiCat/tag-cloud/blob/master/src/assets/js/Generator.js).
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+If you don't like it, cry me a river! :sob: :sob: :sob:
+
+:rowboat: <- me
+
+## Acknowledgements
+
+I'm using [timdream's word cloud generator](https://github.com/timdream/wordcloud2.js/).
