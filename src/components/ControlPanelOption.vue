@@ -23,13 +23,4 @@
         font-weight:bold;
         margin:0 0.5vw 0 0.5vw;
     }
-
-    div { display:inline; }
-    @media (orientation: portrait) {
-        div { 
-            flex-basis:60%;
-            flex-grow:1;
-            margin:0.5vw 0 0.5vw 0;
-        }
-    }
 </style>

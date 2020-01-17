@@ -1,22 +1,24 @@
 <template>
     <div id="container">
-        <div id="username-entry">
+        <div class="option">
             <span>Last.fm Username:</span>
             <input v-model="username" ref="username-input"
                    v-on:keyup="(e) => e.key == 'Enter' ? this.$emit('generate') : this.$emit('update:username',e.target.value)"/>
         </div>
 
-        <control-panel-option v-bind:name="'Period'"
+        <control-panel-option class="option"
+                              v-bind:name="'Period'"
                               v-bind:options="period.options"
                               v-bind:selected="period.selected"
                               v-on:update="$emit('update:period',$event)"/>
 
-        <control-panel-option v-bind:name="'Max Artists'"
+        <control-panel-option class="option"
+                              v-bind:name="'Max Artists'"
                               v-bind:options="max_artists.options"
                               v-bind:selected="max_artists.selected"
                               v-on:update="$emit('update:max_artists',$event)"/>
 
-        <div class="option" id="button-container">
+        <div id="button-container">
             <button :loading="state != undefined ? 'true' : 'false'" v-on:click="$emit('generate')">Load Data</button>
         </div>
     </div>
@@ -42,20 +44,24 @@
         padding:0.6vw 1vw 0.5vw 0.5vw;
 
         display: flex;
-        flex-wrap:wrap;
+        flex-wrap:nowrap;
         align-items:center;
     }
     @media (orientation: portrait) {
         #container { 
             padding:1vw 1.5vw 1vw 1vw;
+            flex-wrap:wrap;
         }
     }
 
-    #username-entry{ display:inline; }
+    .option{
+        display:inline;
+        margin:0.5vw 0 0.5vw 0;
+        padding: 0 2vw 0 0;
+    }
     @media (orientation: portrait) {
-        #username-entry { 
+        .option { 
             flex-basis:60%;
-            flex-grow:1;
             margin:0.5vw 0 0.5vw 0;
         }
     }
@@ -65,14 +71,7 @@
         display:flex;
         justify-content:flex-end;
     }
-    @media (orientation: portrait) {
-        #button-container { 
-            flex-basis:30%;
-        }
-    }
-
     button {
-        margin:0 0 0 1vw;
         border-width:3px;
         box-sizing:border-box;
     }
