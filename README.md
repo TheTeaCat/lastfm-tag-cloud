@@ -1,7 +1,7 @@
 # tag-cloud
 A last.fm tag cloud generator build on Vue!
 
-Give it a whirl: [theteacat.github.io/tag-cloud/](https://pedanticat.github.io/tag-cloud/)
+Give it a whirl: [theteacat.github.io/tag-cloud/](https://theteacat.github.io/tag-cloud/)
 
 
 ## How it do? Why are big and small? Grandpa?
