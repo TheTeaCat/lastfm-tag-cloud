@@ -1,8 +1,11 @@
 <template>
     <div>
         <span>{{ name }}: </span>
-        <select v-model="selected">
-            <option v-for="option in options" v-bind:key="option.value" v-bind:value="option.value">
+        <select v-model="selected"
+                v-on:change="$emit('update',$event.target.value)">
+            <option v-for="option in options" 
+                    v-bind:key="option.value" 
+                    v-bind:value="option.value">
                 {{ option.text }}
             </option>
         </select>

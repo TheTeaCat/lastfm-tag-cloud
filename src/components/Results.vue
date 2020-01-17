@@ -19,9 +19,13 @@
             Click "Load Data"!
         </h2>
 
+        <canvas v-show="generatingCloud"
+                id="tag-cloud-canvas" ref="tag-cloud-canvas"
+                width="1920" height="1200"/>
+
         <artists-list v-if="result != undefined" id="artists-list" v-bind:artists="result.artists" v-bind:listens="result.listens"/>
 
-        <tags-list v-if="result != undefined" id="tags-list" v-bind:tags="result.tags" v-bind:taggings="result.taggings"></tags-list>
+        <tags-list v-if="result != undefined" id="tags-list" v-bind:tags="result.tags" v-bind:taggings="result.taggings"/>
     </div>
 </template>
 
@@ -36,7 +40,18 @@
             TagsList,
             Spinner,
         },
-        props: ['state','result']
+        props: ['state','result'],
+        data: function(){
+            return {
+                generatingCloud:false,
+            }
+        },
+        methods: {
+            createTagCloud(generator) {
+                this.generatingCloud = true;
+                generator.generate_tag_cloud(this.$refs["tag-cloud-canvas"])
+            },
+        }
     }
 </script>
 
@@ -44,6 +59,11 @@
     h2 { margin:0 0 1.2vw 0; }
     @media (orientation: portrait) {
         h2 { margin:1vw 1vw 1vw 0; }
+    }
+
+    canvas {
+        width:100%;
+        height:100%;
     }
 
     #artists-list, #tags-list {

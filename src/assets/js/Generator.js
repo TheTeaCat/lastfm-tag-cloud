@@ -1,4 +1,5 @@
 import axios from "axios"
+import WordCloud from "wordcloud"
 
 const API_KEY = '97773975bd1d3fdf89b362a27d2b6313'
 
@@ -147,6 +148,32 @@ class Generator {
         }
         /**Sorting the tags based upon their scores */
         this.result.tags.sort(function(a,b){return this.result.scores[b]-this.result.scores[a]}.bind(this))
+    }
+
+    generate_tag_cloud(canvas) {
+        this.cloud_tags = []
+        var minScore = Infinity
+        var maxScore = -Infinity
+        for (var tag of this.result.tags) {
+            if (this.result.scores[tag] < minScore) {
+                minScore = this.result.scores[tag]
+            }
+            if (this.result.scores[tag] > maxScore) {
+                maxScore = this.result.scores[tag]
+            }
+        }
+        for (tag of this.result.tags) {
+            /**Biggest should be 200, smallest should be 25.
+             * Logarithmic scaling is pretty arbritrary, just what I found looks decent.
+             */
+            this.cloud_tags.push([tag,Math.log10((this.result.scores[tag]-minScore)*99/maxScore+1)/2*175+25])
+        }
+        WordCloud(canvas,{
+            list:this.cloud_tags,
+            fontFamily:"Courier",
+            color:"#000",
+            shrinkToFit:true
+        })
     }
 }
 

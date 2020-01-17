@@ -7,10 +7,14 @@
                        v-bind:period="period" 
                        v-bind:max_artists="max_artists"
                        v-bind:state="generator.state"
-                       @generate="generator.generate(username,period.selected,max_artists.selected)"/>
+                       v-on:update:username="username=$event"
+                       v-on:update:period="period.selected=$event"
+                       v-on:update:max_artists="max_artists.selected=$event"
+                       @generate="generate"/>
 
         <div id="results-container">
-            <results v-bind:state="generator.state"
+            <results ref="results"
+                     v-bind:state="generator.state"
                      v-bind:result="generator.result"/>
         </div>
     </div>
@@ -49,8 +53,16 @@
                           {text:'100',value:100}]
                       },
           generator:new Generator(),
+          tags:undefined,
       };
     },
+
+    methods: {
+      async generate() {
+        await this.generator.generate(this.username,this.period.selected,this.max_artists.selected)
+        this.$refs["results"].createTagCloud(this.generator)
+      }
+    }
   }
 </script>
 

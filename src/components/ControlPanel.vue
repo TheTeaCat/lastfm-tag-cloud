@@ -2,16 +2,19 @@
     <div id="container">
         <div id="username-entry">
             <span>Last.fm Username:</span>
-            <input v-model="username"/>
+            <input v-model="username"
+                   v-on:change="$emit('update:username',$event.target.value)"/>
         </div>
 
         <control-panel-option v-bind:name="'Period'"
                               v-bind:options="period.options"
-                              v-bind:selected="period.selected"/>
+                              v-bind:selected="period.selected"
+                              v-on:update="$emit('update:period',$event)"/>
 
         <control-panel-option v-bind:name="'Max Artists'"
                               v-bind:options="max_artists.options"
-                              v-bind:selected="max_artists.selected"/>
+                              v-bind:selected="max_artists.selected"
+                              v-on:update="$emit('update:max_artists',$event)"/>
 
         <div class="option" id="button-container">
             <button id="generate-button" :loading="state != undefined ? 'true' : 'false'" v-on:click="$emit('generate')">Load Data</button>
