@@ -39,7 +39,7 @@ class Generator {
     /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Generation sub-funcs ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     async get_artist_data() {
         await axios.get(
-            "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists"+
+            "https://ws.audioscrobbler.com/2.0/?method=user.gettopartists"+
             "&api_key="+API_KEY+
             "&user="+this.result.username+
             "&period="+this.result.period+
@@ -56,7 +56,7 @@ class Generator {
                                 this.result.artists.push(artist_name)
                                 this.result.listens[artist_name] = artist.playcount
                                 /**Getting their tags... */
-                                await axios.get("http://ws.audioscrobbler.com/2.0/?method=artist.getTopTags"+
+                                await axios.get("https://ws.audioscrobbler.com/2.0/?method=artist.getTopTags"+
                                         "&api_key="+API_KEY+
                                         "&artist="+artist_name.replace("&","%26")+
                                         "&format=json").then( function(response){                                                    
@@ -103,7 +103,7 @@ class Generator {
         for (var tag of this.result.tags) {
             tag_promises.push(new Promise(
                 async function(resolve){
-                    await axios.get("http://ws.audioscrobbler.com/2.0/?method=tag.getinfo"+
+                    await axios.get("https://ws.audioscrobbler.com/2.0/?method=tag.getinfo"+
                     "&api_key="+API_KEY+
                     "&tag="+tag+
                     "&format=json").then(
