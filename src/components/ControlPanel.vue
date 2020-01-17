@@ -74,5 +74,8 @@
     button[loading = "false"] { border-color:#f33 }
     button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
 
-    span { font-weight:bold; }
+    >>> span { 
+        font-weight:bold;
+        margin: 0 1vw 0 0;
+    }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span>{{ name }}: </span>
+        <span>{{ name }}:</span>
         <select v-model="selected"
                 v-on:change="$emit('update',$event.target.value)">
             <option v-for="option in options" 
@@ -17,10 +17,3 @@
         props: ['name','options','selected']
     }
 </script>
-
-<style scoped>
-    span { 
-        font-weight:bold;
-        margin:0 0.5vw 0 0.5vw;
-    }
-</style>
