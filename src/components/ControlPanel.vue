@@ -1,27 +1,17 @@
 <template>
     <div id="container">
-        <div class="option">
+        <div id="username-entry">
             <span>Last.fm Username:</span>
             <input v-model="username"/>
         </div>
 
-        <div class="option">
-            <span>Time Period:</span>
-            <select v-model="period.selected">
-                <option v-for="option in period.options" v-bind:key="option.value" v-bind:value="option.value">
-                    {{ option.text }}
-                </option>
-            </select>
-        </div>
+        <control-panel-option v-bind:name="'Period'"
+                              v-bind:options="period.options"
+                              v-bind:selected="period.selected"/>
 
-        <div class="option">
-            <span>Max Artists:</span>
-            <select v-model="max_artists.selected">
-                <option v-for="option in max_artists.options" v-bind:key="option.value" v-bind:value="option.value">
-                    {{ option.text }}
-                </option>
-            </select>
-        </div>
+        <control-panel-option v-bind:name="'Max Artists'"
+                              v-bind:options="max_artists.options"
+                              v-bind:selected="max_artists.selected"/>
 
         <div class="option" id="button-container">
             <button id="generate-button" :loading="state != undefined ? 'true' : 'false'" v-on:click="$emit('generate')">Load Data</button>
@@ -30,7 +20,12 @@
 </template>
 
 <script>
+    import ControlPanelOption from "./ControlPanelOption.vue"
+
     export default {
+        components: {
+            ControlPanelOption
+        },
         props: ['username','period','max_artists','state']
     }
 </script>
@@ -52,18 +47,15 @@
         }
     }
 
-    .option { display:inline; }
+    #username-entry{ display:inline; }
     @media (orientation: portrait) {
-        .option { 
+        #username-entry { 
             flex-basis:60%;
             flex-grow:1;
             margin:0.5vw 0 0.5vw 0;
         }
     }
 
-    button { 
-        margin:0 0 0 1vw;
-    }
     #button-container {
         flex-grow:1;
         display:flex;
@@ -75,6 +67,15 @@
         }
     }
 
+    #generate-button {
+        margin:0 0 0 1vw;
+        font-weight:bold;
+        background:#fff;
+        border-style:dashed;
+        border-width:3px;
+        box-sizing:border-box;
+    }
+
     @keyframes rainbow {
         100%,0% {border-color:rgb(255,255,0)}
         33% {border-color:rgb(255,0,255)}
@@ -84,23 +85,11 @@
         0% {border-color:rgb(255,0,0)}
         50% {border-color:rgb(0,255,0)}
     }
-    #generate-button {
-        font-weight:bold;
-        background:#fff;
-        border-style:dashed;
-        border-width:3px;
-        box-sizing:border-box;
-    }
-    #generate-button[loading = "false"] {
-        animation:rainbow 10s linear infinite;
-    }
-    #generate-button[loading = "true"] {
-        animation: loading 0.5s steps(1,end) infinite;
-    }
+    #generate-button[loading = "false"] { animation:rainbow 2s linear infinite; }
+    #generate-button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
 
     span { 
         font-weight:bold;
-        margin:0 0.5vw 0 1vw;
+        margin:0 0.5vw 0 0.5vw;
     }
-    span:first-child { margin:0 0.5vw 0 0.5vw; }
 </style>
