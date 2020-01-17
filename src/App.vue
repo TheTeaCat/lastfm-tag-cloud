@@ -63,8 +63,11 @@
 
     methods: {
       async generate() {
+        this.$refs["results"].reset()
         await this.generator.generate(this.username,this.period.selected,this.max_artists.selected)
-        this.$refs["results"].createTagCloud(this.generator)
+        if (this.generator.result.artists.length > 0) {
+          this.$refs["results"].createTagCloud(this.generator)
+        }
       }
     }
   }

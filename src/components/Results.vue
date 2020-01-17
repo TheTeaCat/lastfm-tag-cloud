@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 v-if="result != undefined && state == undefined">
+        <h2 v-if="result != undefined && state == undefined && result.artists.length > 0">
             {{ result.username + (result.username[result.username.length-1].toLowerCase() == "s" ? "'" : "'s") }}
             tag cloud based upon their top 
             {{ result.artists.length }} 
@@ -11,6 +11,16 @@
                 '6month':'over the last 6 months',
                 '12month':'over the last year',
                 'overall':'overall'}[result.period] }}:
+        </h2>
+        <h2 v-else-if="result != undefined && state == undefined && result.artists.length == 0">
+            {{ result.username }} 
+            hasn't listened to anything
+            {{ {'7day':'in the past week',
+                '1month':'in the past month',
+                '3month':'in the past 3 months',
+                '6month':'in the past 6 months',
+                '12month':'in the past year',
+                'overall':'at all'}[result.period] }}!
         </h2>
         <h2 v-else-if="state != undefined">
             <spinner/> {{ state }}
@@ -25,9 +35,9 @@
                     width="1920" height="1200"/>
         </div>
 
-        <artists-list v-if="result != undefined" id="artists-list" v-bind:artists="result.artists" v-bind:listens="result.listens"/>
+        <artists-list v-if="result != undefined && result.artists.length > 0" id="artists-list" v-bind:artists="result.artists" v-bind:listens="result.listens"/>
 
-        <tags-list v-if="result != undefined" id="tags-list" v-bind:tags="result.tags" v-bind:taggings="result.taggings"/>
+        <tags-list v-if="result != undefined && result.artists.length > 0" id="tags-list" v-bind:tags="result.tags" v-bind:taggings="result.taggings"/>
     </div>
 </template>
 
@@ -50,9 +60,12 @@
         },
         methods: {
             createTagCloud(generator) {
-                this.generatingCloud = true;
+                this.generatingCloud = true
                 generator.generate_tag_cloud(this.$refs["tag-cloud-canvas"])
             },
+            reset(){
+                this.generatingCloud = false
+            }
         }
     }
 </script>
