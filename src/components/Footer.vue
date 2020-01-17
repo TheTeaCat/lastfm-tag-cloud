@@ -1,7 +1,9 @@
 <template>
     <footer>
-        <a href="https://www.last.fm/user/theteacat">My last.fml</a>
-        | <a href="https://github.com/PedantiCat/tag-cloud">Github repo</a>
+        <ul>
+            <li><a href="https://www.last.fm/user/theteacat">My last.fml</a></li>
+            <li><a href="https://github.com/PedantiCat/tag-cloud">Github repo</a></li>
+        </ul>
     </footer>
 </template>
 
@@ -18,4 +20,11 @@
         margin:1vw 0 1vw 0;
         padding:1vw 1vw 0.9vw 1vw;
     }
+
+    ul li {
+        display: inline;
+        list-style:none;
+    }
+    li::before { content:" | " }
+    ul li:first-child:before { content:"" }
 </style>
