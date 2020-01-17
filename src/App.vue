@@ -15,7 +15,8 @@
         <div id="results-container">
             <results ref="results"
                      v-bind:state="generator.state"
-                     v-bind:result="generator.result"/>
+                     v-bind:result="generator.result"
+                     v-bind:error="generator.error"/>
         </div>
 
         <Footer/>

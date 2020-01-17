@@ -8,6 +8,7 @@ class Generator {
     constructor() {
         this.result = undefined
         this.state = undefined
+        this.error = undefined
     }
 
     /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Generation func ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
@@ -25,15 +26,17 @@ class Generator {
         }
         this.state = "Getting artists' data..."
         await this.get_artist_data()
-        this.state = "Pruning tags..."
-        await this.prune_tags()
-        this.state = "Getting tags' data..."
-        await this.get_tag_data()
-        this.state = "Scoring tags..."
-        await this.score_tags()
-        this.state = "Sorting tags..."
-        await this.sort_data()
-        this.state = undefined;
+        if (!this.error) {
+            this.state = "Pruning tags..."
+            await this.prune_tags()
+            this.state = "Getting tags' data..."
+            await this.get_tag_data()
+            this.state = "Scoring tags..."
+            await this.score_tags()
+            this.state = "Sorting tags..."
+            await this.sort_data()
+        }
+        this.state = undefined;    
     }
 
     /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Generation sub-funcs ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
@@ -90,6 +93,10 @@ class Generator {
                     }
                     await Promise.all(artist_promises)
                 }.bind(this)
+        ).catch(
+            function(error) {
+                this.error = error
+            }.bind(this)
         )
     }
 

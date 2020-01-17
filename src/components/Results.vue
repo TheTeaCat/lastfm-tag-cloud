@@ -12,7 +12,7 @@
                 '12month':'over the last year',
                 'overall':'overall'}[result.period] }}:
         </h2>
-        <h2 v-else-if="result != undefined && state == undefined && result.artists.length == 0">
+        <h2 v-else-if="result != undefined && state == undefined && error == undefined && result.artists.length == 0">
             {{ result.username }} 
             hasn't listened to anything
             {{ {'7day':'in the past week',
@@ -21,6 +21,11 @@
                 '6month':'in the past 6 months',
                 '12month':'in the past year',
                 'overall':'at all'}[result.period] }}!
+        </h2>
+        <h2 v-else-if="result != undefined && state == undefined && error != undefined">
+            An error occured :'(
+            <br><br>
+            {{ error }}
         </h2>
         <h2 v-else-if="state != undefined">
             <spinner/> {{ state }}
@@ -52,7 +57,7 @@
             TagsList,
             Spinner,
         },
-        props: ['state','result'],
+        props: ['state','result','error'],
         data: function(){
             return {
                 generatingCloud:false,
