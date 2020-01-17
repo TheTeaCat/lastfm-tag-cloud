@@ -45,9 +45,15 @@
             </a>
         </div>
 
-        <artists-list v-if="result != undefined && result.artists.length > 0" id="artists-list" v-bind:artists="result.artists" v-bind:listens="result.listens"/>
+        <artists-list id="artists-list" 
+                      v-if="result != undefined && result.artists.length > 0" 
+                      v-bind:artists="result.artists" 
+                      v-bind:listens="result.listens"/>
 
-        <tags-list v-if="result != undefined && result.artists.length > 0" id="tags-list" v-bind:tags="result.tags" v-bind:taggings="result.taggings"/>
+        <tags-list id="tags-list" 
+                   v-if="result != undefined && result.artists.length > 0" 
+                   v-bind:tags="result.tags" 
+                   v-bind:taggings="result.taggings"/>
     </div>
 </template>
 
@@ -87,22 +93,23 @@
 <style scoped>
     #cloud-container {
         width:100%;
-        display: flex;
-        justify-content: center;
-        flex-direction:column;
+        overflow: auto;
     }
-    #cloud-container a { align-self:flex-end; }
 
     #canvas-container {
         width:100%;
-        display: flex;
-        justify-content: center;
     }
     canvas {
-        max-height:90vh;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
         max-width:100%;
+        max-height:90vh;
     }
 
+    #cloud-container a { 
+        float:right;
+    }
     button {
         border-width:3px;
         box-sizing:border-box;
