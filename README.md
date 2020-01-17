@@ -1,8 +1,7 @@
-# tag-cloud
+# lastfm-tag-cloud
 A last.fm tag cloud generator build on Vue!
 
 Give it a whirl: [theteacat.github.io/tag-cloud/](https://theteacat.github.io/tag-cloud/)
-
 
 ## How it do? Why are big and small? Grandpa?
 
@@ -10,7 +9,7 @@ If you want to have a scrawl over how exactly this picks out tags, you'll want t
 
 If you don't like it, cry me a river! :sob: :sob: :sob:
 
-:rowboat: <- me, rowing around in a sea of your tears. :droplet: xoxo
+:rowboat: <- me, rowing around in a sea of your tears. xoxo
 
 ## Acknowledgements
 
