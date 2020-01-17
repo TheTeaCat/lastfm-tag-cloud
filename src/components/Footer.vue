@@ -16,6 +16,6 @@
         border-width:1px;
         border-style:solid;
         margin:1vw 0 1vw 0;
-        padding:0.6vw 1vw 0.5vw 0.5vw;
+        padding:1vw 1vw 0.9vw 1vw;
     }
 </style>
