@@ -5,6 +5,16 @@ Give it a whirl: [theteacat.github.io/lastfm-tag-cloud/](https://theteacat.githu
 
 ## How are the tags chosen & scaled?
 
+Initially, the sample of artists (up to the size and of the time period you specify) is iterated through. For each artist, their top tags are fetched, using [artist.getTopTags](https://www.last.fm/api/show/artist.getTopTags). Each tag in the response has a `count`.
+
+This `count` doesn't seem to be documented anywhere. They cap out at 100, so I am working under the assumption that they're a kind of confidence % as to how apropriate that tag is for that artist.
+
+For each tag on the artist, the product of `the tag's score on that artist` and `the user's scrobbles of that artist` is added to the tag's `library_total`.
+
+Once all of the artists are iterated through, the tags are pruned to the top 100 by this `library_total` metric.
+
+They are then scored, which will determine their size.
+
 Behold, the relevant code [[source](https://github.com/TheTeaCat/lastfm-tag-cloud/blob/master/src/assets/js/Generator.js)]:
 
 ```javascript
