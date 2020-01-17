@@ -67,6 +67,8 @@ class Generator {
                                                 /**If the response doesn't have the data we need, we just return and declare the request as failed. */
                                                 if (response.data.toptags == undefined) { return }                                                        
                                                 for (var tag of response.data.toptags.tag) {
+                                                    /**I'm currently ignoring tags that contain ampersands because the last.fm API is broken for them. */
+                                                    if (tag.name.includes("&")) { continue }
                                                     /**Tag "counts" cap out at 100.
                                                      * I am assuming that they are a confidence % given by last.fm as to how accurate the tag is.
                                                      */
@@ -110,19 +112,21 @@ class Generator {
         var tag_promises = []
         for (var tag of this.result.tags) {
             tag_promises.push(new Promise(
-                async function(resolve){
-                    await axios.get("https://ws.audioscrobbler.com/2.0/?method=tag.getinfo"+
-                    "&api_key="+API_KEY+
-                    "&tag="+tag+
-                    "&format=json").then(
-                        function(response){
-                            if (response.data.tag == undefined) { return }
-                            this.result.tag_meta[response.data.tag.name].reach = response.data.tag.reach
-                            this.result.tag_meta[response.data.tag.name].total = response.data.tag.total
-                        }.bind(this)
-                    )
-                    resolve(true)
-                }.bind(this)
+                function(tag_name){
+                    return async function (resolve){
+                        await axios.get("https://ws.audioscrobbler.com/2.0/?method=tag.getinfo"+
+                        "&api_key="+API_KEY+
+                        "&tag="+tag_name+
+                        "&format=json").then(
+                            function(response){
+                                if (response.data.tag == undefined ) { return }
+                                this.result.tag_meta[tag_name].reach = response.data.tag.reach
+                                this.result.tag_meta[tag_name].total = response.data.tag.total
+                            }.bind(this)
+                        )
+                        resolve(true)
+                    }.bind(this)
+                }.bind(this)(tag)
             ))
         }
         await Promise.all(tag_promises)
