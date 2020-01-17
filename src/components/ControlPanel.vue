@@ -3,7 +3,7 @@
         <div id="username-entry">
             <span>Last.fm Username:</span>
             <input v-model="username" ref="username-input"
-                   v-on:change="$emit('update:username',$event.target.value)"/>
+                   v-on:keyup="(e) => e.key == 'Enter' ? this.$emit('generate') : this.$emit('update:username',e.target.value)"/>
         </div>
 
         <control-panel-option v-bind:name="'Period'"
@@ -30,9 +30,6 @@
             ControlPanelOption
         },
         props: ['username','period','max_artists','state'],
-        mounted: function() {
-            this.$refs["username-input"].addEventListener("keypress", (e) => e.key == "Enter" ? this.$emit('generate') : null )
-        }
     }
 </script>
 
