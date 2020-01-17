@@ -7,7 +7,7 @@ Give it a whirl: [theteacat.github.io/lastfm-tag-cloud/](https://theteacat.githu
 
 Initially, the sample of artists (up to the size and of the time period you specify) is iterated through. For each artist, their top tags are fetched, using [artist.getTopTags](https://www.last.fm/api/show/artist.getTopTags). 
 
-Each tag in the response has a `count`, and each tag has a `library_total` metric initialised at `0`.
+Each tag in the response has a `count` for that artist, and each tag has a `library_total` metric initialised at `0` that is global over all artists.
 
 This `count` doesn't seem to be documented anywhere. They cap out at 100, so I am working under the assumption that they're a kind of confidence % as to how apropriate that tag is for that artist.
 
