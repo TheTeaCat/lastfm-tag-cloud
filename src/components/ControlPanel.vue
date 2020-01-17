@@ -2,7 +2,7 @@
     <div id="container">
         <div id="username-entry">
             <span>Last.fm Username:</span>
-            <input v-model="username"
+            <input v-model="username" ref="username-input"
                    v-on:change="$emit('update:username',$event.target.value)"/>
         </div>
 
@@ -29,7 +29,10 @@
         components: {
             ControlPanelOption
         },
-        props: ['username','period','max_artists','state']
+        props: ['username','period','max_artists','state'],
+        mounted: function() {
+            this.$refs["username-input"].addEventListener("keypress", (e) => e.key == "Enter" ? this.$emit('generate') : null )
+        }
     }
 </script>
 
