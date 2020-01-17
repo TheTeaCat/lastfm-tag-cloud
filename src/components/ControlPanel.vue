@@ -1,5 +1,5 @@
 <template>
-    <div id="container">
+    <div class="section-container" id="container">
         <div class="option">
             <span>Last.fm Username:</span>
             <input v-model="username" ref="username-input"
@@ -37,31 +37,22 @@
 
 <style scoped>
     #container {
-        border-width:1px;
-        border-style:solid;
-
-        margin:1vw 0 1vw 0;
-        padding:0.6vw 1vw 0.5vw 0.5vw;
-
         display: flex;
         flex-wrap:nowrap;
         align-items:center;
     }
     @media (orientation: portrait) {
-        #container { 
-            padding:1vw 1.5vw 1vw 1vw;
-            flex-wrap:wrap;
-        }
+        #container { flex-wrap:wrap; }
     }
 
     .option{
         display:inline;
-        margin:0.5vw 0 0.5vw 0;
         padding: 0 2vw 0 0;
     }
     @media (orientation: portrait) {
         .option { 
             flex-basis:60%;
+            flex-grow:1;
             margin:0.5vw 0 0.5vw 0;
         }
     }
@@ -83,8 +74,5 @@
     button[loading = "false"] { border-color:#f33 }
     button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
 
-    span { 
-        font-weight:bold;
-        margin:0 0.5vw 0 0.5vw;
-    }
+    span { font-weight:bold; }
 </style>

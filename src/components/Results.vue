@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="section-container">
         <h2 v-if="result != undefined && state == undefined && result.artists.length > 0">
             {{ result.username + (result.username[result.username.length-1].toLowerCase() == "s" ? "'" : "'s") }}
             tag cloud based upon their top 
@@ -85,20 +85,13 @@
 </script>
 
 <style scoped>
-    h2 { margin:0 0 1.2vw 0; }
-    @media (orientation: portrait) {
-        h2 { margin:1vw 1vw 1vw 0; }
-    }
-
     #cloud-container {
         width:100%;
         display: flex;
         justify-content: center;
         flex-direction:column;
     }
-    #cloud-container a {
-        align-self:flex-end;
-    }
+    #cloud-container a { align-self:flex-end; }
 
     #canvas-container {
         width:100%;

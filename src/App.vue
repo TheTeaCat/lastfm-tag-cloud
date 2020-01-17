@@ -12,12 +12,10 @@
                        v-on:update:max_artists="max_artists.selected=$event"
                        @generate="generate"/>
 
-        <div id="results-container">
-            <results ref="results"
-                     v-bind:state="generator.state"
-                     v-bind:result="generator.result"
-                     v-bind:error="generator.error"/>
-        </div>
+        <results ref="results"
+                  v-bind:state="generator.state"
+                  v-bind:result="generator.result"
+                  v-bind:error="generator.error"/>
 
         <Footer/>
     </div>
@@ -89,15 +87,13 @@
     #page-title { margin: 3vw 0 2vw 5vw; }
   }
 
-  #results-container {
+  .section-container {
     border-width:1px;
     border-style:solid;    
     margin:1vw 0 1vw 0;
-    padding:2vw 1vw 0.5vw 2vw;
+    padding:1vw 2vw 1vw 1.5vw;
   }
   @media (orientation: portrait) {
-      #results-container { 
-          padding:1.5vw 1.5vw 1.5vw 1.5vw;
-      }
+      .section-container { padding:2vw; }
   }
 </style>
