@@ -114,4 +114,5 @@
         margin:1vw;
         padding:1vw;
     }
+    #tags-list { margin: 1vw 1vw 0 1vw; }
 </style>
