@@ -19,9 +19,11 @@
             Click "Load Data"!
         </h2>
 
-        <canvas v-show="generatingCloud"
-                id="tag-cloud-canvas" ref="tag-cloud-canvas"
-                width="1920" height="1200"/>
+        <div v-show="generatingCloud"
+             id="canvas-container">
+            <canvas id="tag-cloud-canvas" ref="tag-cloud-canvas"
+                    width="1920" height="1200"/>
+        </div>
 
         <artists-list v-if="result != undefined" id="artists-list" v-bind:artists="result.artists" v-bind:listens="result.listens"/>
 
@@ -61,9 +63,14 @@
         h2 { margin:1vw 1vw 1vw 0; }
     }
 
-    canvas {
+    #canvas-container {
         width:100%;
-        height:100%;
+        display: flex;
+        justify-content: center;        
+    }
+    canvas {
+        max-height:90vh;
+        max-width:100%;
     }
 
     #artists-list, #tags-list {
