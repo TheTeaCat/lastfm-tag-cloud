@@ -10,7 +10,7 @@ If you want to have a scrawl over how exactly this picks out tags, you'll want t
 
 If you don't like it, cry me a river! :sob: :sob: :sob:
 
-:rowboat: <- me
+:rowboat: <- me, rowing around in a sea of your tears. :droplet: xoxo
 
 ## Acknowledgements
 
