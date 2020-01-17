@@ -24,6 +24,7 @@ class Generator {
             tag_meta:{},
             scores:{}
         }
+        this.error = undefined
         this.state = "Getting artists' data..."
         await this.get_artist_data()
         if (!this.error) {
