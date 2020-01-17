@@ -16,9 +16,17 @@
 
 <style scoped>
     ul li {
-        display: inline;
+        display: inline-block;
         list-style:none;
     }
-    li::before { content:" | " }
-    ul li:first-child:before { content:"" }
+    @media (orientation: landscape) {
+        li::before { content:"|"; padding:0 1vw 0 1vw;}
+        ul li:first-child:before { content:""; padding:0;}
+    }
+    @media (orientation:portrait) {
+        li::before { content:"~ "; padding:0 0.5vw 0 0.5vw;}
+        ul li {
+            display: block;
+        }
+    }
 </style>
