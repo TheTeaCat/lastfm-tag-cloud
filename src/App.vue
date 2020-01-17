@@ -17,12 +17,15 @@
                      v-bind:state="generator.state"
                      v-bind:result="generator.result"/>
         </div>
+
+        <Footer/>
     </div>
 </template>
 
 <script>
   import ControlPanel from "./components/ControlPanel.vue"
   import Results from "./components/Results.vue"
+  import Footer from "./components/Footer.vue"
   import Generator from "./assets/js/Generator.js"
 
   export default {
@@ -30,6 +33,7 @@
       components: {
           Results,
           ControlPanel,
+          Footer,
       },
       
       /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Data ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */

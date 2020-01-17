@@ -12,6 +12,11 @@ h2 { font-size:150%; }
     h2 { font-size:120%; }
 }
 
+a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
 button, input, select {
     font-family:'Courier New', Courier, monospace;
 }
