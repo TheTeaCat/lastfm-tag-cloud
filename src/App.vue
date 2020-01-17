@@ -81,7 +81,7 @@
   #page-title {
     margin: 1.5vw 0 1vw 2.5vw;
     border-style: solid;
-    border-width: 0 0 1px 0;
+    border-width: 0 0 2px 0;
     border-color:#f33;
     display:inline-block;
   }
