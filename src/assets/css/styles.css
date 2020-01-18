@@ -1,6 +1,7 @@
 #app {
     min-height:100vh;
     padding:1vw;
+    box-sizing: border-box;
     font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
     font-size:10pt;
 
