@@ -7,17 +7,17 @@ Give it a whirl: [theteacat.github.io/lastfm-tag-cloud/](https://theteacat.githu
 
 Initially, the sample of artists (up to the size and of the time period you specify) is iterated through. For each artist, their top tags are fetched, using [artist.getTopTags](https://www.last.fm/api/show/artist.getTopTags). 
 
-Each tag in the response has a `count` for that artist, and each tag has a `library_total` metric initialised at `0` that is global over all artists.
+Each tag in the response has a `count` for that artist.
 
-This `count` doesn't seem to be documented anywhere. They cap out at 100, so I am working under the assumption that they're a kind of confidence % as to how apropriate that tag is for that artist.
+>**Note:** This `count` doesn't seem to be documented anywhere. They cap out at 100, so I am working under the assumption that they're a kind of confidence % as to how apropriate that tag is for that artist.
 
-For each tag on the artist, the product of `the tag's score on that artist` and `the user's scrobbles of that artist` is added to the tag's `library_total` metric.
+For each tag on the artist, if I have not seen it before, I initialise a `library_total` metric for that tag with an initial value of `0`. 
 
-Once all of the artists are iterated through, the tags are pruned to the top 100 by this `library_total` metric. This is done to avoid hitting rate limits on the last.fm API.
+The product of `the tag's score on that artist` and `the user's scrobbles of that artist` is then added to that tag's `library_total` metric.
 
-They are then scored, which will determine their size.
+Once all of the artists are iterated through, the tags are pruned to the top 100 by this `library_total` metric. This is done to avoid hitting rate limits on the last.fm API in the next step, where I have to call [tag.getInfo](https://www.last.fm/api/show/tag.getInfo) for every tag.
 
-Behold, the relevant code [[source](https://github.com/TheTeaCat/lastfm-tag-cloud/blob/master/src/assets/js/Generator.js)]:
+Each of these 100 tags is then scored as per the following code snippet [[source](https://github.com/TheTeaCat/lastfm-tag-cloud/blob/master/src/assets/js/Generator.js)]:
 
 ```javascript
 score_tags(){
@@ -50,9 +50,9 @@ score_tags(){
 }
 ```
 
-:sob: If you don't like it, cry me a river. :sob:
+I've tried to make this take into account the "uniqueness" of the tag to a user's library, as if they were all just scored by frequency the biggest tag on everyone's clouds would probably just be "all".
 
-:rowboat: <- me, rowing around in a sea of your tears. x
+If this causes issues for you, I know. See [here](https://github.com/TheTeaCat/lastfm-tag-cloud/issues/10). I don't care. :rowboat:
 
 ## Acknowledgements
 
