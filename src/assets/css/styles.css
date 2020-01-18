@@ -1,5 +1,9 @@
+html, body {
+    height:100%;
+}
+
 #app {
-    min-height:100vh;
+    height:100%;
     padding:1vw;
     box-sizing: border-box;
     font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
