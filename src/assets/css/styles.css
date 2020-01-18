@@ -73,5 +73,10 @@ button:hover {
     border-color:var(--highlight-colour);
     color:var(--highlight-colour);
 }
+@keyframes waiting {
+    0% {border-color:var(--highlight-colour); color:var(--highlight-colour); }
+    50% {border-color:var(--text-colour); color:var(--text-colour); }
+}
+button:disabled { animation: waiting 0.5s steps(1,end) infinite; }
 
 ul, ol { list-style: circle inside; }

@@ -36,13 +36,25 @@
 
         <div v-show="cloudState != undefined"
              id="cloud-container">
+
             <div id="canvas-container">
                 <canvas id="tag-cloud-canvas" ref="tag-cloud-canvas"
                         width="1920" height="1200"/>
             </div>
-            <a v-show="cloudState=='generated'" ref="download-link" download="tag-cloud.png">
-                <button v-on:click="downloadTagCloud">Download Image</button>
+
+            <a v-show="cloudState!=undefined" 
+               ref="download-link" 
+               download="tag-cloud.png">
+                <button v-on:click="downloadTagCloud"
+                        v-bind:disabled="cloudState!='generated'">
+                        Download Image
+                        </button>
             </a>
+
+            <button v-show="cloudState!=undefined"
+                    v-bind:disabled="cloudState!='generated'"
+                    v-on:click="reshuffleTagCloud">Reshuffle</button>
+
         </div>
 
         <artists-list id="artists-list" 
@@ -73,6 +85,7 @@
         data: function(){
             return {
                 cloudState:undefined,
+                words:undefined,
             }
         },
         methods: {
@@ -80,6 +93,7 @@
                 this.cloudState = undefined
             },
             async createTagCloud(words) {
+                this.words = words
                 this.cloudState = "generating"
 
                 this.$refs["tag-cloud-canvas"].addEventListener(
@@ -96,6 +110,18 @@
                     shrinkToFit:true,
                     color:style['color'],
                     backgroundColor:style['background-color'],
+                })
+            },
+            reshuffleTagCloud(){
+                this.cloudState = "generating"
+                var style = getComputedStyle(this.$refs["tag-cloud-canvas"]);
+                WordCloud(this.$refs["tag-cloud-canvas"],{
+                    list:this.words,
+                    fontFamily:"Courier",
+                    shrinkToFit:true,
+                    color:style['color'],
+                    backgroundColor:style['background-color'],
+                    shuffle:true,
                 })
             },
             downloadTagCloud() {
@@ -129,8 +155,9 @@
         box-sizing:border-box;
     }
 
-    #cloud-container a { 
+    #cloud-container a, button { 
         float:right;
+        margin:0 0 0 0.5vw;
     }
 
     #artists-list, #tags-list {

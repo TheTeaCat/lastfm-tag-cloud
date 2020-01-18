@@ -67,12 +67,6 @@
         justify-content:flex-end;
     }
 
-    @keyframes loading {
-        0% {border-color:var(--highlight-colour); color:var(--highlight-colour); }
-        50% {border-color:var(--text-colour); color:var(--text-colour); }
-    }
-    #generate-button:disabled { animation: loading 0.5s steps(1,end) infinite; }
-
     >>> span { 
         margin: 0 1vw 0 0;
     }
