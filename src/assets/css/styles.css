@@ -15,7 +15,7 @@ body, #app { min-height:100%; }
     --text-colour:#000;
     --cloud-text-colour:#000;
     --border-colour:#000;
-    --section-colour:#fff;
+    --section-colour:#fafafa;
     --input-colour:#fff;
     --highlight-colour:#f33;
     --darker-colour:#bc0000;
