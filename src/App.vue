@@ -65,6 +65,8 @@
     methods: {
       async generate() {
         this.$refs["results"].clear()
+          this.result=undefined
+          this.error=undefined
 
         var response = await this.generator.generate(this.username,
                                                      this.period.selected,
