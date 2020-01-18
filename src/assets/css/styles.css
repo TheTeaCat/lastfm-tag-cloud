@@ -3,6 +3,7 @@
     padding:1vw;
     font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
     font-size:10pt;
+
     --background-colour:#fff;
     --title-colour:#000;
     --text-colour:#000;
@@ -17,6 +18,12 @@
     color:var(--text-colour);
     background:var(--background-colour);
 
+}
+
+@media(orientation:landscape) {
+    #app {
+        padding:1vw 10vw 1vw 10vw;
+    }
 }
 
 #app[theme="dark"] {
