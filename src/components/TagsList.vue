@@ -5,9 +5,7 @@
         <div v-if="!collapsed">
             <ol class="tag-list">
                 <li v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'><span class="tag">{{ tag }}</span>:
-                    <ol class="artist-list">
-                        <li v-for='tagging in taggings[tag]' v-bind:key='tagging.artist'>{{ tagging.artist }}</li>
-                    </ol>
+                    <taggings-list class="artist-list" v-bind:taggings="taggings[tag]"/>
                 </li>
             </ol>
         </div>
@@ -16,10 +14,12 @@
 
 <script>
     import CollapseButton from "./CollapseButton.vue"
+    import TaggingsList from "./TaggingsList.vue"
 
     export default {
         components: {
-            CollapseButton
+            CollapseButton,
+            TaggingsList
         },
         props: ['tags','taggings'],
         data: function(){
@@ -45,12 +45,5 @@
         border-style:solid;
         border-color:var(--border-colour);
     }
-
     .tag { font-weight:bold; }
-
-    .artist-list { display:inline; }
-    .artist-list li { display:inline; }
-
-    .artist-list li:before { content:", "; }
-    .artist-list li:first-child:before { content:""; }
 </style>

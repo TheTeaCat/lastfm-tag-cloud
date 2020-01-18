@@ -58,6 +58,7 @@ a {
     text-decoration: none;
     color: var(--highlight-colour);
 }
+a:hover { text-decoration: underline; }
 a:visited { color: var(--lighter-colour) }
 
 button, input, select {
