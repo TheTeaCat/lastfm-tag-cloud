@@ -43,6 +43,7 @@
         padding: 1vw 0 1vw 2vw;
         border-width:1px;
         border-style:solid;
+        border-color:var(--border-colour);
     }
 
     .tag { font-weight:bold; }
