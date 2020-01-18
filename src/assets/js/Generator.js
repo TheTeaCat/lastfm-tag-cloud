@@ -101,7 +101,32 @@ class Generator {
         )
     }
 
-    async prune_tags(result){
+    prune_tags(result){
+        /**First, we remove duplicate tags.
+         * The tag data is not merged, the one that is used less in the user's library is simply ignored.
+         * Tags are considered the same if:
+         *  - One is identical to the other, except it ends in an "s".
+         *  - One is identical to the other, except it has a hyphen, space, or no space where the other has any of those three in lieu.
+         */
+        for (var i in result.tags) {
+            for (var j in result.tags) {
+                if (i != j) {
+                    var tagA = result.tags[i]
+                    var tagB = result.tags[j]
+                    if (tagB[tagB.length-1] == "s" && tagB.slice(0,tagB.length-1) == tagA
+                        ||tagB.replace(" ","").replace("-","") == tagA.replace(" ","").replace("-","")) {
+                            if (result.tag_meta[tagA].library_total >= result.tag_meta[tagB].library_total) {
+                                //if tagA is bigger, we get rid of tagA.
+                                result.tags.splice(j,1)
+                                } else {
+                                //if tagB is bigger, we get rid of tagA.
+                                result.tags.splice(i,1)
+                            }
+                        }
+                }
+            }
+        }
+
         result.tags.sort(function(a,b){return result.tag_meta[b].library_total - result.tag_meta[a].library_total}.bind(this))
         result.tags = result.tags.slice(0,100)
     }
@@ -116,7 +141,7 @@ class Generator {
                         "&api_key="+API_KEY+
                         "&tag="+tag_name+
                         "&format=json").then(
-                            function(response){
+                            async function(response){
                                 if (response.data.tag == undefined ) { return }
                                 result.tag_meta[tag_name].reach = response.data.tag.reach
                                 result.tag_meta[tag_name].total = response.data.tag.total
