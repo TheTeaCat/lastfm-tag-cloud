@@ -1,8 +1,8 @@
-body {
-    margin:1vw;
+#app {
+    min-height:100vh;
+    padding:1vw;
     font-family:'Courier New', Courier, monospace;
     font-size:10pt;
-
     --background-colour:#fff;
     --title-colour:#000;
     --text-colour:#000;
@@ -16,21 +16,20 @@ body {
 
     color:var(--text-colour);
     background:var(--background-colour);
+
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        --background-colour:#000;
-        --title-colour:#fff;
-        --text-colour:#fff;
-        --cloud-text-colour:#f33;
-        --border-colour:#bc0000;
-        --section-colour:#2c0000;
-        --input-colour:#000;
-        --highlight-colour:#f33;
-        --darker-colour:#bc0000;
-        --lighter-colour:#faa;        
-    }
+#app[theme="dark"] {
+    --background-colour:#000;
+    --title-colour:#fff;
+    --text-colour:#fff;
+    --cloud-text-colour:#f33;
+    --border-colour:#bc0000;
+    --section-colour:#2c0000;
+    --input-colour:#000;
+    --highlight-colour:#f33;
+    --darker-colour:#bc0000;
+    --lighter-colour:#faa;        
 }
 
 h1,h2 { font-weight:bold; }

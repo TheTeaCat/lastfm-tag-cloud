@@ -1,7 +1,11 @@
 /* eslint-disable vue/require-v-for-key */
 <template>
-    <div>
+    <div id="app" v-bind:theme="theme">
         <h1 id="page-title">Tag Cloud Generator!</h1>
+
+      <button id="theme-button" v-on:click="toggleTheme">
+        {{ theme == "dark" ? "Light Mode" : "Dark Mode" }}
+      </button>
 
         <control-panel v-bind:username="username" 
                        v-bind:period="period" 
@@ -38,6 +42,7 @@
       /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Data ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
       data: function() {
         return {
+          theme:"light",
           username:'TheTeaCat',
           period:{selected:'3month',
                   options:[
@@ -62,7 +67,16 @@
       };
     },
 
+    mounted: function(){
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        this.theme="dark"
+      }
+    },
+
     methods: {
+      toggleTheme() {
+        this.theme = this.theme ==  "dark" ? "light" : "dark"
+      },
       async generate() {
         this.$refs["results"].clear()
           this.result=undefined
@@ -114,6 +128,11 @@
   }
   @media (orientation: portrait) {
     #page-title { margin: 3vw 0 2vw 5vw; }
+  }
+
+  #theme-button {
+    float:right;
+    margin:1vw 1vw 0 0;
   }
 
   .section-container {
