@@ -20,7 +20,10 @@
 
         <div id="generate-button-container">
             <button id="generate-button" 
-                    :loading="state != undefined ? 'true' : 'false'" v-on:click="$emit('generate')">Load Data</button>
+                    v-bind:disabled="state != undefined"
+                    v-on:click="$emit('generate')">
+                    Load Data
+            </button>
         </div>
     </div>
 </template>
@@ -68,7 +71,7 @@
         0% {border-color:var(--highlight-colour); color:var(--highlight-colour); }
         50% {border-color:var(--text-colour); color:var(--text-colour); }
     }
-    #generate-button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
+    #generate-button:disabled { animation: loading 0.5s steps(1,end) infinite; }
 
     >>> span { 
         margin: 0 1vw 0 0;
