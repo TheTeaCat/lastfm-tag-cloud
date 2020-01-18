@@ -132,7 +132,9 @@
 
   #theme-button {
     float:right;
-    margin:1vw 1vw 0 0;
+  }
+  @media (orientation: portrait) {
+    #theme-button { margin:1vw 1vw 0 0; font-size:75%; }
   }
 
   .section-container {
