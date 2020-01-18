@@ -1,7 +1,7 @@
 #app {
     min-height:100vh;
     padding:1vw;
-    font-family:'Courier New', Courier, monospace;
+    font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
     font-size:10pt;
     --background-colour:#fff;
     --title-colour:#000;
@@ -49,13 +49,13 @@ a:visited { color: var(--lighter-colour) }
 
 button, input, select {
     padding:0.5vw;
-    font-family:'Courier New', Courier, monospace;
+    font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
     background:var(--input-colour);
     border-color:var(--border-colour);
     color:var(--text-colour);
     border-width:1px;
 }
-button { border-style:dashed; font-weight:bold; }
+button { border-style:dashed; }
 button:hover { 
     border-color:var(--highlight-colour);
     color:var(--highlight-colour);

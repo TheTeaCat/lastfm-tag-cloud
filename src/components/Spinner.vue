@@ -10,6 +10,7 @@
         75%{content:"\\"}
     }
     div {
+        font-family:'Courier New', Courier, monospace;
         display:inline-block;
     }
     div::after {
