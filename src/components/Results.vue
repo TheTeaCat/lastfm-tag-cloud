@@ -122,6 +122,10 @@
 
         background-color:var(--background-colour);
         color:var(--cloud-text-colour);
+
+        border-width:1px;
+        border-style:solid;
+        border-color:var(--border-colour);
     }
 
     #cloud-container a { 
