@@ -126,6 +126,7 @@
         border-width:1px;
         border-style:solid;
         border-color:var(--border-colour);
+        box-sizing:border-box;
     }
 
     #cloud-container a { 
