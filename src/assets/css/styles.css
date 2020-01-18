@@ -22,5 +22,6 @@ button, input, select {
     border-width:1px;
 }
 button { border-style:dashed; font-weight:bold; }
+button:hover { border-color:#f33; color:#f33; }
 
 ul, ol { list-style: circle inside; }

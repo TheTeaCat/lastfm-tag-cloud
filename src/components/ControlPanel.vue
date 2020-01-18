@@ -63,16 +63,11 @@
         display:flex;
         justify-content:flex-end;
     }
-    #generate-button-container button {
-        border-width:3px;
-        box-sizing:border-box;
-    }
 
     @keyframes loading {
-        0% {border-color:#f33}
-        50% {border-color:#000}
+        0% {border-color:#f33; color:#f33; }
+        50% {border-color:#000; color:#000; }
     }
-    #generate-button[loading = "false"] { border-color:#f33 }
     #generate-button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
 
     >>> span { 

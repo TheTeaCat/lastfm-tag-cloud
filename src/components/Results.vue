@@ -123,10 +123,6 @@
     #cloud-container a { 
         float:right;
     }
-    button {
-        border-width:3px;
-        box-sizing:border-box;
-    }
 
     #artists-list, #tags-list {
         border-width:1px 0px 1px 0px;
