@@ -20,9 +20,9 @@ Once all of the artists are iterated through, the tags are pruned to the top 100
 Each of these 100 tags is then scored as per the following code snippet [[source](https://github.com/TheTeaCat/lastfm-tag-cloud/blob/master/src/assets/js/Generator.js)]:
 
 ```javascript
-score_tags(){
-    for (var tag of this.result.tags) {
-        this.result.scores[tag] = 0
+score_tags(result){
+    for (var tag of result.tags) {
+        result.scores[tag] = 0
         /**First, each tagging is weighted by the product of:
          *  - How many times the user has listened to the artist on which the tag was used,
          * and...
@@ -30,8 +30,8 @@ score_tags(){
          *    I am assuming that this "count" is a confidence % given by last.fm as to the accuracy of the tag on that artist.
          *    I can't find any doccumentation, but this would make sense, as they cap out at 100.
          */
-        for (var tagging of this.result.taggings[tag]) {
-            this.result.scores[tag] += tagging.count/100 * this.result.listens[tagging.artist]
+        for (var tagging of result.taggings[tag]) {
+            result.scores[tag] += tagging.count/100 * result.listens[tagging.artist]
         }
         /**The sum of all these weighted taggings is then scaled by:
          * 1. How many of the uses of that tag overall fall within the user's library sample (its "uniqueness" to the sample).
@@ -42,10 +42,10 @@ score_tags(){
          *    Base 10 is used so 100 people using the tag makes it twice as significant as 10 people using the tag; a nice balance.
          *    It's also conveniently provided as a function by Math.
          */
-        this.result.scores[tag] = this.result.scores[tag] 
-                                    * (this.result.tag_meta[tag].library_total / this.result.tag_meta[tag].total) 
-                                    * this.result.taggings[tag].length * this.result.taggings[tag].length
-                                    * Math.log10(this.result.tag_meta[tag].reach)
+        result.scores[tag] = result.scores[tag] 
+                                    * (result.tag_meta[tag].library_total / result.tag_meta[tag].total) 
+                                    * result.taggings[tag].length * result.taggings[tag].length
+                                    * Math.log10(result.tag_meta[tag].reach)
     }
 }
 ```
