@@ -14,8 +14,8 @@
 
         <results ref="results"
                  v-bind:state="generator.state"
-                 v-bind:result="generator.result"
-                 v-bind:error="generator.error"/>
+                 v-bind:result="result"
+                 v-bind:error="error"/>
 
         <Footer/>
     </div>
@@ -56,16 +56,43 @@
                           {text:'100',value:100}]
                       },
           generator:new Generator(),
-          tags:undefined,
+          result:undefined,
+          error:undefined,
+          cloudWords:undefined,
       };
     },
 
     methods: {
       async generate() {
-        this.$refs["results"].reset()
-        await this.generator.generate(this.username,this.period.selected,this.max_artists.selected)
-        if (this.generator.result.artists.length > 0) {
-          this.$refs["results"].createTagCloud(this.generator)
+        this.$refs["results"].clear()
+
+        var response = await this.generator.generate(this.username,
+                                                     this.period.selected,
+                                                     this.max_artists.selected)
+        this.result = response.result
+        this.error = response.error
+
+        if (this.result.artists.length > 0) {
+          var minScore = Infinity
+          var maxScore = -Infinity
+          for (var tag of this.result.tags) {
+              if (this.result.scores[tag] < minScore) {
+                  minScore = this.result.scores[tag]
+              }
+              if (this.result.scores[tag] > maxScore) {
+                  maxScore = this.result.scores[tag]
+              }
+          }
+
+          this.cloudWords = []
+          for (tag of this.result.tags) {
+              /**Biggest should be 200, smallest should be 25.
+               * Logarithmic scaling is pretty arbritrary, just what I found looks decent.
+               */
+              this.cloudWords.push([tag,Math.log10((this.result.scores[tag]-minScore)*99/maxScore+1)/2*175+25])
+          }
+
+          this.$refs["results"].createTagCloud(this.cloudWords)
         }
       }
     }

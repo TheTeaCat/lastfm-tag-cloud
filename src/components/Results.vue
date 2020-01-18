@@ -61,6 +61,7 @@
     import ArtistsList from "./ArtistsList.vue"
     import TagsList from "./TagsList.vue"
     import Spinner from "./Spinner.vue"
+    import WordCloud from "wordcloud"
 
     export default {
         components: {
@@ -75,13 +76,25 @@
             }
         },
         methods: {
-            reset(){
+            clear(){
                 this.cloudState = undefined
             },
-            async createTagCloud(generator) {
+            async createTagCloud(words) {
                 this.cloudState = "generating"
-                this.$refs["tag-cloud-canvas"].addEventListener("wordcloudstop",function(){this.cloudState="generated"}.bind(this))
-                await generator.generate_tag_cloud(this.$refs["tag-cloud-canvas"])
+
+                this.$refs["tag-cloud-canvas"].addEventListener(
+                    "wordcloudstop",
+                    function(){
+                        this.cloudState="generated"
+                    }.bind(this)
+                )
+
+                WordCloud(this.$refs["tag-cloud-canvas"],{
+                    list:words,
+                    fontFamily:"Courier",
+                    color:"#000",
+                    shrinkToFit:true
+                })
             },
             downloadTagCloud() {
                 this.$refs["download-link"].href = this.$refs["tag-cloud-canvas"].toDataURL()

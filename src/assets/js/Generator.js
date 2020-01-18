@@ -1,19 +1,16 @@
 import axios from "axios"
-import WordCloud from "wordcloud"
 
 const API_KEY = '97773975bd1d3fdf89b362a27d2b6313'
 
 class Generator {
     /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Constructor ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     constructor() {
-        this.result = undefined
         this.state = undefined
-        this.error = undefined
     }
 
     /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Generation func ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     async generate(username,period,max_artists) {
-        this.result = {
+        var result = {
             username:username,
             period:period,
             max_artists:max_artists,
@@ -24,41 +21,45 @@ class Generator {
             tag_meta:{},
             scores:{}
         }
-        this.error = undefined
+        var error = undefined
         this.state = "Getting artists' data..."
-        await this.get_artist_data()
-        if (!this.error) {
+        await this.get_artist_data(result).then(
+            e => error = e
+        )
+        
+        if (error == undefined) {
             this.state = "Pruning tags..."
-            await this.prune_tags()
+            await this.prune_tags(result)
             this.state = "Getting tags' data..."
-            await this.get_tag_data()
+            await this.get_tag_data(result)
             this.state = "Scoring tags..."
-            await this.score_tags()
+            await this.score_tags(result)
             this.state = "Sorting tags..."
-            await this.sort_data()
+            await this.sort_data(result)
         }
-        this.state = undefined;    
+        this.state = undefined;
+        return {'result':result, 'error':error}
     }
 
     /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Generation sub-funcs ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
-    async get_artist_data() {
+    async get_artist_data(result) {
         await axios.get(
             "https://ws.audioscrobbler.com/2.0/?method=user.gettopartists"+
             "&api_key="+API_KEY+
-            "&user="+this.result.username+
-            "&period="+this.result.period+
-            "&limit="+this.result.max_artists+
+            "&user="+result.username+
+            "&period="+result.period+
+            "&limit="+result.max_artists+
             "&format=json").then(
                 async function(response){
                     var artist_promises = []
                     for (var artist of response.data.topartists.artist) {
                         artist_promises.push( new Promise(
                             async function(resolve) {
-                                /**Sanitising data */
+                                /**Sanitising result */
                                 var artist_name = artist.name.toLowerCase()
                                 /**Adding the artist to the artists list... */
-                                this.result.artists.push(artist_name)
-                                this.result.listens[artist_name] = artist.playcount
+                                result.artists.push(artist_name)
+                                result.listens[artist_name] = artist.playcount
                                 /**Getting their tags... */
                                 await axios.get("https://ws.audioscrobbler.com/2.0/?method=artist.getTopTags"+
                                         "&api_key="+API_KEY+
@@ -72,17 +73,17 @@ class Generator {
                                                     /**Sanitising data */
                                                     tag.name = tag.name.toLowerCase()
                                                     /**Adding the tag to the tags list if it's not already present... */
-                                                    if (this.result.taggings[tag.name] == undefined) {
-                                                        this.result.tags.push(tag.name)
+                                                    if (result.taggings[tag.name] == undefined) {
+                                                        result.tags.push(tag.name)
                                                         /**Initialising the taggings of the tag on the artist to the tag's list in the taggings object... */
-                                                        this.result.taggings[tag.name] = [{artist:artist_name,count:tag.count}]
+                                                        result.taggings[tag.name] = [{artist:artist_name,count:tag.count}]
                                                         /**Initialising the count of taggings on the artist to the tag's library_total... */
-                                                        this.result.tag_meta[tag.name] = {library_total:tag.count/100}
+                                                        result.tag_meta[tag.name] = {library_total:tag.count/100}
                                                     } else {
                                                         /**Adding the taggings of the tag on the artist to the tag's list in the taggings object... */
-                                                        this.result.taggings[tag.name].push({artist:artist_name,count:tag.count})
+                                                        result.taggings[tag.name].push({artist:artist_name,count:tag.count})
                                                         /**Adding the count of taggings on the artist to the tag's library_total... */
-                                                        this.result.tag_meta[tag.name].library_total += tag.count/100
+                                                        result.tag_meta[tag.name].library_total += tag.count/100
                                                     }
                                                 }
                                             }.bind(this))
@@ -95,19 +96,19 @@ class Generator {
                 }.bind(this)
         ).catch(
             function(error) {
-                this.error = error
+                return error
             }.bind(this)
         )
     }
 
-    async prune_tags(){
-        this.result.tags.sort(function(a,b){return this.result.tag_meta[b].library_total - this.result.tag_meta[a].library_total}.bind(this))
-        this.result.tags = this.result.tags.slice(0,100)
+    async prune_tags(result){
+        result.tags.sort(function(a,b){return result.tag_meta[b].library_total - result.tag_meta[a].library_total}.bind(this))
+        result.tags = result.tags.slice(0,100)
     }
 
-    async get_tag_data(){
+    async get_tag_data(result){
         var tag_promises = []
-        for (var tag of this.result.tags) {
+        for (var tag of result.tags) {
             tag_promises.push(new Promise(
                 function(tag_name){
                     return async function (resolve){
@@ -117,8 +118,8 @@ class Generator {
                         "&format=json").then(
                             function(response){
                                 if (response.data.tag == undefined ) { return }
-                                this.result.tag_meta[tag_name].reach = response.data.tag.reach
-                                this.result.tag_meta[tag_name].total = response.data.tag.total
+                                result.tag_meta[tag_name].reach = response.data.tag.reach
+                                result.tag_meta[tag_name].total = response.data.tag.total
                             }.bind(this)
                         )
                         resolve(true)
@@ -129,9 +130,9 @@ class Generator {
         await Promise.all(tag_promises)
     }
 
-    score_tags(){
-        for (var tag of this.result.tags) {
-            this.result.scores[tag] = 0
+    score_tags(result){
+        for (var tag of result.tags) {
+            result.scores[tag] = 0
             /**First, each tagging is weighted by the product of:
              *  - How many times the user has listened to the artist on which the tag was used,
              * and...
@@ -139,8 +140,8 @@ class Generator {
              *    I am assuming that this "count" is a confidence % given by last.fm as to the accuracy of the tag on that artist.
              *    I can't find any doccumentation, but this would make sense, as they cap out at 100.
              */
-            for (var tagging of this.result.taggings[tag]) {
-                this.result.scores[tag] += tagging.count/100 * this.result.listens[tagging.artist]
+            for (var tagging of result.taggings[tag]) {
+                result.scores[tag] += tagging.count/100 * result.listens[tagging.artist]
             }
             /**The sum of all these weighted taggings is then scaled by:
              * 1. How many of the uses of that tag overall fall within the user's library sample (its "uniqueness" to the sample).
@@ -151,46 +152,20 @@ class Generator {
              *    Base 10 is used so 100 people using the tag makes it twice as significant as 10 people using the tag; a nice balance.
              *    It's also conveniently provided as a function by Math.
              */
-            this.result.scores[tag] = this.result.scores[tag] 
-                                        * (this.result.tag_meta[tag].library_total / this.result.tag_meta[tag].total) 
-                                        * this.result.taggings[tag].length * this.result.taggings[tag].length
-                                        * Math.log10(this.result.tag_meta[tag].reach)
+            result.scores[tag] = result.scores[tag] 
+                                        * (result.tag_meta[tag].library_total / result.tag_meta[tag].total) 
+                                        * result.taggings[tag].length * result.taggings[tag].length
+                                        * Math.log10(result.tag_meta[tag].reach)
         }
     }
 
-    sort_data(){
-        for (var tag of this.result.tags) {
+    sort_data(result){
+        for (var tag of result.tags) {
             /**Sorting the tags' artists based upon how many times each artist has been tagged that tag */
-            this.result.taggings[tag].sort(function(a,b){return b.count-a.count})
+            result.taggings[tag].sort(function(a,b){return b.count-a.count})
         }
         /**Sorting the tags based upon their scores */
-        this.result.tags.sort(function(a,b){return this.result.scores[b]-this.result.scores[a]}.bind(this))
-    }
-
-    generate_tag_cloud(canvas) {
-        this.cloud_tags = []
-        var minScore = Infinity
-        var maxScore = -Infinity
-        for (var tag of this.result.tags) {
-            if (this.result.scores[tag] < minScore) {
-                minScore = this.result.scores[tag]
-            }
-            if (this.result.scores[tag] > maxScore) {
-                maxScore = this.result.scores[tag]
-            }
-        }
-        for (tag of this.result.tags) {
-            /**Biggest should be 200, smallest should be 25.
-             * Logarithmic scaling is pretty arbritrary, just what I found looks decent.
-             */
-            this.cloud_tags.push([tag,Math.log10((this.result.scores[tag]-minScore)*99/maxScore+1)/2*175+25])
-        }
-        WordCloud(canvas,{
-            list:this.cloud_tags,
-            fontFamily:"Courier",
-            color:"#000",
-            shrinkToFit:true
-        })
+        result.tags.sort(function(a,b){return result.scores[b]-result.scores[a]}.bind(this))
     }
 }
 
