@@ -89,11 +89,13 @@
                     }.bind(this)
                 )
 
+                var style = getComputedStyle(this.$refs["tag-cloud-canvas"]);
                 WordCloud(this.$refs["tag-cloud-canvas"],{
                     list:words,
                     fontFamily:"Courier",
-                    color:"#000",
-                    shrinkToFit:true
+                    shrinkToFit:true,
+                    color:style['color'],
+                    backgroundColor:style['background-color'],
                 })
             },
             downloadTagCloud() {
@@ -117,6 +119,9 @@
         margin:1vw auto 1vw auto;
         max-width:100%;
         max-height:90vh;
+
+        background-color:var(--background-colour);
+        color:var(--cloud-text-colour);
     }
 
     #cloud-container a { 
