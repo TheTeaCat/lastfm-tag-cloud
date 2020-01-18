@@ -114,8 +114,7 @@
     }
     canvas {
         display: block;
-        margin-left: auto;
-        margin-right: auto;
+        margin:1vw auto 1vw auto;
         max-width:100%;
         max-height:90vh;
     }
@@ -126,7 +125,8 @@
 
     #artists-list, #tags-list {
         border-width:1px 0px 1px 0px;
-        border-style:solid;        
+        border-style:solid;
+        border-color:var(--border-colour);
         margin:1vw;
         padding:1vw;
     }

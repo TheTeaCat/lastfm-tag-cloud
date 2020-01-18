@@ -107,7 +107,7 @@
     margin: 1.5vw 0 1vw 2.5vw;
     border-style: solid;
     border-width: 0 0 2px 0;
-    border-color:#f33;
+    border-color:var(--highlight-colour);
     display:inline-block;
   }
   @media (orientation: portrait) {
@@ -117,6 +117,8 @@
   .section-container {
     border-width:1px;
     border-style:solid;    
+    border-color:var(--border-colour);
+    background:var(--section-colour);
     margin:1vw 0 1vw 0;
     padding:1vw 2vw 1vw 1.5vw;
   }

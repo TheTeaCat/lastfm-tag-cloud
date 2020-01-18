@@ -65,8 +65,8 @@
     }
 
     @keyframes loading {
-        0% {border-color:#f33; color:#f33; }
-        50% {border-color:#000; color:#000; }
+        0% {border-color:var(--highlight-colour); color:var(--highlight-colour); }
+        50% {border-color:var(--text-colour); color:var(--text-colour); }
     }
     #generate-button[loading = "true"] { animation: loading 0.5s steps(1,end) infinite; }
 
