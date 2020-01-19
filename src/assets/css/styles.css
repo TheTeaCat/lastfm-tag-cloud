@@ -83,4 +83,4 @@ button:disabled {
     background:var(--darkest-colour)
 }
 
-ul, ol { list-style: circle inside; }
+ul, ol { list-style: decimal inside; }
