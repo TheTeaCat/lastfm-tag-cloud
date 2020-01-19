@@ -188,17 +188,26 @@
     #cloud-buttons {
         display:flex;
         justify-content:center;
+        align-items:center;
         flex-wrap:nowrap;
     }
-    .cloud-button { margin:0 0 0 1vw; display:inline-block; }
-    #cloud-buttons .cloud-button:first-child { margin:0; }
+    .cloud-button { 
+        margin:0 0 0 1vw; 
+        display:inline-block;
+        flex-shrink:1;
+        flex-grow:0;
+    }
+    #cloud-buttons .cloud-button:first-child { 
+        margin:0; 
+    }
     #copy-share-link-title {
         flex-shrink:0;
-        flex-grow:1;
     }
     #share-link {
         display:flex;
         align-items:center;
+        overflow:hidden;
+        flex-basis:40%;
     }
     #share-link input { 
         border:none;
