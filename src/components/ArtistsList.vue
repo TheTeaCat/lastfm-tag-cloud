@@ -45,7 +45,7 @@
         padding: 1vw 0 1vw 2vw;
         border-width:1px;
         border-style:solid;
-        border-color:var(--border-colour);
+        border-color:var(--list-border-colour);
         background-color:var(--list-colour);        
     }
 

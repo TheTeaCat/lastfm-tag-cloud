@@ -174,7 +174,7 @@
 
         border-width:1px;
         border-style:solid;
-        border-color:var(--border-colour);
+        border-color:var(--cloud-border-colour);
         box-sizing:border-box;
     }
 
@@ -184,11 +184,15 @@
     }
 
     #artists-list, #tags-list {
-        border-width:1px 0px 1px 0px;
-        border-style:solid;
-        border-color:var(--border-colour);
         margin:1vw;
         padding:1vw;
+    }
+    @media(orientation:landscape) {
+        #artists-list, #tags-list {
+            border-width:1px 0px 1px 0px;
+            border-style:solid;
+            border-color:var(--list-border-colour);
+        }
     }
 
     #tags-list { margin: 1vw 1vw 0 1vw; }

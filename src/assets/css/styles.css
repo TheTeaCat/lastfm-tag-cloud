@@ -10,38 +10,60 @@ body, #app { min-height:100%; }
     font-size:10pt;
 
     --background-colour:#fff;
+    --text-colour:#000;
+
     --title-colour:#f33;
     --header-background:linear-gradient(0deg, #fff 0%, #fafafa 100%);
-    --text-colour:#000;
+
+    --section-background-colour:#fff;
+
     --cloud-text-colour:#000;
     --cloud-background-colour:#fff;
-    --border-colour:#aaa;
-    --list-colour:#fafafa;
+    --cloud-border-colour:#000;
+
+    --list-colour:#fff0f0;
+
     --input-colour:#fff0f0;
+    --input-border-colour:#000;
+
     --highlight-colour:#f33;
+
     --darkest-colour:#220000;
-    --darker-colour:#bc0000;
-    --lighter-colour:#f88;
-    --lightest-colour:#fff0f0;
+    --darker-colour:#6c0000;
+    --lighter-colour:#f99;
+    --lightest-colour:#ffe0e0;
 
     color:var(--text-colour);
     background:var(--background-colour);
 
 }
-
 #app[theme="dark"] {
     --background-colour:#090909;
+    --text-colour:#fff;
+
     --title-colour:#fff;
     --header-background:linear-gradient(0deg, #090909 0%, #292929 100%);
-    --text-colour:#fff;
+
+    --section-background-colour:#090909;
+
     --cloud-text-colour:#f33;
     --cloud-background-colour:#000;    
-    --border-colour:#333;
-    --list-colour:#111;
+    --cloud-border-colour:#333;
+
+    --list-colour:#000;
+    --list-border-colour:#333;
+
     --input-colour:#000;
-    --highlight-colour:#f33;
-    --darker-colour:#bc0000;
-    --lighter-colour:#faa;
+    --input-border-colour:#333;
+}
+@media(orientation:portrait){
+    #app {
+        --section-background-colour:#fee;
+        --input-colour:#fff;        
+    }
+    #app[theme="dark"] {
+        --section-background-colour:#290000;
+    }
 }
 
 h1,h2 { font-weight:bold; }
@@ -64,7 +86,7 @@ button, input, select {
     padding:0.5vw;
     font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
     background:var(--input-colour);
-    border-color:var(--border-colour);
+    border-color:var(--input-border-colour);
     color:var(--text-colour);
     border-style:solid;
     border-width:1px;
