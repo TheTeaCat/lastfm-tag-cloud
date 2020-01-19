@@ -2,17 +2,15 @@
     <div>
         <collapse-button v-bind:collapsed="collapsed" @collapse="collapse"/>
         <h2>Artists:</h2>
-        <div v-if="!collapsed">
-            <ol id="artist-list">
-                <li v-for='artist in artists' v-bind:key='artist' v-bind:artist='artist'>
-                    <span class="artist">
-                        <a v-bind:href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">
-                        {{ artist }}
-                        </a></span>
-                    ({{ listens[artist] }} <span v-if="listens[artist]>1">listens</span> <span v-else>listen</span>)
-                </li>
-            </ol>
-        </div>
+        <ol id="artist-list" v-if="!collapsed">
+            <li v-for='artist in artists' v-bind:key='artist' v-bind:artist='artist'>
+                <span class="artist">
+                    <a v-bind:href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">
+                    {{ artist }}
+                    </a></span>
+                ({{ listens[artist] }} <span v-if="listens[artist]>1">listens</span> <span v-else>listen</span>)
+            </li>
+        </ol>
     </div>
 </template>
 
@@ -41,6 +39,7 @@
     h2 { display:inline; }
 
     #artist-list {
+        flex-basis:100%;
         margin: 0.5vw 0 0 0;
         padding: 1vw 0 1vw 2vw;
         border-width:1px;

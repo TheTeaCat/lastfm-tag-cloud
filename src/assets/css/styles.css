@@ -39,7 +39,7 @@ body, #app { min-height:100%; }
 }
 #app[theme="dark"] {
     --background-colour:#090909;
-    --text-colour:#fff;
+    --text-colour:#ddd;
 
     --title-colour:#fff;
     --header-background:linear-gradient(0deg, #090909 0%, #292929 100%);
@@ -62,7 +62,7 @@ body, #app { min-height:100%; }
         --input-colour:#fff;        
     }
     #app[theme="dark"] {
-        --section-background-colour:#290000;
+        --section-background-colour:#190909;
     }
 }
 

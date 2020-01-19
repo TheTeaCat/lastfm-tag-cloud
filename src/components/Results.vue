@@ -186,6 +186,9 @@
     #artists-list, #tags-list {
         margin:1vw;
         padding:1vw;
+        display:flex;
+        flex-wrap:wrap;
+        align-items:center;
     }
     @media(orientation:landscape) {
         #artists-list, #tags-list {
