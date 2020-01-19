@@ -5,7 +5,7 @@
         <div v-if="!collapsed">
             <ol class="tag-list">
                 <li v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'>
-                    <span class="tag"><a v-bind:href="tag_meta[tag].url" target="_blank">
+                    <span class="tag"><a v-bind:href="tag_meta[tag].url">
                         {{ tag }}</a></span>:
                     <taggings-list class="artist-list" v-bind:taggings="taggings[tag]"/>
                 </li>
