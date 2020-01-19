@@ -6,7 +6,7 @@
 
         <li v-if="taggings.length > 3" 
             v-on:click="toggle">
-            <a>{{ collapsed ? "..." : "collapse" }}</a>
+            <a>{{ collapsed ? "show more..." : "show less" }}</a>
             </li>
     </ol>
 </template>
@@ -32,5 +32,7 @@ export default {
 
     li:before { content:", "; }
     li:first-child:before { content:""; }
-    li:last-child:before { content:""; }    
+    li:last-child:before { content:""; }
+
+    a { color:var(--text-colour)}
 </style>
