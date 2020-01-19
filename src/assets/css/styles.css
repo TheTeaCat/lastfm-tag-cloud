@@ -26,13 +26,16 @@ body, #app { min-height:100%; }
 
     --input-colour:#fff0f0;
     --input-border-colour:#000;
+    --input-disabled-colour:#ffe0e0;
+    --input-disabled-border-colour:#f99;
 
     --highlight-colour:#f33;
+    --visited-colour:#f99;
 
-    --darkest-colour:#220000;
-    --darker-colour:#6c0000;
-    --lighter-colour:#f99;
-    --lightest-colour:#ffe0e0;
+    --darkest-colour:#0f0;
+    --darker-colour:#00f;
+    --lighter-colour:#ff0;
+    --lightest-colour:#f0f;
 
     color:var(--text-colour);
     background:var(--background-colour);
@@ -57,6 +60,8 @@ body, #app { min-height:100%; }
 
     --input-colour:#000;
     --input-border-colour:#333;
+    --input-disabled-colour:#0f0000;
+    --input-disabled-border-colour:#300;
 }
 @media(orientation:portrait){
     #app {
@@ -84,7 +89,7 @@ a {
     color: var(--highlight-colour);
 }
 a:hover { text-decoration: underline; }
-a:visited { color: var(--lighter-colour) }
+a:visited { color: var(--visited-colour) }
 
 button, input, select {
     padding:0.5vw;
@@ -99,14 +104,9 @@ button {
     border-style:dashed;
 }
 button:disabled {
-    color:var(--lighter-colour);
-    border-color:var(--lighter-colour);
-    background:var(--lightest-colour)
-}
-#app[theme="dark"] button:disabled {
-    color:var(--darker-colour);
-    border-color:var(--darker-colour);
-    background:var(--darkest-colour)
+    color:var(--input-disabled-border-colour);
+    border-color:var(--input-disabled-border-colour);
+    background:var(--input-disabled-colour);
 }
 
 ul, ol { list-style: decimal inside; }
