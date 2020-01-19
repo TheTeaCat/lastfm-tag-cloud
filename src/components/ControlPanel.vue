@@ -68,6 +68,7 @@
 
     @media (orientation:portrait) {
         #generate-button-container {
+            padding: 0;
             flex-grow:1;
             flex-basis:30%;
             display:flex;
