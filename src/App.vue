@@ -164,7 +164,7 @@
     background:var(--section-background-colour);
     margin:1vw 10vw 1vw 10vw;
     padding:1vw 2vw 1vw 1.5vw;
-    border-radius:2vw;
+    border-radius:2px;
   }
   @media (orientation: portrait) {
       .section-container { 

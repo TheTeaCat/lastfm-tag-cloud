@@ -13,7 +13,7 @@ body, #app { min-height:100%; }
     --text-colour:#000;
 
     --title-colour:#f33;
-    --header-background:linear-gradient(0deg, #fff 0%, #fafafa 100%);
+    --header-background:linear-gradient(0deg, #fff 0%, #f3f3f3 100%);
 
     --section-background-colour:#fff;
 
@@ -58,11 +58,11 @@ body, #app { min-height:100%; }
 }
 @media(orientation:portrait){
     #app {
-        --section-background-colour:#fee;
-        --input-colour:#fff;        
+        --section-background-colour:#fafafa;
+        --input-colour:#fff;
     }
     #app[theme="dark"] {
-        --section-background-colour:#190909;
+        --section-background-colour:#150909;
     }
 }
 
