@@ -142,7 +142,7 @@
         computed: {
             share_link:function() {
                 if (this.result != undefined) {
-                    return window.location.href
+                    return window.location.origin + window.location.pathname
                      + "?username=" + this.result.username 
                      + "&period=" + this.result.period 
                      + "&max_artists=" + this.result.max_artists 
