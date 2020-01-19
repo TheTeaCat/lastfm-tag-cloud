@@ -46,6 +46,7 @@
         border-width:1px;
         border-style:solid;
         border-color:var(--border-colour);
+        background-color:var(--list-colour);
     }
     .tag { font-weight:bold; }
 </style>

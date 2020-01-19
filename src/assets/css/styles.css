@@ -14,10 +14,10 @@ body, #app { min-height:100%; }
     --header-background:linear-gradient(0deg, #fafafa 0%, #dadada 100%);
     --text-colour:#000;
     --cloud-text-colour:#000;
-    --cloud-background-colour:#fff;    
-    --border-colour:#000;
-    --section-colour:#fafafa;
-    --input-colour:#fff;
+    --cloud-background-colour:#fff;
+    --border-colour:#aaa;
+    --list-colour:#fafafa;
+    --input-colour:#fff0f0;
     --highlight-colour:#f33;
     --darkest-colour:#220000;
     --darker-colour:#bc0000;
@@ -30,14 +30,14 @@ body, #app { min-height:100%; }
 }
 
 #app[theme="dark"] {
-    --background-colour:#000;
+    --background-colour:#111;
     --title-colour:#fff;
-    --header-background:linear-gradient(0deg, #000 0%, #222 100%);
+    --header-background:linear-gradient(0deg, #111 0%, #000 100%);
     --text-colour:#fff;
     --cloud-text-colour:#f33;
     --cloud-background-colour:#000;    
     --border-colour:#333;
-    --section-colour:#222;
+    --list-colour:#090909;
     --input-colour:#000;
     --highlight-colour:#f33;
     --darker-colour:#bc0000;

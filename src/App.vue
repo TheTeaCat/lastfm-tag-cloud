@@ -161,15 +161,15 @@
   }
 
   .section-container {
-    border-width:1px;
-    border-style:solid;    
-    border-color:var(--border-colour);
-    background:var(--section-colour);
+    background:var(--background-colour);
     margin:1vw 10vw 1vw 10vw;
     padding:1vw 2vw 1vw 1.5vw;
   }
   @media (orientation: portrait) {
       .section-container { 
+        border-style:solid;
+        border-width:1px;
+        border-color:var(--border-colour);
         padding:2vw;
         margin: 1vw;
       }

@@ -158,6 +158,7 @@
         width:100%;
         overflow: auto;
     }
+    @media (orientation:landscape){ #cloud-container { margin-top: 1vw; } }
 
     #canvas-container {
         width:100%;
