@@ -43,8 +43,7 @@
                         width="1920" height="1200"/>
             </div>
 
-            <a v-show="cloudState!=undefined" 
-               ref="download-link" 
+            <a ref="download-link" class="cloud-button"
                download="tag-cloud.png">
                 <button v-on:click="downloadTagCloud"
                         v-bind:disabled="cloudState!='generated'">
@@ -52,10 +51,9 @@
                         </button>
             </a>
 
-            <button v-show="cloudState!=undefined"
+            <button class="cloud-button"
                     v-bind:disabled="cloudState!='generated'"
                     v-on:click="reshuffleTagCloud">Reshuffle</button>
-
         </div>
 
         <artists-list id="artists-list" 
@@ -68,6 +66,12 @@
                    v-bind:tags="result.tags" 
                    v-bind:taggings="result.taggings"
                    v-bind:tag_meta="result.tag_meta"/>
+
+        <button v-if="result != undefined && result.artists.length > 0"
+                id="share-link"
+                v-on:click="copyShareLink"> Copy Link: 
+            <input ref="share-link" v-bind:value="share_link" readonly="readonly"/>
+        </button>
     </div>
 </template>
 
@@ -128,6 +132,22 @@
             },
             downloadTagCloud() {
                 this.$refs["download-link"].href = this.$refs["tag-cloud-canvas"].toDataURL()
+            },
+            copyShareLink() {
+                this.$refs["share-link"].select()
+                this.$refs["share-link"].setSelectionRange(0,99999)
+                document.execCommand("Copy")
+            }
+        },
+        computed: {
+            share_link:function() {
+                if (this.result != undefined) {
+                    return window.location.href
+                     + "?username=" + this.result.username 
+                     + "&period=" + this.result.period 
+                     + "&max_artists=" + this.result.max_artists 
+                }
+                return ""
             }
         }
     }
@@ -157,9 +177,9 @@
         box-sizing:border-box;
     }
 
-    #cloud-container a, button { 
+    .cloud-button {
         float:right;
-        margin:0 0 0 0.5vw;
+        margin:0 0 0 1vw;
     }
 
     #artists-list, #tags-list {
@@ -169,5 +189,18 @@
         margin:1vw;
         padding:1vw;
     }
+
     #tags-list { margin: 1vw 1vw 0 1vw; }
+
+    #share-link { 
+        margin:2vw 0 0 auto;
+        display:block;
+    }
+    @media(orientation:landscape){
+        #share-link{
+            padding-top:0; padding-bottom:0; padding-right:0;
+            margin:1vw 0 0 auto;
+        }
+    }
+    #share-link input { border:none; max-width:20vw;}
 </style>

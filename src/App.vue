@@ -7,13 +7,13 @@
         {{ theme == "dark" ? "Light Mode" : "Dark Mode" }}
       </button>
 
-        <control-panel v-bind:username="username" 
-                       v-bind:period="period" 
-                       v-bind:max_artists="max_artists"
-                       v-bind:state="generator.state"
-                       v-on:update:username="username=$event"
-                       v-on:update:period="period.selected=$event"
-                       v-on:update:max_artists="max_artists.selected=$event"
+        <control-panel :username="username"
+                       :period="period" 
+                       :max_artists="max_artists"
+                       :state="generator.state"
+                       @update:username="username=$event"
+                       @update:period="period.selected=$event"
+                       @update:max_artists="max_artists.selected=$event"
                        @generate="generate"/>
 
         <results ref="results"
@@ -71,6 +71,20 @@
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         this.theme="dark"
       }
+
+      if (this.period.options.some(
+          function(option){return option.value==this.$route.query.period}.bind(this))
+      ) { this.period.selected = this.$route.query.period }
+
+      if (this.max_artists.options.some(
+          function(option){return option.value==this.$route.query.max_artists}.bind(this))
+      ) { this.max_artists.selected = this.$route.query.max_artists }
+
+      if (this.$route.query.username != undefined) { 
+        this.username = this.$route.query.username 
+        this.generate()
+      }
+
     },
 
     methods: {

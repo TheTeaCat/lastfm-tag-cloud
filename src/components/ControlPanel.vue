@@ -3,7 +3,10 @@
         <div class="option">
             <span>Last.fm Username:</span>
             <input v-model="username" ref="username-input"
-                   v-on:keyup="(e) => e.key == 'Enter' ? this.$emit('generate') : this.$emit('update:username',e.target.value)"/>
+                   v-on:keyup="(e) => 
+                   e.key == 'Enter' 
+                   ? this.$emit('generate') 
+                   : this.$emit('update:username',e.target.value)"/>
         </div>
 
         <control-panel-option class="option"
