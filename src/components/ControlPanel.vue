@@ -21,7 +21,7 @@
                               v-bind:selected="max_artists.selected"
                               v-on:update="$emit('update:max_artists',$event)"/>
 
-        <div id="generate-button-container">
+        <div id="generate-button-container" class="option">
             <button id="generate-button" 
                     v-bind:disabled="state != undefined"
                     v-on:click="$emit('generate')">
@@ -66,13 +66,21 @@
         }
     }
 
-    #generate-button-container {
-        flex-grow:1;
-        display:flex;
-        justify-content:flex-end;
-        align-self:flex-end;
+    @media (orientation:portrait) {
+        #generate-button-container {
+            flex-grow:1;
+            flex-basis:30%;
+            display:flex;
+            justify-content:flex-end;
+            align-self:flex-end;
+        }
     }
-
+    @media (orientation:landscape) {
+        #generate-button-container:before {
+            content:"| ";
+            padding:0 2.5vw 0 1vw;
+        }
+    }
     >>> span { 
         margin: 0 1vw 0 0;
     }
