@@ -194,12 +194,11 @@
     #cloud-buttons .cloud-button:first-child { margin:0; }
     #copy-share-link-title {
         flex-shrink:0;
+        flex-grow:1;
     }
     #share-link {
         display:flex;
         align-items:center;
-        flex-basis:50%;
-        overflow:hidden;
     }
     #share-link input { 
         border:none;
