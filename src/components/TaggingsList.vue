@@ -4,7 +4,8 @@
             v-bind:key='tagging.artist'>{{ tagging.artist }}</li
             >{{ collapsed && taggings.length > 3 ? ', ' : '. ' }}
 
-        <li v-if="taggings.length > 3" 
+        <li id="collapser"
+            v-if="taggings.length > 3" 
             v-on:click="toggle">
             <a>{{ collapsed ? "show more..." : "show less" }}</a>
             </li>
@@ -32,7 +33,7 @@ export default {
 
     li:before { content:", "; }
     li:first-child:before { content:""; }
-    li:last-child:before { content:""; }
+    #collapser:before { content:""; }
 
     a { color:var(--text-colour)}
 </style>
