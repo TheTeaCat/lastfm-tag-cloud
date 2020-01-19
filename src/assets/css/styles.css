@@ -9,9 +9,9 @@ body, #app { min-height:100%; }
     font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
     font-size:10pt;
 
-    --background-colour:#fafafa;
+    --background-colour:#fff;
     --title-colour:#f33;
-    --header-background:linear-gradient(0deg, #fafafa 0%, #dadada 100%);
+    --header-background:linear-gradient(0deg, #fff 0%, #fafafa 100%);
     --text-colour:#000;
     --cloud-text-colour:#000;
     --cloud-background-colour:#fff;
@@ -30,18 +30,18 @@ body, #app { min-height:100%; }
 }
 
 #app[theme="dark"] {
-    --background-colour:#111;
+    --background-colour:#090909;
     --title-colour:#fff;
-    --header-background:linear-gradient(0deg, #111 0%, #000 100%);
+    --header-background:linear-gradient(0deg, #090909 0%, #292929 100%);
     --text-colour:#fff;
     --cloud-text-colour:#f33;
     --cloud-background-colour:#000;    
     --border-colour:#333;
-    --list-colour:#090909;
+    --list-colour:#111;
     --input-colour:#000;
     --highlight-colour:#f33;
     --darker-colour:#bc0000;
-    --lighter-colour:#faa;        
+    --lighter-colour:#faa;
 }
 
 h1,h2 { font-weight:bold; }
