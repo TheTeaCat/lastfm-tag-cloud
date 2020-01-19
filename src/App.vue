@@ -1,11 +1,12 @@
 /* eslint-disable vue/require-v-for-key */
 <template>
     <div id="app" v-bind:theme="theme">
-        <h1 id="page-title">Tag Cloud Generator!</h1>
-
-      <button id="theme-button" v-on:click="toggleTheme">
-        {{ theme == "dark" ? "Light Mode" : "Dark Mode" }}
-      </button>
+      <header>
+        <h1 id="page-title">tag cloud generator</h1>
+        <button id="theme-button" v-on:click="toggleTheme">
+          {{ theme == "dark" ? "Light Mode" : "Dark Mode" }}
+        </button>
+      </header>
 
         <control-panel :username="username"
                        :period="period" 
@@ -133,12 +134,20 @@
   @import './assets/css/reset.css';
   @import './assets/css/styles.css';
 
+  header {
+    background:var(--header-background);
+    margin:0;
+  }
+  @media (orientation: landscape) {
+    header {
+      padding:1vw 10vw 1vw 10vw;
+    }
+  }
+
   #page-title {
-    margin: 1.5vw 0 1vw 2.5vw;
-    border-style: solid;
-    border-width: 0 0 2px 0;
-    border-color:var(--highlight-colour);
+    margin: 0.5vw 0 0.5vw 2.5vw;
     display:inline-block;
+    font-family: 'Varela Round', sans-serif;
   }
   @media (orientation: portrait) {
     #page-title { margin: 3vw 0 2vw 5vw; }
@@ -156,10 +165,13 @@
     border-style:solid;    
     border-color:var(--border-colour);
     background:var(--section-colour);
-    margin:1vw 0 1vw 0;
+    margin:1vw 10vw 1vw 10vw;
     padding:1vw 2vw 1vw 1.5vw;
   }
   @media (orientation: portrait) {
-      .section-container { padding:2vw; }
+      .section-container { 
+        padding:2vw;
+        margin: 1vw;
+      }
   }
 </style>

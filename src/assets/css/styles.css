@@ -5,15 +5,16 @@ body, #app { min-height:100%; }
     position:absolute;
     width:100%;
 
-    padding:1vw;
     box-sizing: border-box;
     font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
     font-size:10pt;
 
-    --background-colour:#fff;
-    --title-colour:#000;
+    --background-colour:#fafafa;
+    --title-colour:#fff;
+    --header-background:linear-gradient(0deg, #000 0%, #222 100%);
     --text-colour:#000;
     --cloud-text-colour:#000;
+    --cloud-background-colour:#fff;    
     --border-colour:#000;
     --section-colour:#fafafa;
     --input-colour:#fff;
@@ -28,34 +29,27 @@ body, #app { min-height:100%; }
 
 }
 
-@media(orientation:landscape) {
-    #app {
-        padding:1vw 10vw 1vw 10vw;
-    }
-}
-
 #app[theme="dark"] {
     --background-colour:#000;
     --title-colour:#fff;
+    --header-background:linear-gradient(0deg, #000 0%, #222 100%);
     --text-colour:#fff;
     --cloud-text-colour:#f33;
-    --border-colour:#bc0000;
-    --section-colour:#2c0000;
+    --cloud-background-colour:#000;    
+    --border-colour:#333;
+    --section-colour:#222;
     --input-colour:#000;
     --highlight-colour:#f33;
     --darker-colour:#bc0000;
     --lighter-colour:#faa;        
 }
-#app[theme="dark"] button:disabled {
-    background-color: var(--darkest-colour);
-}
 
 h1,h2 { font-weight:bold; }
-h1 { font-size:200%; color: var(--title-colour); }
+h1 { font-size:300%; color: var(--title-colour); }
 h2 { font-size:150%; }
 @media (orientation: portrait) {
-    h1 { font-size: 150%; }
-    h2 { font-size:120%; }
+    h1 { font-size: 200%; }
+    h2 { font-size:125%; }
 }
 
 a {
@@ -72,17 +66,21 @@ button, input, select {
     background:var(--input-colour);
     border-color:var(--border-colour);
     color:var(--text-colour);
+    border-style:solid;
     border-width:1px;
 }
-button { border-style:dashed; }
-button:hover { 
-    border-color:var(--highlight-colour);
-    color:var(--highlight-colour);
+button {
+    border-style:dashed;
 }
-button:disabled { 
-    border-color:var(--darker-colour); 
-    color:var(--darker-colour); 
-    background-color:var(--lightest-colour)
+button:disabled {
+    color:var(--lighter-colour);
+    border-color:var(--lighter-colour);
+    background:var(--lightest-colour)
+}
+#app[theme="dark"] button:disabled {
+    color:var(--darker-colour);
+    border-color:var(--darker-colour);
+    background:var(--darkest-colour)
 }
 
 ul, ol { list-style: circle inside; }

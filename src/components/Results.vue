@@ -166,9 +166,9 @@
         display: block;
         margin:1vw auto 1vw auto;
         max-width:100%;
-        max-height:90vh;
+        max-height:70vh;
 
-        background-color:var(--background-colour);
+        background-color:var(--cloud-background-colour);
         color:var(--cloud-text-colour);
 
         border-width:1px;
