@@ -43,17 +43,25 @@
                         width="1920" height="1200"/>
             </div>
 
-            <a ref="download-link" class="cloud-button"
-               download="tag-cloud.png">
-                <button v-on:click="downloadTagCloud"
-                        v-bind:disabled="cloudState!='generated'">
-                        Download Image
-                        </button>
-            </a>
+            <div id="cloud-buttons">
+                <button id="share-link" class="cloud-button"
+                        v-on:click="copyShareLink">
+                    <span id="copy-share-link-title">Copy Link:</span> 
+                    <input ref="share-link" v-bind:value="share_link" readonly="readonly"/>
+                </button>
 
-            <button class="cloud-button"
-                    v-bind:disabled="cloudState!='generated'"
-                    v-on:click="reshuffleTagCloud">Reshuffle</button>
+                <button class="cloud-button"
+                        v-bind:disabled="cloudState!='generated'"
+                        v-on:click="reshuffleTagCloud">Reshuffle</button>
+
+                <a ref="download-link" class="cloud-button"
+                download="tag-cloud.png">
+                    <button v-on:click="downloadTagCloud"
+                            v-bind:disabled="cloudState!='generated'">
+                            Download Image
+                    </button>
+                </a>
+            </div>
         </div>
 
         <artists-list id="artists-list" 
@@ -66,12 +74,6 @@
                    v-bind:tags="result.tags" 
                    v-bind:taggings="result.taggings"
                    v-bind:tag_meta="result.tag_meta"/>
-
-        <button v-if="result != undefined && result.artists.length > 0"
-                id="share-link"
-                v-on:click="copyShareLink"> Copy Link: 
-            <input ref="share-link" v-bind:value="share_link" readonly="readonly"/>
-        </button>
     </div>
 </template>
 
@@ -154,9 +156,13 @@
 </script>
 
 <style scoped>
+    h2 {
+        margin: 0 0 1.5vw 0;
+    }
     #cloud-container {
         width:100%;
         overflow: auto;
+        margin:0 0 4vw 0;
     }
     @media (orientation:landscape){ #cloud-container { margin-top: 1vw; } }
 
@@ -179,8 +185,27 @@
         border-radius:3px;
     }
 
-    .cloud-button {
-        float:right;
+    #cloud-buttons {
+        display:flex;
+        justify-content:center;
+        flex-wrap:nowrap;
+    }
+    .cloud-button { margin:0 0 0 1vw; display:inline-block; }
+    #cloud-buttons .cloud-button:first-child { margin:0; }
+    #copy-share-link-title {
+        flex-shrink:0;
+    }
+    #share-link {
+        display:flex;
+        align-items:center;
+        flex-basis:50%;
+        overflow:hidden;
+    }
+    #share-link input { 
+        border:none;
+        padding:0;
+        height:1em;
+        flex-grow:1;
         margin:0 0 0 1vw;
     }
 
@@ -198,18 +223,4 @@
             border-color:var(--list-border-colour);
         }
     }
-
-    #tags-list { margin: 1vw 1vw 0 1vw; }
-
-    #share-link { 
-        margin:2vw 0 0 auto;
-        display:block;
-    }
-    @media(orientation:landscape){
-        #share-link{
-            padding-top:0; padding-bottom:0; padding-right:0;
-            margin:1vw 0 0 auto;
-        }
-    }
-    #share-link input { border:none; max-width:20vw;}
 </style>

@@ -168,8 +168,8 @@
   }
   @media (orientation: portrait) {
       .section-container { 
-        padding:2vw;
-        margin: 1vw;
+        padding:2vw 2vw 2vw 2vw;
+        margin: 1vw 1vw 0 1vw;
       }
       #control-panel, #footer {
         border-style:solid;

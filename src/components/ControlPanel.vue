@@ -70,6 +70,7 @@
         flex-grow:1;
         display:flex;
         justify-content:flex-end;
+        align-self:flex-end;
     }
 
     >>> span { 

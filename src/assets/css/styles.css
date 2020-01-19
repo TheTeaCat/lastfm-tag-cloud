@@ -32,11 +32,6 @@ body, #app { min-height:100%; }
     --highlight-colour:#f33;
     --visited-colour:#f99;
 
-    --darkest-colour:#0f0;
-    --darker-colour:#00f;
-    --lighter-colour:#ff0;
-    --lightest-colour:#f0f;
-
     color:var(--text-colour);
     background:var(--background-colour);
 
@@ -60,8 +55,8 @@ body, #app { min-height:100%; }
 
     --input-colour:#000;
     --input-border-colour:#333;
-    --input-disabled-colour:#0f0000;
-    --input-disabled-border-colour:#300;
+    --input-disabled-colour:#111;
+    --input-disabled-border-colour:#333;
 }
 @media(orientation:portrait){
     #app {
