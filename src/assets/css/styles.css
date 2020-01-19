@@ -18,8 +18,10 @@ body, #app { min-height:100%; }
     --section-colour:#fafafa;
     --input-colour:#fff;
     --highlight-colour:#f33;
+    --darkest-colour:#220000;
     --darker-colour:#bc0000;
     --lighter-colour:#f88;
+    --lightest-colour:#fff0f0;
 
     color:var(--text-colour);
     background:var(--background-colour);
@@ -43,6 +45,9 @@ body, #app { min-height:100%; }
     --highlight-colour:#f33;
     --darker-colour:#bc0000;
     --lighter-colour:#faa;        
+}
+#app[theme="dark"] button:disabled {
+    background-color: var(--darkest-colour);
 }
 
 h1,h2 { font-weight:bold; }
@@ -74,10 +79,10 @@ button:hover {
     border-color:var(--highlight-colour);
     color:var(--highlight-colour);
 }
-@keyframes waiting {
-    0% {border-color:var(--highlight-colour); color:var(--highlight-colour); }
-    50% {border-color:var(--text-colour); color:var(--text-colour); }
+button:disabled { 
+    border-color:var(--darker-colour); 
+    color:var(--darker-colour); 
+    background-color:var(--lightest-colour)
 }
-button:disabled { animation: waiting 0.5s steps(1,end) infinite; }
 
 ul, ol { list-style: circle inside; }
