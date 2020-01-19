@@ -204,7 +204,6 @@
     #share-link input { 
         border:none;
         padding:0;
-        height:1em;
         flex-grow:1;
         margin:0 0 0 1vw;
     }
