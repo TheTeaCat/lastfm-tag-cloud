@@ -10,8 +10,8 @@ body, #app { min-height:100%; }
     font-size:10pt;
 
     --background-colour:#fafafa;
-    --title-colour:#fff;
-    --header-background:linear-gradient(0deg, #000 0%, #222 100%);
+    --title-colour:#f33;
+    --header-background:linear-gradient(0deg, #fafafa 0%, #dadada 100%);
     --text-colour:#000;
     --cloud-text-colour:#000;
     --cloud-background-colour:#fff;    
