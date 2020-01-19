@@ -8,21 +8,22 @@
         </button>
       </header>
 
-        <control-panel :username="username"
-                       :period="period" 
-                       :max_artists="max_artists"
-                       :state="generator.state"
-                       @update:username="username=$event"
-                       @update:period="period.selected=$event"
-                       @update:max_artists="max_artists.selected=$event"
-                       @generate="generate"/>
+      <control-panel id="control-panel"
+                     :username="username"
+                     :period="period" 
+                     :max_artists="max_artists"
+                     :state="generator.state"
+                      @update:username="username=$event"
+                      @update:period="period.selected=$event"
+                      @update:max_artists="max_artists.selected=$event"
+                      @generate="generate"/>
 
-        <results ref="results"
-                 v-bind:state="generator.state"
-                 v-bind:result="result"
-                 v-bind:error="error"/>
+      <results ref="results"
+                v-bind:state="generator.state"
+                v-bind:result="result"
+                v-bind:error="error"/>
 
-        <Footer/>
+      <Footer id="footer"/>
     </div>
 </template>
 
@@ -164,12 +165,18 @@
     background:var(--section-background-colour);
     margin:1vw 10vw 1vw 10vw;
     padding:1vw 2vw 1vw 1.5vw;
-    border-radius:2px;
   }
   @media (orientation: portrait) {
       .section-container { 
         padding:2vw;
         margin: 1vw;
+      }
+      #control-panel, #footer {
+        border-style:solid;
+        border-color:var(--section-border-colour);
+        border-width:1px;
+        border-radius:3px;
+        background:var(--end-sections-colour);
       }
   }
 </style>

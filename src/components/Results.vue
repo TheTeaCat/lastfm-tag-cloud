@@ -176,6 +176,7 @@
         border-style:solid;
         border-color:var(--cloud-border-colour);
         box-sizing:border-box;
+        border-radius:3px;
     }
 
     .cloud-button {

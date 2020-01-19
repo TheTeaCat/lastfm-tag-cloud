@@ -49,7 +49,9 @@
         align-items:center;
     }
     @media (orientation: portrait) {
-        .section-container { flex-wrap:wrap; }
+        .section-container { 
+            flex-wrap:wrap;
+        }
     }
 
     .option{
