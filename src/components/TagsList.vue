@@ -4,7 +4,9 @@
         <h2>Tags:</h2>
         <div v-if="!collapsed">
             <ol class="tag-list">
-                <li v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'><span class="tag">{{ tag }}</span>:
+                <li v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'>
+                    <span class="tag"><a v-bind:href="tag_meta[tag].url" target="_blank">
+                        {{ tag }}</a></span>:
                     <taggings-list class="artist-list" v-bind:taggings="taggings[tag]"/>
                 </li>
             </ol>
@@ -21,7 +23,7 @@
             CollapseButton,
             TaggingsList
         },
-        props: ['tags','taggings'],
+        props: ['tags','taggings','tag_meta'],
         data: function(){
             return {
                 collapsed:true,

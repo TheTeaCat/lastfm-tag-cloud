@@ -19,7 +19,7 @@ class Generator {
             tags:[],
             taggings:{},
             tag_meta:{},
-            scores:{}
+            scores:{},
         }
         var error = undefined
         this.state = "Getting artists' data..."
@@ -77,8 +77,9 @@ class Generator {
                                                         result.tags.push(tag.name)
                                                         /**Initialising the taggings of the tag on the artist to the tag's list in the taggings object... */
                                                         result.taggings[tag.name] = [{artist:artist_name,count:tag.count}]
-                                                        /**Initialising the count of taggings on the artist to the tag's library_total... */
-                                                        result.tag_meta[tag.name] = {library_total:tag.count/100}
+                                                        /**Initialising the count of taggings on the artist to the tag's library_total & saving the tag's URL... */
+                                                        result.tag_meta[tag.name] = {library_total:tag.count/100,
+                                                                                     url:tag.url}
                                                     } else {
                                                         /**Adding the taggings of the tag on the artist to the tag's list in the taggings object... */
                                                         result.taggings[tag.name].push({artist:artist_name,count:tag.count})

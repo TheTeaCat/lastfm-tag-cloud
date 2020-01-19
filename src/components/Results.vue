@@ -1,7 +1,8 @@
 <template>
     <div class="section-container">
         <h2 v-if="result != undefined && state == undefined && result.artists.length > 0">
-            {{ result.username + (result.username[result.username.length-1].toLowerCase() == "s" ? "'" : "'s") }}
+            <a v-bind:href="'https://www.last.fm/user/'+result.username">
+                {{ result.username }}</a>{{ (result.username[result.username.length-1].toLowerCase() == "s" ? "'" : "'s") }}
             tag cloud based upon their top 
             {{ result.artists.length }} 
             artists
@@ -65,7 +66,8 @@
         <tags-list id="tags-list" 
                    v-if="result != undefined && result.artists.length > 0" 
                    v-bind:tags="result.tags" 
-                   v-bind:taggings="result.taggings"/>
+                   v-bind:taggings="result.taggings"
+                   v-bind:tag_meta="result.tag_meta"/>
     </div>
 </template>
 

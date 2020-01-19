@@ -5,7 +5,11 @@
         <div v-if="!collapsed">
             <ol id="artist-list">
                 <li v-for='artist in artists' v-bind:key='artist' v-bind:artist='artist'>
-                    <span class="artist">{{ artist }}</span> ({{ listens[artist] }} <span v-if="listens[artist]>1">listens</span> <span v-else>listen</span>)
+                    <span class="artist">
+                        <a v-bind:href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">
+                        {{ artist }}
+                        </a></span>
+                    ({{ listens[artist] }} <span v-if="listens[artist]>1">listens</span> <span v-else>listen</span>)
                 </li>
             </ol>
         </div>
