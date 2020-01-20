@@ -64,12 +64,6 @@
     .tag {
         display:flex;
         align-items:start;
-        margin: 0.5vw 0 0.5vw 0;
-    }
-    @media(orientation:portrait) {
-        .tag {
-            margin: 1vw 0 1vw 0;
-        }
     }
     input {
         margin: 0 0.5vw 0 0;
