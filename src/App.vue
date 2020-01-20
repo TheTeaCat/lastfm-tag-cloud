@@ -101,30 +101,12 @@
         var response = await this.generator.generate(this.username,
                                                      this.period.selected,
                                                      this.max_artists.selected)
+        
         this.result = response.result
         this.error = response.error
-
+        
         if (this.result.artists.length > 0) {
-          var minScore = Infinity
-          var maxScore = -Infinity
-          for (var tag of this.result.tags) {
-              if (this.result.scores[tag] < minScore) {
-                  minScore = this.result.scores[tag]
-              }
-              if (this.result.scores[tag] > maxScore) {
-                  maxScore = this.result.scores[tag]
-              }
-          }
-
-          this.cloudWords = []
-          for (tag of this.result.tags) {
-              /**Biggest should be 200, smallest should be 25.
-               * Logarithmic scaling is pretty arbritrary, just what I found looks decent.
-               */
-              this.cloudWords.push([tag,Math.log10((this.result.scores[tag]-minScore)*99/maxScore+1)/2*175+25])
-          }
-
-          this.$refs["results"].createTagCloud(this.cloudWords)
+          this.$refs["results"].createTagCloud(this.result)
         }
       }
     }

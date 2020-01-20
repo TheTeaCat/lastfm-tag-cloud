@@ -2,11 +2,14 @@
     <div>
         <collapse-button v-bind:collapsed="collapsed" @collapse="collapse"/>
         <h2>Tags:</h2>
+        <span>//Don't like a tag? Uncheck it here & reshuffle!</span>
         <ol id="tag-list" v-if="!collapsed">
-            <li v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'>
-                <span class="tag"><a v-bind:href="tag_meta[tag].url">
-                    {{ tag }}</a></span>:
-                <taggings-list class="artist-list" v-bind:taggings="taggings[tag]"/>
+            <li class="tag" v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'>
+                <input type="checkbox" v-model="tag_meta[tag].shown"/>
+                <div>
+                    <a v-bind:href="tag_meta[tag].url">{{ tag }}</a>:
+                    <taggings-list class="artist-list" v-bind:taggings="taggings[tag]"/>
+                </div>
             </li>
         </ol>
     </div>
@@ -38,7 +41,18 @@
 <style scoped>
     h2 { display:inline; }
 
+    span { 
+        margin: 0 0 0 1vw; 
+        color:var(--highlight-colour); 
+    }
+    @media(orientation:portrait) {
+        span {
+            margin: 0 0 0 2vw;
+        }
+    }
+
     #tag-list {
+        list-style:none;
         flex-basis:100%;        
         margin: 0.5vw 0 0 0;
         padding: 1vw 0 1vw 2vw;
@@ -47,5 +61,17 @@
         border-color:var(--list-border-colour);
         background-color:var(--list-colour);
     }
-    .tag { font-weight:bold; }
+    .tag {
+        display:flex;
+        align-items:start;
+        margin: 0.5vw 0 0.5vw 0;
+    }
+    @media(orientation:portrait) {
+        .tag {
+            margin: 1vw 0 1vw 0;
+        }
+    }
+    input {
+        margin: 0 0.5vw 0 0;
+    }
 </style>

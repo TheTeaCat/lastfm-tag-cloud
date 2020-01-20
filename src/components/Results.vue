@@ -52,7 +52,7 @@
 
                 <button class="cloud-button"
                         v-bind:disabled="cloudState!='generated'"
-                        v-on:click="reshuffleTagCloud">Reshuffle</button>
+                        v-on:click="generateTagCloud">Reshuffle</button>
 
                 <a ref="download-link" class="cloud-button"
                 download="tag-cloud.png">
@@ -93,16 +93,55 @@
         data: function(){
             return {
                 cloudState:undefined,
-                words:undefined,
+                cloudWords:undefined,
             }
         },
         methods: {
             clear(){
                 this.cloudState = undefined
             },
-            async createTagCloud(words) {
-                this.words = words
+
+            async createTagCloud(newResult) {
+                this.result = newResult
+                // eslint-disable-next-line no-console
+                console.log(this)
+                // eslint-disable-next-line no-console
+                console.log(this.result)
+                
+                var minScore = Infinity
+                var maxScore = -Infinity
+                for (var tag of this.result.tags) {
+                    if (this.result.scores[tag] < minScore) {
+                        minScore = this.result.scores[tag]
+                    }
+                    if (this.result.scores[tag] > maxScore) {
+                        maxScore = this.result.scores[tag]
+                    }
+                }
+
+                this.cloudWords = []
+
+                for (tag of this.result.tags) {
+                    /**Biggest should be 200, smallest should be 25.
+                    * Logarithmic scaling is pretty arbritrary, just what I found looks decent.
+                    */
+                    this.cloudWords.push([tag,Math.log10((this.result.scores[tag]-minScore)*99/maxScore+1)/2*175+25])
+                    /**By default, every tag is shown. */
+                    this.result.tag_meta[tag].shown = true;
+                }
+
+                this.generateTagCloud()
+            },
+
+            generateTagCloud(){
                 this.cloudState = "generating"
+
+                var shownTags = []
+                for (var tag of this.cloudWords) {
+                    if (this.result.tag_meta[tag[0]].shown) {
+                        shownTags.push(tag)
+                    }
+                }
 
                 this.$refs["tag-cloud-canvas"].addEventListener(
                     "wordcloudstop",
@@ -113,18 +152,7 @@
 
                 var style = getComputedStyle(this.$refs["tag-cloud-canvas"]);
                 WordCloud(this.$refs["tag-cloud-canvas"],{
-                    list:words,
-                    fontFamily:"Courier",
-                    shrinkToFit:true,
-                    color:style['color'],
-                    backgroundColor:style['background-color'],
-                })
-            },
-            reshuffleTagCloud(){
-                this.cloudState = "generating"
-                var style = getComputedStyle(this.$refs["tag-cloud-canvas"]);
-                WordCloud(this.$refs["tag-cloud-canvas"],{
-                    list:this.words,
+                    list:shownTags,
                     fontFamily:"Courier",
                     shrinkToFit:true,
                     color:style['color'],
@@ -132,9 +160,11 @@
                     shuffle:true,
                 })
             },
+
             downloadTagCloud() {
                 this.$refs["download-link"].href = this.$refs["tag-cloud-canvas"].toDataURL()
             },
+
             copyShareLink() {
                 this.$refs["share-link"].select()
                 this.$refs["share-link"].setSelectionRange(0,99999)
