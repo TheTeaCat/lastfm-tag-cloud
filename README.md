@@ -1,5 +1,5 @@
 # lastfm-tag-cloud
-A last.fm tag cloud generator build on Vue!
+A last.fm tag cloud generator built with Vue!
 
 Give it a whirl: [theteacat.github.io/lastfm-tag-cloud/](https://theteacat.github.io/lastfm-tag-cloud/)
 
@@ -13,7 +13,7 @@ Each tag in the response has a `count` for that artist.
 
 For each tag on the artist, if I have not seen it before, I initialise a `library_total` metric for that tag with an initial value of `0`. 
 
-The product of `the tag's score on that artist` and `the user's scrobbles of that artist` is then added to that tag's `library_total` metric.
+The product of the tag's `count` and is then added to that tag's `library_total` metric.
 
 Once all of the artists are iterated through, the tags are pruned to the top 100 by this `library_total` metric. This is done to avoid hitting rate limits on the last.fm API in the next step, where I have to call [tag.getInfo](https://www.last.fm/api/show/tag.getInfo) for every tag.
 
