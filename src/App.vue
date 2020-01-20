@@ -161,4 +161,7 @@
         background:var(--end-sections-colour);
       }
   }
+  #footer {
+    margin-bottom:1vw;
+  }
 </style>
