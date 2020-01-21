@@ -50,8 +50,6 @@
                     "wordcloudstop",
                     function(){
                         this.$emit("generating",false)
-                        // eslint-disable-next-line no-console
-                        console.log("Bruh")
                     }.bind(this)
                 )
 
