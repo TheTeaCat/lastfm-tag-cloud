@@ -21,7 +21,7 @@
 
             <li>
                 <a ref="download-link" class="cloud-button"
-                download="tag-cloud.png">
+                   download="tag-cloud.png">
                     <button v-on:click="downloadTagCloud"
                             v-bind:disabled="generating">
                             Download Image

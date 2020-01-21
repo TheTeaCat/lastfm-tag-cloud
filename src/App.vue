@@ -3,21 +3,21 @@
         <Header :theme="theme"
                 @toggleTheme="toggleTheme"/>
 
-    <main>
-        <control-panel id="control-panel"
-                       :username="username"
-                       :period="period" 
-                       :max_artists="max_artists"
-                       :state="generator.state"
-                       @update:username="username=$event;$cookies.set('username',$event)"
-                       @update:period="period.selected=$event;$cookies.set('period',$event)"
-                       @update:max_artists="max_artists.selected=$event;$cookies.set('max_artists',$event)"
-                       @generate="generate"/>
+        <main>
+            <control-panel id="control-panel"
+                        :username="username"
+                        :period="period" 
+                        :max_artists="max_artists"
+                        :state="generator.state"
+                        @update:username="username=$event;$cookies.set('username',$event)"
+                        @update:period="period.selected=$event;$cookies.set('period',$event)"
+                        @update:max_artists="max_artists.selected=$event;$cookies.set('max_artists',$event)"
+                        @generate="generate"/>
 
-        <results ref="results"
-                :state="generator.state"
-                :result="result"
-                :error="error"/>
+            <results ref="results"
+                    :state="generator.state"
+                    :result="result"
+                    :error="error"/>
         </main>
 
         <Footer/>
