@@ -14,7 +14,8 @@
                 'overall':'overall'}[result.period] }}:
         </h2>
         <h2 v-else-if="result != undefined && state == undefined && error == undefined && result.artists.length == 0">
-            {{ result.username }} 
+            <a v-bind:href="'https://www.last.fm/user/'+result.username">
+                {{ result.username }}</a>
             hasn't listened to anything
             {{ {'7day':'in the past week',
                 '1month':'in the past month',
