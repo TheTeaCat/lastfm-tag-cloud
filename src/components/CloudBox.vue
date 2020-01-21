@@ -2,7 +2,7 @@
     <main>
         <Cloud ref="cloud" 
                :result="result" 
-               @generating="generating=$event"/>
+               @generating="$emit('generating',$event)"/>
 
         <ul>
             <li id="share-link-container">
@@ -39,10 +39,7 @@
         components:{
             Cloud,
         },
-        props:["result"],
-        data:function(){return{
-            generating:true,
-        }},
+        props:["result","generating"],
         methods: {
             reshuffle(){this.$refs['cloud'].generateTagCloud()},
             downloadTagCloud() {

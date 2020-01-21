@@ -2,8 +2,11 @@
     <div>
         <collapse-button :collapsed="collapsed" @collapse="collapse"/>
         <h2>Tags:</h2>
-        <span>//Don't like a tag? Uncheck it here & reshuffle!</span>
+        <span>//Don't like a tag? Uncheck it here!</span>
         <ol id="tag-list" v-if="!collapsed">
+            <button id="apply-changes-button" 
+                    @click="$emit('applyTagChanges')"
+                    :disabled="generating">Apply Changes</button> 
             <li class="tag" v-for='tag in tags' :key='tag' :tag='tag'>
                 <input type="checkbox" v-model="tag_meta[tag].shown"/>
                 <div>
@@ -24,7 +27,7 @@
             CollapseButton,
             TaggingsList,
         },
-        props: ['tags','taggings','tag_meta'],
+        props: ['tags','taggings','tag_meta','generating'],
         data:function(){return{
             collapsed:true,
         }},
@@ -65,6 +68,12 @@
         }
     }
     
+    #apply-changes-button {
+        float:right;
+        margin:0 0 1vw 1vw;
+        background:var(--background-colour);
+    }
+
     .tag {
         display:flex;
         align-items:start;

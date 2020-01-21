@@ -36,9 +36,11 @@
             Click "Load Data"!
         </h2>
 
-        <CloudBox ref="cloud"
+        <CloudBox ref="cloud-box"
                   v-if="result != undefined && result.artists.length > 0"
-                  :result="result"/>
+                  :result="result"
+                  :generating="generating"
+                  @generating="generating=$event"/>
 
         <artists-list class="list"
                       v-if="result != undefined && result.artists.length > 0" 
@@ -49,7 +51,9 @@
                    v-if="result != undefined && result.artists.length > 0" 
                    :tags="result.tags" 
                    :taggings="result.taggings"
-                   :tag_meta="result.tag_meta"/>
+                   :tag_meta="result.tag_meta"
+                   :generating="generating"
+                   @applyTagChanges="applyTagChanges"/>
     </div>
 </template>
 
@@ -67,9 +71,15 @@
             TagsList,
         },    
         props: ['state','result','error'],
+        data: function(){return{
+            generating:true,
+        }},
         methods: {
             clear(){
                 this.cloudState = undefined
+            },
+            applyTagChanges(){
+                this.$refs['cloud-box'].reshuffle()
             },
         },
     }
