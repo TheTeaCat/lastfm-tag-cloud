@@ -11,9 +11,9 @@ Each tag in the response has a `count` for that artist.
 
 >**Note:** This `count` doesn't seem to be documented anywhere. They cap out at 100, so I am working under the assumption that they're a kind of confidence % as to how apropriate that tag is for that artist.
 
-For each tag on the artist, if I have not seen it before, I initialise a `library_total` metric for that tag with an initial value of `0`. 
+For each tag on the artist, the tag's `count` is added to that tag's `library_total` metric.
 
-The product of the tag's `count` and is then added to that tag's `library_total` metric.
+This `library_total` metric is created with an initial value of `0` for every tag.
 
 Once all of the artists are iterated through, the tags are pruned to the top 100 by this `library_total` metric. This is done to avoid hitting rate limits on the last.fm API in the next step, where I have to call [tag.getInfo](https://www.last.fm/api/show/tag.getInfo) for every tag.
 
