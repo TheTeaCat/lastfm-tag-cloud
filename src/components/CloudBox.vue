@@ -101,7 +101,7 @@
         margin:0 0 0 1vw;
     }
     @media(orientation: portrait) {
-        button {
+        button, input {
             background:var(--end-sections-colour);
         }
     }

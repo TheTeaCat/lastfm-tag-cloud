@@ -55,12 +55,18 @@
         list-style:none;
         flex-basis:100%;        
         margin: 0.5vw 0 0 0;
-        padding: 1vw 0 1vw 2vw;
+        padding: 1vw 1vw 1vw 2vw;
         border-width:1px;
         border-style:solid;
         border-color:var(--list-border-colour);
         background-color:var(--list-colour);
     }
+    @media (orientation:portrait) {
+        #tag-list {
+            padding: 1vw 2vw 1vw 2vw;
+        }
+    }
+    
     .tag {
         display:flex;
         align-items:start;
