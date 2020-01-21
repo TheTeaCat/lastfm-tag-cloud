@@ -1,7 +1,7 @@
 <template>
     <ol>
         <li v-for='tagging in collapsed ? taggings.slice(0,3) : taggings' 
-            v-bind:key='tagging.artist'>{{ tagging.artist }}</li
+            :key='tagging.artist'>{{ tagging.artist }}</li
         >{{ collapsed && taggings.length > 3 ? ', ' : '. ' }}
 
         <li id="collapser"

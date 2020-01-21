@@ -11,21 +11,21 @@
         </div>
 
         <control-panel-option class="option"
-                              v-bind:name="'Period'"
-                              v-bind:options="period.options"
-                              v-bind:selected="period.selected"
+                              :name="'Period'"
+                              :options="period.options"
+                              :selected="period.selected"
                               v-on:update="$emit('update:period',$event)"/>
 
         <control-panel-option class="option"
-                              v-bind:name="'Max Artists'"
-                              v-bind:options="max_artists.options"
-                              v-bind:selected="max_artists.selected"
+                              :name="'Max Artists'"
+                              :options="max_artists.options"
+                              :selected="max_artists.selected"
                               v-on:update="$emit('update:max_artists',$event)"/>
 
         <div class="option"
              id="generate-button-container">
             <button id="generate-button" 
-                    v-bind:disabled="state != undefined"
+                    :disabled="state != undefined"
                     v-on:click="submit">
                     Load Data
             </button>

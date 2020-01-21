@@ -1,11 +1,11 @@
 <template>
     <div>
-        <collapse-button v-bind:collapsed="collapsed" @collapse="collapse"/>
+        <collapse-button :collapsed="collapsed" @collapse="collapse"/>
         <h2>Artists:</h2>
         <ol id="artist-list" v-if="!collapsed">
-            <li v-for='artist in artists' v-bind:key='artist' v-bind:artist='artist'>
+            <li v-for='artist in artists' :key='artist' :artist='artist'>
                 <span class="artist">
-                    <a v-bind:href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">
+                    <a :href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">
                         {{ artist }}
                     </a>
                 </span>

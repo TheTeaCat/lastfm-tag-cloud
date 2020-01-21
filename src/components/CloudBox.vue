@@ -9,13 +9,13 @@
                 <button id="share-link" class="cloud-button" 
                         v-on:click="copyShareLink">
                     <span id="copy-share-link-title">Copy Link:</span>
-                    <input ref="share-link" v-bind:value="share_link" readonly="readonly"/>
+                    <input ref="share-link" :value="share_link" readonly="readonly"/>
                 </button>
             </li>
 
             <li>
                 <button class="cloud-button"
-                        v-bind:disabled="generating"
+                        :disabled="generating"
                         v-on:click="reshuffle">Reshuffle</button>
             </li>
 
@@ -23,7 +23,7 @@
                 <a ref="download-link" class="cloud-button"
                    download="tag-cloud.png">
                     <button v-on:click="downloadTagCloud"
-                            v-bind:disabled="generating">
+                            :disabled="generating">
                             Download Image
                     </button>
                 </a>

@@ -1,14 +1,14 @@
 <template>
     <div>
-        <collapse-button v-bind:collapsed="collapsed" @collapse="collapse"/>
+        <collapse-button :collapsed="collapsed" @collapse="collapse"/>
         <h2>Tags:</h2>
         <span>//Don't like a tag? Uncheck it here & reshuffle!</span>
         <ol id="tag-list" v-if="!collapsed">
-            <li class="tag" v-for='tag in tags' v-bind:key='tag' v-bind:tag='tag'>
+            <li class="tag" v-for='tag in tags' :key='tag' :tag='tag'>
                 <input type="checkbox" v-model="tag_meta[tag].shown"/>
                 <div>
-                    <a v-bind:href="tag_meta[tag].url">{{ tag }}</a>:
-                    <taggings-list class="artist-list" v-bind:taggings="taggings[tag]"/>
+                    <a :href="tag_meta[tag].url">{{ tag }}</a>:
+                    <taggings-list class="artist-list" :taggings="taggings[tag]"/>
                 </div>
             </li>
         </ol>

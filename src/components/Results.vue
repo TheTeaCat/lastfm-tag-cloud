@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 v-if="result != undefined && state == undefined && result.artists.length > 0">
-            <a v-bind:href="'https://www.last.fm/user/'+result.username">
+            <a :href="'https://www.last.fm/user/'+result.username">
                 {{ result.username }}</a>{{ (result.username[result.username.length-1].toLowerCase() == "s" ? "'" : "'s") }}
             tag cloud based upon their top 
             {{ result.artists.length }} 
@@ -14,7 +14,7 @@
                 'overall':'overall'}[result.period] }}:
         </h2>
         <h2 v-else-if="result != undefined && state == undefined && error == undefined && result.artists.length == 0">
-            <a v-bind:href="'https://www.last.fm/user/'+result.username">
+            <a :href="'https://www.last.fm/user/'+result.username">
                 {{ result.username }}</a>
             hasn't listened to anything
             {{ {'7day':'in the past week',
@@ -38,18 +38,18 @@
 
         <CloudBox ref="cloud"
                   v-if="result != undefined && result.artists.length > 0"
-                  v-bind:result="result"/>
+                  :result="result"/>
 
         <artists-list class="list"
                       v-if="result != undefined && result.artists.length > 0" 
-                      v-bind:artists="result.artists" 
-                      v-bind:listens="result.listens"/>
+                      :artists="result.artists" 
+                      :listens="result.listens"/>
 
         <tags-list class="list"
                    v-if="result != undefined && result.artists.length > 0" 
-                   v-bind:tags="result.tags" 
-                   v-bind:taggings="result.taggings"
-                   v-bind:tag_meta="result.tag_meta"/>
+                   :tags="result.tags" 
+                   :taggings="result.taggings"
+                   :tag_meta="result.tag_meta"/>
     </div>
 </template>
 
