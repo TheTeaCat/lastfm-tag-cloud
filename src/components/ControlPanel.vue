@@ -26,7 +26,7 @@
              id="generate-button-container">
             <button id="generate-button" 
                     v-bind:disabled="state != undefined"
-                    v-on:click="$emit('generate')">
+                    v-on:click="submit">
                     Load Data
             </button>
         </div>
