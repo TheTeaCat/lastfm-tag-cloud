@@ -54,12 +54,12 @@ I've tried to make this take into account the "uniqueness" of the tag to a user'
 
 If this causes issues for you, I know. See [here](https://github.com/TheTeaCat/lastfm-tag-cloud/issues/10). I don't care. :rowboat:
 
+## What does the tag filter do?
+
+The tag filter checks tags against an offensive word list, "all", "seen live" and a geohash filter to remove tags that are overly generic/obscene.
+
+The source of the tag filter's offensive word list is [Ofcom's September 2016 Attitudes to potentially offensive language and gestures on TV and radio Research report](https://www.ofcom.org.uk/__data/assets/pdf_file/0022/91624/OfcomOffensiveLanguage.pdf). Those used are the medium, strong, and stronger words that are **not** marked as "least recognised".
+
 ## Acknowledgements
 
 I'm using [timdream's word cloud generator](https://github.com/timdream/wordcloud2.js/).
-
-The source of the tag filter's offensive word list is [Ofcom's September 2016 Attitudes to potentially offensive language and gestures on TV and radio Research report](https://www.ofcom.org.uk/__data/assets/pdf_file/0022/91624/OfcomOffensiveLanguage.pdf).
-
-Those used are the medium, strong, and stronger words that were **not** marked as "least recognised".
-
-In addition to this, "all" and "seen live" were added to the list, and a geohash filter is in place.
