@@ -19,9 +19,7 @@
         margin:0 0 1vw 0;
     }
     @media (orientation: landscape) {
-        header {
-        padding:1vw 10vw 1vw 10vw;
-        }
+        header { padding:1vw 10vw 1vw 10vw; }
     }
 
     h1 {
@@ -30,14 +28,10 @@
         font-family: 'Varela Round', sans-serif;
     }
     @media (orientation: portrait) {
-        h1 {
-            margin: 3vw 0 2vw 5vw;
-        }
+        h1 { margin: 3vw 0 2vw 5vw; }
     }
 
-    button {
-        float:right;
-    }
+    button { float:right; }
     @media (orientation: portrait) {
         button {
             margin:1vw 1vw 0 0;

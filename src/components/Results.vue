@@ -69,15 +69,13 @@
         methods: {
             clear(){
                 this.cloudState = undefined
-            }
+            },
         },
     }
 </script>
 
 <style scoped>
-    h2 {
-        margin:0 0 4vw 0;
-    }
+    h2 { margin:0 0 4vw 0; }
 
     .list {
         margin:1vw;

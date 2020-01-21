@@ -14,12 +14,10 @@
 
 <script>
     export default {
-        props: ['name','options','selected']
+        props: ['name','options','selected'],
     }
 </script>
 
 <style scoped>
-    span {
-        margin: 0 1vw 0 0;
-    }
+    span { margin: 0 1vw 0 0; }
 </style>

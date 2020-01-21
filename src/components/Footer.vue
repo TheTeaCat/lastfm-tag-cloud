@@ -15,9 +15,7 @@
 </script>
 
 <style scoped>
-    footer {
-        margin:5vw 10vw 3vw 10vw;
-    }
+    footer { margin:5vw 10vw 3vw 10vw; }
     @media (orientation: portrait) {
         footer {
             margin: 2vw 1vw 1vw 1vw;
@@ -30,10 +28,7 @@
         }
     }
 
-    ul li {
-        display: inline-block;
-        list-style:none;
-    }
+    ul li { display: inline-block; list-style:none; }
     li::before { content:"|"; padding:0 1vw 0 1vw; }
     ul li:first-child:before { content:""; padding:0; }
     @media (orientation:portrait) {

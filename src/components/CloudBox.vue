@@ -52,7 +52,7 @@
                 this.$refs["share-link"].select()
                 this.$refs["share-link"].setSelectionRange(0,99999)
                 document.execCommand("Copy")
-            }
+            },
         },
         computed: {
             share_link:function() {
@@ -64,7 +64,7 @@
                 }
                 return ""
             },
-        }
+        },
     }
 </script>
 
@@ -101,8 +101,6 @@
         margin:0 0 0 1vw;
     }
     @media(orientation: portrait) {
-        button, input {
-            background:var(--end-sections-colour);
-        }
+        button, input { background:var(--end-sections-colour); }
     }
 </style>

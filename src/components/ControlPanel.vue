@@ -39,7 +39,7 @@
     export default {
         props: ['username','period','max_artists','state'],
         components: {
-            ControlPanelOption
+            ControlPanelOption,
         },
         mounted:function() {
             if (this.$cookies.isKey("username")){this.$emit("update:username",this.$cookies.get("username"))}
@@ -80,9 +80,7 @@
             margin:0.5vw 0 0.5vw 0;
         }
     }
-    span {
-        margin: 0 1vw 0 0;
-    }
+    span { margin: 0 1vw 0 0; }
 
     @media (orientation:portrait) {
         #generate-button-container {

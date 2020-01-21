@@ -22,18 +22,16 @@
     export default {
         components: {
             CollapseButton,
-            TaggingsList
+            TaggingsList,
         },
         props: ['tags','taggings','tag_meta'],
-        data: function(){
-            return {
-                collapsed:true,
-            }
-        },
+        data:function(){return{
+            collapsed:true,
+        }},
         methods: {
             collapse: function(){
                 this.collapsed = !this.collapsed
-            }
+            },
         }
     }
 </script>

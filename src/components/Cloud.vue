@@ -63,9 +63,7 @@
                     shuffle:true,
                 })
             },
-            getDataURL(){
-                return this.$refs["canvas"].toDataURL()
-            }
+            getDataURL(){ return this.$refs["canvas"].toDataURL() },
         }
     }
 </script>

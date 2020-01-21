@@ -6,7 +6,7 @@
             <li v-for='artist in artists' v-bind:key='artist' v-bind:artist='artist'>
                 <span class="artist">
                     <a v-bind:href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">
-                    {{ artist }}
+                        {{ artist }}
                     </a></span>
                 ({{ listens[artist] }} <span v-if="listens[artist]>1">listens</span> <span v-else>listen</span>)
             </li>
@@ -22,11 +22,9 @@
             CollapseButton
         },
         props: ['artists','listens'],
-        data: function(){
-            return {
-                collapsed:true,
-            }
-        },
+        data:function(){return{
+            collapsed:true,
+        }},
         methods: {
             collapse: function(){
                 this.collapsed = !this.collapsed
