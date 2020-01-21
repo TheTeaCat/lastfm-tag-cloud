@@ -100,7 +100,7 @@
                 this.theme = this.theme ==  "dark" ? "light" : "dark"
                 this.$cookies.set("theme",this.theme)
             },
-        }
+        },
     }
 </script>
 

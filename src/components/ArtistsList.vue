@@ -28,8 +28,8 @@
         methods: {
             collapse: function(){
                 this.collapsed = !this.collapsed
-            }
-        }
+            },
+        },
     }
 </script>
 
