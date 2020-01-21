@@ -6,7 +6,7 @@
                    v-model="username"
                    v-on:keyup="
                     (e) => e.key == 'Enter' 
-                    ? this.$emit('generate') 
+                    ? this.submit()
                     : this.$emit('update:username',e.target.value)"/>
         </div>
 
@@ -40,6 +40,12 @@
         props: ['username','period','max_artists','state'],
         components: {
             ControlPanelOption,
+        },
+        methods:{
+            submit(){
+                this.$emit('update:username',this.username.replace(/&/g,''))
+                this.$emit('generate')
+            },
         },
         mounted:function() {
             if (this.$cookies.isKey("username")){this.$emit("update:username",this.$cookies.get("username"))}
