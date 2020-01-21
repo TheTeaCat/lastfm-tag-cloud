@@ -1,6 +1,7 @@
 <template>
-    <div id="app" v-bind:theme="theme">
-      <Header @toggleTheme="toggleTheme"/>
+    <div id="app" :theme="theme">
+      <Header :theme="theme"
+              @toggleTheme="toggleTheme"/>
 
       <main>
         <control-panel id="control-panel"
@@ -8,15 +9,15 @@
                       :period="period" 
                       :max_artists="max_artists"
                       :state="generator.state"
-                        @update:username="username=$event;$cookies.set('username',$event)"
-                        @update:period="period.selected=$event;$cookies.set('period',$event)"
-                        @update:max_artists="max_artists.selected=$event;$cookies.set('max_artists',$event)"
-                        @generate="generate"/>
+                      @update:username="username=$event;$cookies.set('username',$event)"
+                      @update:period="period.selected=$event;$cookies.set('period',$event)"
+                      @update:max_artists="max_artists.selected=$event;$cookies.set('max_artists',$event)"
+                      @generate="generate"/>
 
         <results ref="results"
-                v-bind:state="generator.state"
-                v-bind:result="result"
-                v-bind:error="error"/>
+                :state="generator.state"
+                :result="result"
+                :error="error"/>
       </main>
 
       <Footer/>
