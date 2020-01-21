@@ -38,12 +38,12 @@ class Generator {
             await this.sort_data(result)
         }
         this.state = undefined;
-        return {'result':result, 'error':error}
+        return {'result':error == undefined ? result : undefined, 'error':error}
     }
 
     /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Generation sub-funcs ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     async get_artist_data(result) {
-        await axios.get(
+        return await axios.get(
             "https://ws.audioscrobbler.com/2.0/?method=user.gettopartists"+
             "&api_key="+API_KEY+
             "&user="+result.username+

@@ -23,7 +23,7 @@
                 '12month':'in the past year',
                 'overall':'at all'}[result.period] }}!
         </h2>
-        <h2 v-else-if="result != undefined && state == undefined && error != undefined">
+        <h2 v-else-if="state == undefined && error != undefined">
             An error occured :'(
             <br><br>
             {{ error }}
