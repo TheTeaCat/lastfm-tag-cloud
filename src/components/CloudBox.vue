@@ -7,7 +7,7 @@
         <ul>
             <li id="share-link-container">
                 <button id="share-link" class="cloud-button" 
-                        v-on:click="copyShareLink">
+                        @click="copyShareLink">
                     <span id="copy-share-link-title">Copy Link:</span>
                     <input ref="share-link" :value="share_link" readonly="readonly"/>
                 </button>
@@ -16,13 +16,13 @@
             <li>
                 <button class="cloud-button"
                         :disabled="generating"
-                        v-on:click="reshuffle">Reshuffle</button>
+                        @click="reshuffle">Reshuffle</button>
             </li>
 
             <li>
                 <a ref="download-link" class="cloud-button"
                    download="tag-cloud.png">
-                    <button v-on:click="downloadTagCloud"
+                    <button @click="downloadTagCloud"
                             :disabled="generating">
                             Download Image
                     </button>
@@ -60,6 +60,7 @@
                     return window.location.origin + window.location.pathname
                      + "?username=" + this.result.username 
                      + "&period=" + this.result.period 
+                     + "&filtered=" + this.result.filtered 
                      + "&max_artists=" + this.result.max_artists 
                 }
                 return ""

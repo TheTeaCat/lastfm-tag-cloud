@@ -8,10 +8,12 @@
                         :username="username"
                         :period="period" 
                         :max_artists="max_artists"
+                        :filtered="filtered"
                         :state="generator.state"
-                        @update:username="username=$event;$cookies.set('username',$event)"
-                        @update:period="period.selected=$event;$cookies.set('period',$event)"
-                        @update:max_artists="max_artists.selected=$event;$cookies.set('max_artists',$event)"
+                        @update:username="username=$event;updateCookie()"
+                        @update:period="period.selected=$event;updateCookie()"
+                        @update:max_artists="max_artists.selected=$event;updateCookie()"
+                        @update:filtered="filtered=$event;updateCookie()"
                         @generate="generate"/>
 
             <results ref="results"
@@ -57,6 +59,7 @@
                             {text:'50',value:50},
                             {text:'100',value:100}]
                         },
+            filtered:false,
             generator:new Generator(),
             result:undefined,
             error:undefined,
@@ -69,6 +72,14 @@
                 this.theme="dark"
             }
 
+            //Loading state from cookies.
+            if (this.$cookies.isKey("config")) {
+                this.username = this.$cookies.get("config").username
+                this.period.selected = this.$cookies.get("config").period
+                this.max_artists.selected = this.$cookies.get("config").max_artists
+                this.filtered = this.$cookies.get("config").filtered
+            }
+
             //Loading state from query, if it exists. If there's at least a username, we generate.
             if (this.period.options.some(
                 function(option){return option.value==this.$route.query.period}.bind(this))
@@ -76,10 +87,13 @@
             if (this.max_artists.options.some(
                 function(option){return option.value==this.$route.query.max_artists}.bind(this))
             ) { this.max_artists.selected = this.$route.query.max_artists }
-            if (this.$route.query.username != undefined) { 
-                this.username = this.$route.query.username 
+            if (this.$route.query.filtered != undefined) {
+                this.filtered = {"true":true,"false":false}[this.$route.query.filtered]
+            } if (this.$route.query.username != undefined) { 
+                this.username = this.$route.query.username
                 this.generate()
             }
+            this.$router.push(this.$route.path)
         },
         methods: {
             async generate() {
@@ -91,14 +105,23 @@
                 this.error=undefined
 
                 var response = await this.generator.generate(this.username,
-                                                            this.period.selected,
-                                                            this.max_artists.selected)
+                                                             this.period.selected,
+                                                             this.max_artists.selected,
+                                                             this.filtered)
                 this.error = response.error
                 this.result = response.result
             },
             toggleTheme() {
                 this.theme = this.theme ==  "dark" ? "light" : "dark"
                 this.$cookies.set("theme",this.theme)
+            },
+            updateCookie() {
+                this.$cookies.set('config',{
+                    username:this.username,
+                    period:this.period.selected,
+                    max_artists:this.max_artists.selected,
+                    filtered:this.filtered,
+                })
             },
         },
     }

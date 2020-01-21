@@ -1,5 +1,5 @@
 <template>
-    <button v-on:click="$emit('collapse')" class="collapse-button">{{ collapsed ? '+' : '-' }}</button>
+    <button @click="$emit('collapse')" class="collapse-button">{{ collapsed ? '+' : '-' }}</button>
 </template>
 
 <script>

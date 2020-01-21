@@ -1,6 +1,14 @@
 import axios from "axios"
 
 const API_KEY = '97773975bd1d3fdf89b362a27d2b6313'
+const MAX_TAGS = 100
+
+/**The filtered words are taken from Ofcom's September 2016 Attitudes to potentially offensive language and gestures on TV and radio Research report.
+ * src: https://www.ofcom.org.uk/__data/assets/pdf_file/0022/91624/OfcomOffensiveLanguage.pdf
+ * Those used are the medium, strong, and stronger words that were not marked as least recognised.
+ * "Geohash", "all" and "seen live" have also been added to this list.
+ */
+const FILTERED_WORDS = ['geohash','all','seen live','cunt','fuck','motherfucker','bastard','beaver','bellend','clunge','cock','dick','dickhead','fanny','flaps','gash','knob','minge','prick','punani','pussy','snatch','twat','arsehole','balls','bint','bitch','bollocks','bullshit','feck','munter','pissed','pissed off','shit','son of a bitch','tits','cocksucker','dildo','jizz','ho','nonce','prickteaser','skank','slag','slut','wanker','whore','shag','slapper','tart','prod','yid','batty boy','chick with a dick','faggot','gender bender','fudge-packer','shirt lifter','bender','bum boy','dyke','he-she','homo','lezza','lesbo','muff driver','nancy','poof','queer','rug muncher','carpet muncher','tranny','bummer','fairy','pansy','mong','retard','spastic','spakka','spaz','window licker','cripple','midget','schizo','special','vegetable','chinky','coon','darky','golliwog','nigger','nig-nog','paki','wog','honky','jap','negro','polack','raghead','spade','coloured','gippo','kraut','pikey']
 
 class Generator {
     /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Constructor ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
@@ -9,11 +17,12 @@ class Generator {
     }
 
     /**~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Generation func ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
-    async generate(username,period,max_artists) {
+    async generate(username,period,max_artists,filtered) {
         var result = {
             username:username,
             period:period,
             max_artists:max_artists,
+            filtered:filtered,
             artists:[],
             listens:{},
             tags:[],
@@ -63,7 +72,7 @@ class Generator {
                                 /**Getting their tags... */
                                 await axios.get("https://ws.audioscrobbler.com/2.0/?method=artist.getTopTags"+
                                         "&api_key="+API_KEY+
-                                        "&artist="+artist_name.replace("&","%26")+
+                                        "&artist="+artist_name.replace(/&/g,"%26")+
                                         "&format=json").then( function(response){                                                    
                                                 /**If the response doesn't have the data we need, we just return and declare the request as failed. */
                                                 if (response.data.toptags == undefined) { return }                                                        
@@ -115,7 +124,7 @@ class Generator {
                     var tagA = result.tags[i]
                     var tagB = result.tags[j]
                     if (tagB[tagB.length-1] == "s" && tagB.slice(0,tagB.length-1) == tagA
-                        ||tagB.replace(" ","").replace("-","") == tagA.replace(" ","").replace("-","")) {
+                        ||tagB.replace(/ | /g,"") == tagA.replace(/ | /g,"")) {
                             if (result.tag_meta[tagA].library_total >= result.tag_meta[tagB].library_total) {
                                 //if tagA is bigger, we get rid of tagA.
                                 result.tags.splice(j,1)
@@ -129,7 +138,30 @@ class Generator {
         }
 
         result.tags.sort(function(a,b){return result.tag_meta[b].library_total - result.tag_meta[a].library_total}.bind(this))
-        result.tags = result.tags.slice(0,100)
+
+        /**If the filter is enabled, for each tag it's checked against the list of filtered words.
+         * This shouldn't result in many 'scunthorpe problems' as it's only comparing:
+         * 1) each component of the tag split by spaces or hyphens
+         * and
+         * 2) the whole tag, if the tag contains spaces or hyphens
+         * against all filtered words.
+         */
+        if (result.filtered) {
+            for (i = 0; i < MAX_TAGS; i++) {
+                if (i >= result.tags.length) { break }
+                if (FILTERED_WORDS.some(
+                        word => result.tags[i] == word
+                                ||result.tags[i].split(/-| /).some(subword => subword == word.replace(/-| /g,""))
+                                || result.tags[i].match(/-| /) && word.match(/-| /) && result.tags[i] == word
+                        )
+                    || result.tags[i].split(":")[0] == "geohash") {
+                    result.tags.splice(i,1)
+                    i--
+                }
+            }
+        }
+
+        result.tags = result.tags.slice(0,MAX_TAGS)
     }
 
     async get_tag_data(result){

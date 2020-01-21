@@ -1,8 +1,8 @@
 <template>
     <div>
         <span>{{ name }}:</span>
-        <select v-model="selected"
-                v-on:change="$emit('update',$event.target.value)">
+        <select :value="selected"
+                @change="$emit('update',$event.target.value)">
             <option v-for="option in options" 
                     :key="option.value" 
                     :value="option.value">
@@ -20,4 +20,5 @@
 
 <style scoped>
     span { margin: 0 1vw 0 0; }
+    div { display:inline-block; }
 </style>

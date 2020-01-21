@@ -1,7 +1,7 @@
 <template>
     <header>
         <h1>tag cloud generator</h1>
-        <button v-on:click="$emit('toggleTheme')">
+        <button @click="$emit('toggleTheme')">
             {{ theme == "dark" ? "Light Mode" : "Dark Mode" }}
         </button>
     </header>

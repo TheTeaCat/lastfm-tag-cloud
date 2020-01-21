@@ -6,7 +6,7 @@
 
         <li id="collapser"
             v-if="taggings.length > 3" 
-            v-on:click="toggle">
+            @click="toggle">
             <a>{{ collapsed ? "show more..." : "show less" }}</a>
         </li>
     </ol>

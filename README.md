@@ -57,3 +57,9 @@ If this causes issues for you, I know. See [here](https://github.com/TheTeaCat/l
 ## Acknowledgements
 
 I'm using [timdream's word cloud generator](https://github.com/timdream/wordcloud2.js/).
+
+The source of the tag filter's offensive word list is [Ofcom's September 2016 Attitudes to potentially offensive language and gestures on TV and radio Research report](https://www.ofcom.org.uk/__data/assets/pdf_file/0022/91624/OfcomOffensiveLanguage.pdf).
+
+Those used are the medium, strong, and stronger words that were **not** marked as "least recognised".
+
+In addition to this, "all" and "seen live" were added to the list, and a geohash filter is in place.
