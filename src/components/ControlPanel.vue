@@ -41,6 +41,11 @@
         components: {
             ControlPanelOption
         },
+        mounted:function() {
+            if (this.$cookies.isKey("username")){this.$emit("update:username",this.$cookies.get("username"))}
+            if (this.$cookies.isKey("period")){this.$emit("update:period",this.$cookies.get("period"))}
+            if (this.$cookies.isKey("max_artists")){this.$emit("update:max_artists",this.$cookies.get("max_artists"))}
+        },
     }
 </script>
 

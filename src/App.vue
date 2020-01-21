@@ -8,9 +8,9 @@
                       :period="period" 
                       :max_artists="max_artists"
                       :state="generator.state"
-                        @update:username="username=$event"
-                        @update:period="period.selected=$event"
-                        @update:max_artists="max_artists.selected=$event"
+                        @update:username="username=$event;$cookies.set('username',$event)"
+                        @update:period="period.selected=$event;$cookies.set('period',$event)"
+                        @update:max_artists="max_artists.selected=$event;$cookies.set('max_artists',$event)"
                         @generate="generate"/>
 
         <results ref="results"
@@ -66,7 +66,8 @@
     },
 
     mounted: function(){
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      if (this.$cookies.isKey("theme") && this.$cookies.get("theme") == "dark"
+          || window.matchMedia("(prefers-color-scheme: dark)").matches) {
         this.theme="dark"
       }
 
@@ -100,6 +101,7 @@
       },
       toggleTheme() {
         this.theme = this.theme ==  "dark" ? "light" : "dark"
+        this.$cookies.set("theme",this.theme)
       },
     }
   }

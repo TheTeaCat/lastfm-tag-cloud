@@ -8,6 +8,10 @@ var router = new VueRouter({
   routes: []
 });
 
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+Vue.$cookies.config('7d')
+
 Vue.config.productionTip = false
 
 new Vue({
