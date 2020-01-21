@@ -36,7 +36,7 @@
         </h2>
 
         <CloudBox ref="cloud"
-                  v-if="result != undefined"
+                  v-if="result != undefined && result.artists.length > 0"
                   v-bind:result="result"/>
 
         <artists-list class="list"
