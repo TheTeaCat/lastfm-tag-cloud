@@ -21,7 +21,7 @@
                               @update="$emit('update:max_artists',$event)"/>
 
         <div class="option" id="filter-option">
-            <span>Generic/Obscene Tag Filter:</span>
+            <span>Tag Filter:</span>
             <input type="checkbox" :checked="filtered"
                    @change="$emit('update:filtered',$event.target.checked)"/>
         </div>
