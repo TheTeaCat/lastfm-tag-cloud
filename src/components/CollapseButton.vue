@@ -15,4 +15,9 @@
         width:1.5em;
         height:1.5em;
     }
+    @media(orientation: portrait) {
+        button {
+            background:var(--end-sections-colour);
+        }
+    }
 </style>

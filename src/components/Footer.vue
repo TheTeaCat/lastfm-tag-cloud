@@ -1,5 +1,5 @@
 <template>
-    <footer class="section-container">
+    <footer>
         <ul>
             <li><a href="https://www.last.fm/user/theteacat">My Last.Fml</a></li>
             <li><a href="https://github.com/PedantiCat/tag-cloud">Github</a> -  Star This!</li>
@@ -15,18 +15,32 @@
 </script>
 
 <style scoped>
+    footer {
+        margin:5vw 10vw 3vw 10vw;
+    }
+    @media (orientation: portrait) {
+        footer {
+            margin: 2vw 1vw 1vw 1vw;
+            padding:1vw 1.5vw 1vw 1.5vw;
+            border-style:solid;
+            border-color:var(--section-border-colour);
+            border-width:1px;
+            border-radius:3px;
+            background:var(--end-sections-colour);
+        }
+    }
+
     ul li {
         display: inline-block;
         list-style:none;
     }
-    @media (orientation: landscape) {
-        li::before { content:"|"; padding:0 1vw 0 1vw;}
-        ul li:first-child:before { content:""; padding:0;}
-    }
+    li::before { content:"|"; padding:0 1vw 0 1vw; }
+    ul li:first-child:before { content:""; padding:0; }
     @media (orientation:portrait) {
-        li::before { content:"~ "; padding:0 0.5vw 0 0.5vw;}
-        ul li {
-            display: block;
+        li::before {
+            content: "~ " !important;
+            padding: 0 0.5vw 0 0.5vw !important;
         }
+        ul li { display: block; }
     }
 </style>
