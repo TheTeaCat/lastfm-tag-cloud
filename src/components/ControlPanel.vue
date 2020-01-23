@@ -1,38 +1,42 @@
 <template>
     <div id="control-panel">
-        <div class="option" id="username-option">
-            <span>Last.fm Username:</span>
-            <input :value="username"
-                   @keyup="(e) => e.key == 'Enter' 
-                            ? this.submit()
-                            : this.$emit('update:username',e.target.value)"/>
+        <control-panel-option class="option"
+                              :name="'Username'"
+                              :type="'input'"
+                              :params="{value:username}"
+                              @update="$emit('update:username',$event)"
+                              @submit="this.submit"/>
+
+        <div id="tag-filter">
+            <div class="separator" id="first-separator">|</div>
+            <control-panel-option class="option" id="tag-filter-option"
+                                :name="'Tag Filter'"
+                                :type="'checkbox'"
+                                :params="{value:filtered}"
+                                @update="$emit('update:filtered',$event)"/>
+            <div class="separator" id="last-separator">|</div>
         </div>
 
-        <control-panel-option class="option" id="period-option"
+        <control-panel-option class="option"
                               :name="'Period'"
-                              :options="period.options"
-                              :selected="period.selected"
+                              :type="'select'"
+                              :params="{options:period.options,
+                                        selected:period.selected}"
                               @update="$emit('update:period',$event)"/>
 
-        <control-panel-option class="option" id="max-artists-option"
+        <control-panel-option class="option"
                               :name="'Max Artists'"
-                              :options="max_artists.options"
-                              :selected="max_artists.selected"
+                              :type="'select'"
+                              :params="{options:max_artists.options,
+                                        selected:max_artists.selected}"
                               @update="$emit('update:max_artists',$event)"/>
 
-        <div class="option" id="filter-option">
-            <span>Tag Filter:</span>
-            <input type="checkbox" :checked="filtered"
-                   @change="$emit('update:filtered',$event.target.checked)"/>
-        </div>
-
-        <div class="option" id="generate-button-container">
-            <button id="generate-button"
-                    :disabled="state != undefined"
-                    @click="submit">
-                    Load Data
-            </button>
-        </div>
+        <control-panel-option class="option"
+                              :name="'Load Data'"
+                              :type="'button'"
+                              :params="{label:'Go!',
+                                        disabled:state!=undefined}"
+                              @clicked="submit"/>
     </div>
 </template>
 
@@ -57,14 +61,13 @@
     #control-panel {
         margin: 0 0 4vw 0;
         display: flex;
-        flex-wrap:nowrap;
-        align-items:center;
         justify-content:flex-start;
+        align-items:stretch;
+        flex-wrap:wrap;
     }
     @media (orientation: portrait) {
         #control-panel { 
-            padding:1vw;
-            flex-wrap:wrap;
+            padding:0 1vw 1vw 1vw;
             border-style:solid;
             border-color:var(--section-border-colour);
             border-width:1px;
@@ -73,45 +76,40 @@
         }
     }
 
-    .option{
+    .option {
+        padding:0 2vw 0 0;
+        box-sizing:border-box;
+    }
+    #tag-filter {
         display:flex;
-        align-items:center;
-        padding: 0 1.5vw 0 0;
-        flex-shrink:1;
+    }
+    #control-panel .option:last-child {
+        margin:0;
+    }
+    .separator {
+        margin:auto 2vw auto 0vw;
     }
     @media (orientation: portrait) {
-        .option { 
-            flex-basis:60% !important;
-            flex-grow:1;
-            margin:0.5vw 0 0.5vw 0;
+        #control-panel .option:first-child {
+            flex-basis:66%;
         }
-    }
-    span { margin: 0 1vw 0 0; }
 
-    #username-option { 
-        flex-basis: 25%;
-        display:flex;
-        align-items:center;
-        justify-content:flex-start;
-
-    }
-    #filter-option {flex-basis: 15%; }
-    
-    @media (orientation:portrait) {
-        #generate-button-container {
-            padding: 0;
-            margin:0;
+        .option {
+            margin:1vw 0 0 0 !important;
+            flex-basis:33%;
             flex-grow:1;
-            flex-basis:30% !important;
-            display:flex;
-            justify-content:flex-end;
-            align-self:flex-end;
         }
-    }
-    @media (orientation:landscape) {
-        #generate-button-container:before {
-            content:"| ";
-            padding:0 2vw 0 0vw;
+
+        #tag-filter {
+            flex-grow:0;
+            margin-right:auto;
+        }
+        #tag-filter-option {
+            align-items:center;
+        }
+
+        #control-panel .option:last-child {
+            flex-grow:0;
         }
     }
 </style>

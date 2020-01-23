@@ -31,7 +31,7 @@
         h1 { margin: 3vw 0 2vw 5vw; }
     }
 
-    button { float:right; }
+    button { position:absolute; right:1vw; }
     @media (orientation: portrait) {
         button {
             margin:1vw 1vw 0 0;
