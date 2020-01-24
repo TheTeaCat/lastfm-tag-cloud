@@ -50,6 +50,12 @@ score_tags(result){
 }
 ```
 
+`tag_meta[tag].total` is the `taggings` metric for that tag, taken from [tag.getInfo](https://www.last.fm/api/show/tag.getInfo).
+
+`taggings[tag]` is an array of all the artists that were tagged that tag.
+
+`tag_meta[tag].reach` is the `reach` metric for that tag, taken from [tag.getInfo](https://www.last.fm/api/show/tag.getInfo).
+
 I've tried to make this take into account the "uniqueness" of the tag to a user's library, as if they were all just scored by frequency the biggest tag on everyone's clouds would probably just be "all".
 
 If this causes issues for you, I know. See [here](https://github.com/TheTeaCat/lastfm-tag-cloud/issues/10). I don't care. :rowboat:
@@ -58,7 +64,7 @@ If this causes issues for you, I know. See [here](https://github.com/TheTeaCat/l
 
 The tag filter checks tags against an offensive word list, "all", "seen live" and a geohash filter to remove tags that are overly generic/obscene.
 
-The source of the tag filter's offensive word list is [Ofcom's September 2016 Attitudes to potentially offensive language and gestures on TV and radio Research report](https://www.ofcom.org.uk/__data/assets/pdf_file/0022/91624/OfcomOffensiveLanguage.pdf). Those used are the medium, strong, and stronger words that are **not** marked as "least recognised".
+The source of the tag filter's offensive word list is [Ofcom's September 2016 Attitudes to potentially offensive language and gestures on TV and radio research report](https://www.ofcom.org.uk/__data/assets/pdf_file/0022/91624/OfcomOffensiveLanguage.pdf). Those used are the medium, strong, and stronger words that are **not** marked as "least recognised".
 
 ## Acknowledgements
 
