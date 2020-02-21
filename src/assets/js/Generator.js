@@ -68,7 +68,7 @@ class Generator {
                                 var artist_name = artist.name.toLowerCase()
                                 /**Adding the artist to the artists list... */
                                 result.artists.push(artist_name)
-                                result.listens[artist_name] = artist.playcount
+                                result.listens[artist_name] = parseInt(artist.playcount)
                                 /**Getting their tags... */
                                 await axios.get("https://ws.audioscrobbler.com/2.0/?method=artist.getTopTags"+
                                         "&api_key="+API_KEY+
@@ -88,12 +88,14 @@ class Generator {
                                                         result.taggings[tag.name] = [{artist:artist_name,count:tag.count}]
                                                         /**Initialising the count of taggings on the artist to the tag's library_total & saving the tag's URL... */
                                                         result.tag_meta[tag.name] = {library_total:tag.count/100,
-                                                                                     url:tag.url}
+                                                                                     url:tag.url,
+                                                                                     tot_scrobbles:result.listens[artist_name]}
                                                     } else {
                                                         /**Adding the taggings of the tag on the artist to the tag's list in the taggings object... */
                                                         result.taggings[tag.name].push({artist:artist_name,count:tag.count})
                                                         /**Adding the count of taggings on the artist to the tag's library_total... */
                                                         result.tag_meta[tag.name].library_total += tag.count/100
+                                                        result.tag_meta[tag.name].tot_scrobbles += result.listens[artist_name]
                                                     }
                                                 }
                                             }.bind(this))

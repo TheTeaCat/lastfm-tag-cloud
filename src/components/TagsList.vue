@@ -10,7 +10,7 @@
             <li class="tag" v-for='tag in tags' :key='tag' :tag='tag'>
                 <input type="checkbox" v-model="tag_meta[tag].shown"/>
                 <div>
-                    <a :href="tag_meta[tag].url">{{ tag }}</a>:
+                    <a :href="tag_meta[tag].url">{{ tag }}</a> ({{ tag_meta[tag].tot_scrobbles }} {{ tag_meta[tag].tot_scrobbles>1 ? 'listens' : 'listen' }}):
                     <taggings-list class="artist-list" :taggings="taggings[tag]"/>
                 </div>
             </li>
