@@ -25,7 +25,7 @@
     import WordCloud from "wordcloud"
 
     export default {
-        props: ['result'],
+        props: ['result','generating'],
         mounted: function(){            
             var minScore = Infinity
             var maxScore = -Infinity
@@ -63,8 +63,6 @@
         }},
         methods: {
             async generateTagCloud(mode){
-                // eslint-disable-next-line no-console
-                console.log(mode)
                 if (mode != undefined) { this.mode = mode }
 
                 this.$emit("generating",true)
