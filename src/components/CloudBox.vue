@@ -2,6 +2,7 @@
     <main>
         <Cloud ref="cloud" 
                :result="result" 
+               :mode="mode" 
                @generating="$emit('generating',$event)"/>
 
         <ul>
@@ -16,7 +17,7 @@
             <li>
                 <button class="cloud-button"
                         :disabled="generating"
-                        @click="reshuffle">Reshuffle</button>
+                        @click="reshuffle()">Reshuffle</button>
             </li>
 
             <li>
@@ -41,7 +42,9 @@
         },
         props:["result","generating"],
         methods: {
-            reshuffle(){this.$refs['cloud'].generateTagCloud()},
+            reshuffle(mode){
+                this.$refs['cloud'].generateTagCloud(mode)
+            },
             downloadTagCloud() {
                 this.$refs["download-link"].href = this.$refs["cloud"].getDataURL()
             },
@@ -69,6 +72,8 @@
 <style scoped>
     main {
         margin:0 0 3vw 0;
+        display: flex;
+        flex-direction: column;
     }
 
     ul {

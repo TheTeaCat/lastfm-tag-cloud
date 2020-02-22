@@ -76,7 +76,7 @@
                 this.cloudState = undefined
             },
             applyTagChanges(){
-                this.$refs['cloud-box'].reshuffle()
+                this.$refs['cloud-box'].reshuffle('tags')
             },
         },
     }

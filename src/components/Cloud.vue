@@ -1,5 +1,20 @@
 <template>
     <div>
+        <ul id="cloud-mode-options">
+            <li>Show me:</li>
+            <li>
+                <button :disabled="mode=='tags' || generating"
+                        @click="generateTagCloud('tags')">
+                    Tags
+                </button>
+            </li>
+            <li>
+                <button :disabled="mode=='artists' || generating"
+                        @click="generateTagCloud('artists')">
+                    Artists
+                </button>
+            </li>
+        </ul>
         <canvas ref="canvas"
                 width="1920"
                 height="1200"/>
@@ -15,35 +30,54 @@
             var minScore = Infinity
             var maxScore = -Infinity
             for (var tag of this.result.tags) {
-                if (this.result.scores[tag] < minScore) {
-                    minScore = this.result.scores[tag]
-                }
-                if (this.result.scores[tag] > maxScore) {
-                    maxScore = this.result.scores[tag]
-                }
+                var score = this.result.scores[tag]
+                if (score < minScore) { minScore = score }
+                if (score > maxScore) { maxScore = score }
             }
 
-            this.cloudWords = []
-
+            this.cloudTags = []
             for (tag of this.result.tags) {
                 /**Biggest should be 200, smallest should be 25.
                 * Logarithmic scaling is pretty arbritrary, just what I found looks decent.
                 */
-                this.cloudWords.push([tag,Math.log10((this.result.scores[tag]-minScore)*99/maxScore+1)/2*175+25])
+                this.cloudTags.push([tag,Math.log10((this.result.scores[tag]-minScore)*99/maxScore+1)/2*175+25])
                 /**By default, every tag is shown. */
                 this.result.tag_meta[tag].shown = true;
             }
 
-            this.generateTagCloud()
+            var maxListens = -Infinity
+            for (var artist of this.result.artists) {
+                var listens = this.result.listens[artist] 
+                if (listens > maxListens) {maxListens = listens}
+            }
+
+            this.cloudArtists = []
+            for (artist of this.result.artists) {
+                this.cloudArtists.push([artist,((this.result.listens[artist])/maxListens)*175+25])
+            }
+
+            this.generateTagCloud("tags")
         },
+        data(){return{
+            mode:"tags"
+        }},
         methods: {
-            generateTagCloud(){
+            async generateTagCloud(mode){
+                // eslint-disable-next-line no-console
+                console.log(mode)
+                if (mode != undefined) { this.mode = mode }
+
                 this.$emit("generating",true)
-                var shownTags = []
-                for (var tag of this.cloudWords) {
-                    if (this.result.tag_meta[tag[0]].shown) {
-                        shownTags.push(tag)
+
+                var cloudWords = []
+                if (this.mode == "tags") {
+                    for (var tag of this.cloudTags) {
+                        if (this.result.tag_meta[tag[0]].shown) {
+                            cloudWords.push(tag)
+                        }
                     }
+                } else {
+                    cloudWords = this.cloudArtists
                 }
 
                 this.$refs["canvas"].addEventListener(
@@ -55,7 +89,7 @@
 
                 var style = getComputedStyle(this.$refs["canvas"]);
                 WordCloud(this.$refs["canvas"],{
-                    list:shownTags,
+                    list:cloudWords,
                     fontFamily:"Courier",
                     shrinkToFit:true,
                     color:style['color'],
@@ -70,9 +104,25 @@
 
 <style scoped>
     div {
-        width:100%;
         margin:0 0 3vw 0;
+        display:inline-block;
+        margin-left:auto;
+        margin-right:auto;
     }
+    
+    ul {
+        display:flex;
+        justify-content:flex-end;
+        align-items:center;
+        flex-wrap:nowrap;
+    }
+    li { 
+        margin:0 0 0 1vw; 
+        display:inline-block;
+        flex-shrink:1;
+    }
+    ul li:first-child { margin:0; }
+
     canvas {
         display: block;
         margin:1vw auto 1vw auto;
