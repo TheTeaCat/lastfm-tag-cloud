@@ -32,9 +32,6 @@
         <h2 v-else-if="state != undefined">
             <spinner/> {{ state }}
         </h2>
-        <h2 v-else>
-            Click "Load Data"!
-        </h2>
 
         <CloudBox ref="cloud-box"
                   v-if="result != undefined && result.artists.length > 0"
