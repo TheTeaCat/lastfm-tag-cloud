@@ -22,7 +22,7 @@
 
             <li>
                 <a ref="download-link" class="cloud-button"
-                   download="tag-cloud.png">
+                   download="cloud.png">
                     <button @click="downloadTagCloud"
                             :disabled="generating">
                             Download Image
