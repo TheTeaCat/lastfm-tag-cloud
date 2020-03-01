@@ -1,52 +1,147 @@
 <template>
     <main>
-        <Cloud ref="cloud" 
-               :result="result" 
-               :generating="generating"
-               @generating="$emit('generating',$event)"/>
-
-        <ul>
-            <li id="share-link-container">
-                <button id="share-link" class="cloud-button" 
-                        @click="copyShareLink">
-                    <span id="copy-share-link-title">Copy Link:</span>
-                    <input ref="share-link" :value="share_link" readonly="readonly"/>
-                </button>
-            </li>
-
-            <li>
-                <button class="cloud-button"
-                        :disabled="generating"
-                        @click="reshuffle()">Reshuffle</button>
-            </li>
-
-            <li>
-                <a ref="download-link" class="cloud-button"
-                   download="cloud.png">
-                    <button @click="downloadTagCloud"
-                            :disabled="generating">
-                            Download Image
+        <div>
+            <ul id="cloud-mode-options">
+                <li>Show me:</li>
+                <li>
+                    <button :disabled="mode=='tags' || generating"
+                            @click="generateTagCloud('tags')">
+                        Tags
                     </button>
-                </a>
-            </li>
-        </ul>
+                </li>
+                <li>
+                    <button :disabled="mode=='artists' || generating"
+                            @click="generateTagCloud('artists')">
+                        Artists
+                    </button>
+                </li>
+            </ul>
+            <canvas ref="canvas"
+                    width="1920"
+                    height="1200"/>
+
+            <ul>
+                <li>
+                    <input ref="fg-colour" type="color" v-model="fg_colour"/>
+                </li>
+
+                <li>
+                    <input ref="bg-colour" type="color" v-model="bg_colour"/>
+                </li>
+
+                <li>
+                    <button class="cloud-button"
+                            :disabled="generating"
+                            @click="generateTagCloud()">Reshuffle</button>
+                </li>
+
+                <li>
+                    <a ref="download-link" class="cloud-button"
+                    download="cloud.png">
+                        <button @click="downloadTagCloud"
+                                :disabled="generating">
+                                Download
+                        </button>
+                    </a>
+                </li>
+
+                <li id="share-link-container">
+                    <button id="share-link" class="cloud-button" 
+                            @click="copyShareLink">
+                        <span id="copy-share-link-title">Copy Link:</span>
+                        <input ref="share-link" :value="share_link" readonly="readonly"/>
+                    </button>
+                </li>
+            </ul>
+        </div>
     </main>
 </template>
 
 <script>
-    import Cloud from "./Cloud.vue"
+    import WordCloud from "wordcloud"
+    import Utils from "../assets/js/Utils.js"
 
     export default {
-        components:{
-            Cloud,
-        },
         props:["result","generating"],
+        mounted: function(){            
+            var minScore = Infinity
+            var maxScore = -Infinity
+            for (var tag of this.result.tags) {
+                var score = this.result.scores[tag]
+                if (score < minScore) { minScore = score }
+                if (score > maxScore) { maxScore = score }
+            }
+
+            this.cloudTags = []
+            for (tag of this.result.tags) {
+                /**Biggest should be 200, smallest should be 25.
+                * Logarithmic scaling is pretty arbritrary, just what I found looks decent.
+                */
+                this.cloudTags.push([tag,Math.log10((this.result.scores[tag]-minScore)*99/maxScore+1)/2*175+25])
+                /**By default, every tag is shown. */
+                this.result.tag_meta[tag].shown = true;
+            }
+
+            var maxListens = -Infinity
+            for (var artist of this.result.artists) {
+                var listens = this.result.listens[artist] 
+                if (listens > maxListens) {maxListens = listens}
+            }
+
+            this.cloudArtists = []
+            for (artist of this.result.artists) {
+                this.cloudArtists.push([artist,((this.result.listens[artist])/maxListens)*175+25])
+            }
+
+            this.bg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['background-color'])
+            this.fg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['color'])
+
+            this.generateTagCloud("tags")
+        },
+        data(){return{
+            mode:"tags",
+            bg_colour:"#000000",
+            fg_colour:"#ffffff",
+        }},
         methods: {
-            reshuffle(mode){
-                this.$refs['cloud'].generateTagCloud(mode)
+            async generateTagCloud(mode){
+                if (mode != undefined) { this.mode = mode }
+
+                this.$emit("generating",true)
+
+                var cloudWords = []
+                if (this.mode == "tags") {
+                    for (var tag of this.cloudTags) {
+                        if (this.result.tag_meta[tag[0]].shown) {
+                            cloudWords.push(tag)
+                        }
+                    }
+                } else {
+                    cloudWords = this.cloudArtists
+                }
+
+                this.$refs["canvas"].addEventListener(
+                    "wordcloudstop",
+                    function(){
+                        this.$emit("generating",false)
+                    }.bind(this)
+                )
+
+                WordCloud(this.$refs["canvas"],{
+                    list:cloudWords,
+                    fontFamily:"Roboto",
+                    shrinkToFit:true,
+                    color:this.fg_colour,
+                    backgroundColor:this.bg_colour,
+                    shuffle:true,
+                })
+            },
+            retheme() {
+                this.bg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['background-color'])
+                this.fg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['color'])
             },
             downloadTagCloud() {
-                this.$refs["download-link"].href = this.$refs["cloud"].getDataURL()
+                this.$refs["download-link"].href = this.$refs["canvas"].toDataURL()
             },
             copyShareLink() {
                 this.$refs["share-link"].select()
@@ -71,24 +166,50 @@
 
 <style scoped>
     main {
-        margin:0 0 3vw 0;
+        margin:0 0 4vw 0;
         display: flex;
         flex-direction: column;
     }
 
+    div {
+        display:inline-block;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
     ul {
         display:flex;
-        justify-content:center;
+        justify-content:flex-end;
         align-items:center;
         flex-wrap:nowrap;
     }
 
     li { 
         margin:0 0 0 1vw; 
-        display:inline-block;
+        display:inline-flex;
         flex-shrink:1;
+        height:4ex;
+        position:relative;
+        align-items: center;
     }
     ul li:first-child { margin:0; }
+    li *{ height:100%; }
+
+    canvas {
+        display: block;
+        margin:1vw auto 1vw auto;
+        max-width:100%;
+        max-height:70vh;
+
+        background-color:var(--cloud-background-colour);
+        color:var(--cloud-text-colour);
+
+        border-width:1px;
+        border-style:solid;
+        border-color:var(--cloud-border-colour);
+        box-sizing:border-box;
+        border-radius:3px;
+    }
 
     #share-link-container { flex-basis:40%; }
     #copy-share-link-title { flex-shrink:0; }

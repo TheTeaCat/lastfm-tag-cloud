@@ -78,6 +78,9 @@
             applyTagChanges(){
                 this.$refs['cloud-box'].reshuffle('tags')
             },
+            retheme(){
+                this.$refs['cloud-box'].retheme()
+            },
         },
     }
 </script>

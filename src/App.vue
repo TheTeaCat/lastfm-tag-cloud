@@ -1,7 +1,6 @@
 <template>
     <div id="app" :theme="theme">
-        <Header :theme="theme"
-                @toggleTheme="toggleTheme"/>
+        <Header @toggleTheme="toggleTheme"/>
 
         <main>
             <control-panel id="control-panel"
@@ -27,6 +26,8 @@
 </template>
 
 <script>
+    import Vue from 'vue'
+
     import Header from "./components/Header.vue"
     import ControlPanel from "./components/ControlPanel.vue"
     import Results from "./components/Results.vue"
@@ -114,6 +115,7 @@
             toggleTheme() {
                 this.theme = this.theme ==  "dark" ? "light" : "dark"
                 this.$cookies.set("theme",this.theme)
+                Vue.nextTick(this.$refs["results"].retheme)
             },
             updateCookie() {
                 this.$cookies.set('config',{
