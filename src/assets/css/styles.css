@@ -86,7 +86,6 @@ a:hover { text-decoration: underline; }
 a:visited { color: var(--visited-colour) }
 
 button, input, select {
-    padding:0.5vw;
     background:var(--input-colour);
     border-color:var(--input-border-colour);
     color:var(--text-colour);
