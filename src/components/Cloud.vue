@@ -88,7 +88,7 @@
                 var style = getComputedStyle(this.$refs["canvas"]);
                 WordCloud(this.$refs["canvas"],{
                     list:cloudWords,
-                    fontFamily:"Courier",
+                    fontFamily:"Roboto",
                     shrinkToFit:true,
                     color:style['color'],
                     backgroundColor:style['background-color'],

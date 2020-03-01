@@ -6,7 +6,7 @@ body, #app { min-height:100%; }
     width:100%;
 
     box-sizing: border-box;
-    font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
+    font-family: "Roboto";
     font-size:10pt;
 
     --background-colour:#fff;
