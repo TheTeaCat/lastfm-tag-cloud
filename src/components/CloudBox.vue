@@ -2,7 +2,6 @@
     <main>
         <Cloud ref="cloud" 
                :result="result" 
-               :mode="mode"
                :generating="generating"
                @generating="$emit('generating',$event)"/>
 
