@@ -9,8 +9,8 @@ body, #app { min-height:100%; }
     font-family: "Roboto";
     font-size:10pt;
 
-    --background-colour:#fff;
-    --text-colour:#000;
+    --background-colour:#ffffff;
+    --text-colour:#000000;
 
     --title-colour:#f33;
     --header-background:linear-gradient(0deg, #fff 0%, #f3f3f3 100%);
@@ -87,7 +87,6 @@ a:visited { color: var(--visited-colour) }
 
 button, input, select {
     padding:0.5vw;
-    font-family: "Open Sans","Lucida Grande","Helvetica Neue",Helvetica,Arial,Sans-serif;
     background:var(--input-colour);
     border-color:var(--input-border-colour);
     color:var(--text-colour);
