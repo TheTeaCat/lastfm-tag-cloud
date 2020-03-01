@@ -49,8 +49,9 @@
         align-items:stretch; 
         justify-content:space-between;
     }
-    input, button {
+    input, button, select {
         height:100%;
+        padding:0.5vw;
     }
     input[type="checkbox"] {
         margin:0 auto 0 auto;

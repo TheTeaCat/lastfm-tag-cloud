@@ -31,11 +31,10 @@
         h1 { margin: 3vw 0 2vw 5vw; }
     }
 
-    button { position:absolute; right:1vw; }
+    button { position:absolute; right:1vw; padding:0.5vw; }
     @media (orientation: portrait) {
         button {
             margin:1vw 1vw 0 0;
-            font-size:75%;
             background:var(--end-sections-colour);
         }
     }
