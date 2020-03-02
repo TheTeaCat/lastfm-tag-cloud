@@ -76,7 +76,7 @@
                 this.cloudState = undefined
             },
             applyTagChanges(){
-                this.$refs['cloud-box'].reshuffle('tags')
+                this.$refs['cloud-box'].generateTagCloud('tags')
             },
             retheme(){
                 this.$refs['cloud-box'].retheme()
