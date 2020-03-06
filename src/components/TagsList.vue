@@ -70,6 +70,7 @@
     
     #apply-changes-button {
         float:right;
+        height:4ex;
         margin:0 0 1vw 1vw;
         background:var(--background-colour);
     }
