@@ -35,7 +35,6 @@
     @media (orientation: portrait) {
         button {
             margin:1vw 1vw 0 0;
-            background:var(--end-sections-colour);
         }
     }
 </style>

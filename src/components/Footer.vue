@@ -21,11 +21,6 @@
         footer {
             margin: 2vw 1vw 1vw 1vw;
             padding:1vw 1.5vw 1vw 1.5vw;
-            border-style:solid;
-            border-color:var(--section-border-colour);
-            border-width:1px;
-            border-radius:3px;
-            background:var(--end-sections-colour);
         }
     }
 

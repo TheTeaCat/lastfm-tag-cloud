@@ -94,12 +94,8 @@
         display:flex;
         flex-wrap:wrap;
         align-items:center;
-    }
-    @media(orientation:landscape) {
-        .list {
-            border-width:1px 0px 1px 0px;
-            border-style:solid;
-            border-color:var(--list-border-colour);
-        }
+        border-width:1px 0px 1px 0px;
+        border-style:solid;
+        border-color:var(--list-border-colour);
     }
 </style>

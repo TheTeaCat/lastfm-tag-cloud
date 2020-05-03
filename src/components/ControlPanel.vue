@@ -68,11 +68,6 @@
     @media (orientation: portrait) {
         #control-panel { 
             padding:0 1vw 1vw 1vw;
-            border-style:solid;
-            border-color:var(--section-border-colour);
-            border-width:1px;
-            border-radius:3px;
-            background:var(--end-sections-colour);
         }
     }
 

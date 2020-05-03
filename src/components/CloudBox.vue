@@ -224,7 +224,4 @@
         padding:0;
         margin:0 0 0 1vw;
     }
-    @media(orientation: portrait) {
-        button, input { background:var(--end-sections-colour); }
-    }
 </style>
