@@ -1,7 +1,7 @@
 # lastfm-tag-cloud
 A last.fm tag cloud generator built with Vue!
 
-Give it a whirl: [theteacat.github.io/lastfm-tag-cloud/](https://theteacat.github.io/lastfm-tag-cloud/)
+Give it a whirl: [947496893734373.co.uk/](http://947496893734373.co.uk/)
 
 ## How are the tags chosen & scaled?
 
