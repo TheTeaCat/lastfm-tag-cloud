@@ -4,18 +4,19 @@
             <ul id="cloud-mode-options">
                 <li>Show me:</li>
                 <li>
-                    <button :disabled="mode=='tags' || generating"
+                    <button :disabled="mode=='tags' || building"
                             @click="generateTagCloud('tags')">
                         Tags
                     </button>
                 </li>
                 <li>
-                    <button :disabled="mode=='artists' || generating"
+                    <button :disabled="mode=='artists' || building"
                             @click="generateTagCloud('artists')">
                         Artists
                     </button>
                 </li>
             </ul>
+            
             <canvas ref="canvas"
                     width="1920"
                     height="1200"/>
@@ -31,7 +32,7 @@
 
                 <li>
                     <button class="cloud-button"
-                            :disabled="generating"
+                            :disabled="building"
                             @click="generateTagCloud()">Reshuffle</button>
                 </li>
 
@@ -39,7 +40,7 @@
                     <a ref="download-link" class="cloud-button"
                     download="cloud.png">
                         <button @click="downloadTagCloud"
-                                :disabled="generating">
+                                :disabled="building">
                                 Download
                         </button>
                     </a>
@@ -62,7 +63,7 @@
     import Utils from "../assets/js/Utils.js"
 
     export default {
-        props:["result","generating"],
+        props:["result","building"],
         mounted: function(){            
             var minScore = Infinity
             var maxScore = -Infinity
@@ -107,7 +108,7 @@
             async generateTagCloud(mode){
                 if (mode != undefined) { this.mode = mode }
 
-                this.$emit("generating",true)
+                this.$emit("building",true)
 
                 var cloudWords = []
                 if (this.mode == "tags") {
@@ -123,7 +124,7 @@
                 this.$refs["canvas"].addEventListener(
                     "wordcloudstop",
                     function(){
-                        this.$emit("generating",false)
+                        this.$emit("building",false)
                     }.bind(this)
                 )
 

@@ -6,7 +6,7 @@
         <ol id="tag-list" v-if="!collapsed">
             <button id="apply-changes-button" 
                     @click="$emit('applyTagChanges')"
-                    :disabled="generating">Apply Changes</button> 
+                    :disabled="building">Apply Changes</button> 
             <li class="tag" v-for='tag in tags' :key='tag' :tag='tag'>
                 <input type="checkbox" v-model="tag_meta[tag].shown"/>
                 <div>
@@ -27,7 +27,7 @@
             CollapseButton,
             TaggingsList,
         },
-        props: ['tags','taggings','tag_meta','generating'],
+        props: ['tags','taggings','tag_meta','building'],
         data:function(){return{
             collapsed:true,
         }},
