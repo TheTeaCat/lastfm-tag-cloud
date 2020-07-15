@@ -1,6 +1,11 @@
 <template>
     <div id="app" :theme="theme">
-        <Header @toggleTheme="toggleTheme"/>
+        <header>
+            <h1>tag cloud generator</h1>
+            <button @click="$emit('toggleTheme')">
+                {{ theme == "dark" ? "Light Mode" : "Dark Mode" }}
+            </button>
+        </header>
 
         <main>
             <control-panel id="control-panel"
@@ -28,7 +33,6 @@
 <script>
     import Vue from 'vue'
 
-    import Header from "./components/Header.vue"
     import ControlPanel from "./components/ControlPanel.vue"
     import Results from "./components/Results.vue"
     import Footer from "./components/Footer.vue"
@@ -36,7 +40,6 @@
 
     export default {
         components: {
-            Header,
             ControlPanel,
             Results,
             Footer,
