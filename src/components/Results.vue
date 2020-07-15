@@ -84,18 +84,3 @@
         },
     }
 </script>
-
-<style scoped>
-    h2 { margin:0 0 4vw 0; }
-
-    .list {
-        margin:1vw;
-        padding:1vw;
-        display:flex;
-        flex-wrap:wrap;
-        align-items:center;
-        border-width:1px 0px 1px 0px;
-        border-style:solid;
-        border-color:var(--list-border-colour);
-    }
-</style>

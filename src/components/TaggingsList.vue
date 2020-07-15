@@ -25,14 +25,3 @@
         },
     }
 </script>
-
-<style scoped>
-    ol { display:inline; }
-    ol li { display:inline; }
-
-    li:before { content:", "; }
-    li:first-child:before { content:""; }
-    #collapser:before { content:""; }
-
-    a { color:var(--text-colour)}
-</style>

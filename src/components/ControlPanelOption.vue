@@ -36,24 +36,3 @@
         props: ['name','type','params'],
     }
 </script>
-
-<style scoped>
-    span {
-        white-space:nowrap;
-        font-size:90%;
-        margin:0 0 0.25vw 0;
-    }
-    div {
-        display:flex; 
-        flex-direction:column; 
-        align-items:stretch; 
-        justify-content:space-between;
-    }
-    input, button, select {
-        height:100%;
-        padding:0.5vw;
-    }
-    input[type="checkbox"] {
-        margin:0 auto 0 auto;
-    }
-</style>

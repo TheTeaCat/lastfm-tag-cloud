@@ -7,12 +7,3 @@
         props: ['collapsed'],
     }
 </script>
-
-<style scoped>
-    button {
-        margin:0.5vw 1.5vw 0.5vw 0.5vw;
-        padding:0;
-        width:1.5em;
-        height:1.5em;
-    }
-</style>
