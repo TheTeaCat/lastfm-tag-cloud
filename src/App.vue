@@ -2,7 +2,7 @@
     <div id="app" :theme="theme">
         <header>
             <h1>tag cloud generator</h1>
-            <button @click="$emit('toggleTheme')">
+            <button @click="toggleTheme">
                 {{ theme == "dark" ? "Light Mode" : "Dark Mode" }}
             </button>
         </header>
