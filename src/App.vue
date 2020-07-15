@@ -130,9 +130,6 @@
 </script>
 
 <style scoped>
-    @import './assets/css/reset.css';
-    @import './assets/css/styles.css';
-
     main { margin:0 10vw 0 10vw; }
     @media(orientation: portrait) { main { margin: 0 1vw 0 1vw; } }
 </style>

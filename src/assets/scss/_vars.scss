@@ -1,0 +1,12 @@
+$font-size-big: 30px;
+$font-size-medium: 15px;
+$font-size-normal: 10px;
+@media(orientation: portrait) {
+  $font-size-big: 20px;
+  $font-size-medium: 12.5px;  
+}
+
+$bold: 700;
+
+$red: #f33;
+$red-l: #f99;
