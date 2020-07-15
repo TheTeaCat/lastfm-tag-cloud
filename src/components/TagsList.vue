@@ -77,7 +77,7 @@
 
     .tag {
         display:flex;
-        align-items:start;
+        align-items:flex-start
     }
     input {
         margin: 0 0.5vw 0 0;
