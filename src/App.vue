@@ -191,6 +191,7 @@ main {
   }
 }
 footer {
+  margin-bottom: $spacer*4;
   ul {
     >* {
       margin-left: 1em;
