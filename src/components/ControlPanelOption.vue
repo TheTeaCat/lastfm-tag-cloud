@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <span>{{ name }}</span>
+    <div class="option">
+        <span class="label">{{ name }}</span>
 
         <input  v-if="type=='input'"
                 :value="params.value"
@@ -18,10 +18,13 @@
             </option>
         </select>
 
-        <input v-if="type=='checkbox'"
-                type="checkbox" 
-                :checked="params.value"
-                @change="$emit('update',$event.target.checked)"/>
+        <label v-if="type=='checkbox'" class="checkbox-container">
+            <input class="checkbox"
+                   type="checkbox" 
+                   :checked="params.value"
+                   @change="$emit('update',$event.target.checked)"/>
+            <span class="checkmark"></span>
+        </label>
 
         <button v-if="type=='button'"
                 :disabled="params.disabled"
@@ -36,3 +39,33 @@ export default {
     props: ['name','type','params'],
 }
 </script>
+
+<style lang="scss" scoped>
+.option {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    .label {
+        margin-bottom: $spacer;
+    }
+    input, select, button {
+        align-self: stretch;
+    }
+    .checkbox-container {
+        @extend button;
+        align-self: center;
+        width:auto;
+        .checkbox {
+            display:none;
+        }
+        .checkmark:after {
+            display:none;
+            content:"X";
+            text-align: center;
+        }
+        .checkbox:checked ~ .checkmark:after {
+            display:block;
+        }
+    }
+}
+</style>
