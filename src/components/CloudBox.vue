@@ -1,61 +1,32 @@
 <template>
-    <main>
-        <div>
-            <ul id="cloud-mode-options">
-                <li>Show me:</li>
-                <li>
-                    <button :disabled="mode=='tags' || building"
-                            @click="generateTagCloud('tags')">
-                        Tags
-                    </button>
-                </li>
-                <li>
-                    <button :disabled="mode=='artists' || building"
-                            @click="generateTagCloud('artists')">
-                        Artists
-                    </button>
-                </li>
-            </ul>
-            
-            <canvas ref="canvas"
-                    width="1920"
-                    height="1200"/>
+    <div class="cloud-box">
+        <ul class="options-above">
+            <li>Show me:</li>
+            <li><button :disabled="mode=='tags' || building"
+                        @click="generateTagCloud('tags')">
+                    Tags
+            </button></li>
+            <li><button :disabled="mode=='artists' || building"
+                        @click="generateTagCloud('artists')">
+                    Artists
+            </button></li>
+        </ul>
+        
+        <canvas ref="canvas"
+                width="1920"
+                height="1200"/>
 
-            <ul>
-                <li>
-                    <input ref="fg-colour" type="color" v-model="fg_colour"/>
-                </li>
-
-                <li>
-                    <input ref="bg-colour" type="color" v-model="bg_colour"/>
-                </li>
-
-                <li>
-                    <button class="cloud-button"
-                            :disabled="building"
-                            @click="generateTagCloud()">Reshuffle</button>
-                </li>
-
-                <li>
-                    <a ref="download-link" class="cloud-button"
-                    download="cloud.png">
-                        <button @click="downloadTagCloud"
-                                :disabled="building">
-                                Download
-                        </button>
-                    </a>
-                </li>
-
-                <li id="share-link-container">
-                    <button id="share-link" class="cloud-button" 
-                            @click="copyShareLink">
-                        <span id="copy-share-link-title">Copy Link:</span>
-                        <input ref="share-link" :value="share_link" readonly="readonly"/>
-                    </button>
-                </li>
-            </ul>
-        </div>
-    </main>
+        <ul class="options-below">
+            <li><input ref="fg-colour" type="color" v-model="fg_colour"/></li>
+            <li><input ref="bg-colour" type="color" v-model="bg_colour"/></li>
+            <li><button :disabled="building" @click="generateTagCloud()">Reshuffle</button></li>
+            <li><a download="cloud.png"><button @click="downloadTagCloud" :disabled="building">Download</button></a></li>
+            <li class="share-button"><button @click="copyShareLink">
+                    <span>Copy Link:</span>
+                    <input ref="share-link" :value="share_link" readonly="readonly"/>
+            </button></li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -164,3 +135,55 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+.cloud-box {
+    display:flex;
+    flex-direction: column;
+    .options-above {
+        justify-content: flex-end;
+    }
+    .options-below {
+        justify-content: center;
+        @media(orientation:portrait) {
+            justify-content: flex-start;
+        }
+    }
+    .options-above, .options-below {
+        display:flex;
+        flex-direction:row;
+        align-items: center;
+        overflow-x: auto;
+        >* {
+            padding-left: $spacer*2;
+        }
+        .share-button {
+            flex-basis:40%;
+            display:flex;
+            flex-direction: column;
+            align-items: stretch;
+            button {
+                display:flex;
+                align-items: center;
+                span {
+                    height:fit-content;
+                    white-space: pre;
+                }
+                input {
+                    width:0;
+                    flex-basis:0;
+                    flex-grow:1;
+                    border: none;
+                    padding: 0;
+                    margin-left: 0.5em;
+                }
+            }
+        }
+    }
+    canvas {
+        width:100%;
+        color:$black;
+        background-color:$white;
+    }
+}
+</style>

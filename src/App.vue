@@ -17,7 +17,8 @@
                      @update:filtered="filtered=$event;updateCookie()"
                      @generate="generate"/>
 
-      <ResultTitle :fetchedData="result != undefined"
+      <ResultTitle class="result-title"
+                   :fetchedData="result != undefined"
                    :state="generator.state"
                    :username="result ? result.username : undefined"
                    :artistCount="result ? result.artists.length : undefined"
@@ -185,7 +186,9 @@ header {
   }
 }
 main {
-  margin-bottom: $spacer*4;
+  >* {
+    margin-bottom: $spacer*4;
+  }
 }
 footer {
   ul {

@@ -25,3 +25,8 @@ input, select, button {
   box-sizing: content-box;
   background: $red-ll;
 }
+button:disabled {
+  color: $grey-d;
+  border-color: $grey;
+  border-style: dashed;
+}
