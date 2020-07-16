@@ -60,8 +60,13 @@ export default {
         }
         .checkmark:after {
             display:none;
-            content:"X";
-            text-align: center;
+            content:"";
+            height:90%;
+            width:40%;
+            margin: auto;
+            transform: translate(10%, -10%) rotate(45deg);
+            border: solid $black;
+            border-width: 0px 3px 3px 0px;
         }
         .checkbox:checked ~ .checkmark:after {
             display:block;
