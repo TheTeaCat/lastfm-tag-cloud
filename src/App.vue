@@ -42,7 +42,7 @@
                  :taggings="result.taggings"
                  :tag_meta="result.tag_meta"
                  :building="building"
-                 @applyTagChanges="this.$refs['cloud-box'].generateTagCloud('tags')"/>
+                 @applyTagChanges="$refs['cloud-box'].generateTagCloud('tags')"/>
     </main>
 
     <footer>
@@ -198,6 +198,7 @@ footer {
   ul {
     >* {
       margin-left: 1em;
+      margin-top: $spacer*2;
       box-sizing: content-box;   
       &:before {
         content: "~";
