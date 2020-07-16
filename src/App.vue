@@ -47,15 +47,21 @@
                        @applyTagChanges="this.$refs['cloud-box'].generateTagCloud('tags')"/>
         </main>
 
-        <Footer/>
-    </div>
+    <footer>
+      <ul>
+        <li><a href="https://www.last.fm/user/theteacat">My Last.Fml</a></li>
+        <li><a href="https://github.com/PedantiCat/tag-cloud">Github</a> -  Star This!</li>
+        <li><a href="https://github.com/TheTeaCat/lastfm-tag-cloud#how-are-the-tags-chosen--scaled">How Are The Tags Chosen & Scaled?</a></li>
+        <li><a href="https://github.com/TheTeaCat/lastfm-tag-cloud#what-does-the-tag-filter-do">What Does The Tag Filter Do?</a></li>
+      </ul>
+    </footer>
+  </div>
 </template>
 
 <script>
 import Vue from 'vue'
 
 import ControlPanel from "./components/ControlPanel.vue"
-import Footer from "./components/Footer.vue"
 import CloudBox from "./components/CloudBox.vue"
 import ArtistsList from "./components/ArtistsList.vue"
 import TagsList from "./components/TagsList.vue"
