@@ -13,6 +13,10 @@ h1 {
   font-family: 'Varela Round', sans-serif;
 }
 h2 { font-size: $font-size-medium }
+@media(orientation:portrait) {
+  h1 { font-size: $font-size-big-mob }
+  h2 { font-size: $font-size-medium-mob }
+}
 
 a { color: $red; }
 a:visited { color: $red-d; }
