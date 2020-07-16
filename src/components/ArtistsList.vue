@@ -4,13 +4,10 @@
         <h2>Artists:</h2>
         <ol v-if="!collapsed">
             <li v-for='(artist, i) of artists' :key='i' :artist='artist'>
-                <span class="artist-name">
-                    {{ i+1 }} - <a :href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">
-                        {{ artist }}
-                    </a>
+                <span class="artist-name">{{ i+1 }} - 
+                    <a :href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">{{ artist }}</a>
                 </span>
-                ({{ listens[artist] }} {{ listens[artist]>1 ? 'listens' : 'listen' }}){{ i == artists.length-1 ? '' : ','}}
-            </li>
+                ({{ listens[artist] }} {{ listens[artist]>1 ? 'listens' : 'listen' }}){{ i == artists.length-1 ? '' : ', '}}</li>
         </ol>
     </div>
 </template>
@@ -44,9 +41,9 @@ export default {
         padding: $spacer*2;
         background: var(--list-red);
         li {
+            white-space: pre;
             line-height: $spacer*3;
             display:inline-block;
-            margin-right: $spacer;
             .artist-name>a {
                 font-weight:$bold;
             }
