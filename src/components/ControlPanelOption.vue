@@ -1,5 +1,5 @@
 <template>
-    <div class="option">
+    <label class="option">
         <span class="label">{{ name }}</span>
 
         <input  v-if="type=='input'"
@@ -18,7 +18,7 @@
             </option>
         </select>
 
-        <label v-if="type=='checkbox'" class="checkbox-container">
+        <label v-if="type=='checkbox'" class="button">
             <input class="checkbox"
                    type="checkbox" 
                    :checked="params.value"
@@ -31,7 +31,7 @@
                 @click="$emit('clicked')">
                 {{ params.label }}
         </button>
-    </div>
+    </label>
 </template>
 
 <script>
@@ -51,8 +51,7 @@ export default {
     input, select, button {
         align-self: stretch;
     }
-    .checkbox-container {
-        @extend button;
+    .button {
         align-self: center;
         width:auto;
         .checkbox {
@@ -65,7 +64,7 @@ export default {
             width:40%;
             margin: auto;
             transform: translate(5%, -10%) rotate(45deg);
-            border: solid $black;
+            border: solid var(--text-colour);
             border-width: 0px 3px 3px 0px;
         }
         .checkbox:checked ~ .checkmark:after {

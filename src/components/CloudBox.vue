@@ -81,6 +81,8 @@ export default {
 
             this.$emit("building",true)
 
+            this.retheme()
+
             var cloudWords = []
             if (this.mode == "tags") {
                 for (var tag of this.cloudTags) {
@@ -182,8 +184,8 @@ export default {
     }
     canvas {
         width:100%;
-        color:$black;
-        background-color:$white;
+        color:var(--text-colour);
+        background-color:var(--background-colour);
         margin: $spacer*2 0;
     }
 }

@@ -58,7 +58,6 @@ export default {
     width:100%;
     display:flex;
     align-items: center;
-    margin-bottom: $spacer*4;
     >* { padding: 0 $spacer*2; }
     @media (orientation: landscape) {
         >*:first-child { padding-left: 0; }

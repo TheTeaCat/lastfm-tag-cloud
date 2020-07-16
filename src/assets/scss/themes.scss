@@ -1,0 +1,32 @@
+@import '_vars';
+
+@mixin light {
+  --background-colour: #{$white};
+  --top-gradient: #{$grey-l};
+  --border-colour: #{$black};
+  --text-colour: #{$black};
+  --text-alt-colour: #{$red};
+  --text-alt-colour-2: #{$red-d};
+  --input-colour: #{$red-ll};
+  --input-weight: #{$normal};
+  --list-red: #{$red-ll};
+}
+
+@mixin dark {
+  --background-colour: #{$black};
+  --top-gradient: #{$grey-dd};
+  --border-colour: #{$white};
+  --text-colour: #{$white};
+  --text-alt-colour: #{$white};
+  --text-alt-colour-2: #{$grey-l};
+  --input-colour: #{$red-d};
+  --input-weight: #{$bold};
+  --list-red: #{$red-dd};
+}
+
+:root { @include light; }
+@media(prefers-color-scheme: dark) {
+  :root { @include dark; }
+}
+:root[theme='light'] { @include light; }
+:root[theme='dark'] { @include dark; }

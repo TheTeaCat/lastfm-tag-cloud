@@ -6,7 +6,7 @@
 
         <ol v-if="!collapsed">
             <li v-for='tag in tags' :key='tag' :tag='tag'>
-                <label class="checkbox-container">
+                <label class="button">
                     <input class="checkbox"
                         type="checkbox" 
                         v-model="tag_meta[tag].shown"
@@ -51,15 +51,15 @@ export default {
         margin: $spacer*2;
     }
     >span {
-        color: $red;
+        color: var(--text-alt-colour);
         font-weight: $bold;
         margin-left: $spacer*2;
     }
     >ol {
         flex-basis:100%;
-        border: 1px solid $black;
+        border: 1px solid var(--text-colour);
         padding: $spacer*2;
-        background: $red-ll;
+        background: var(--list-red);
         :first-child {
             margin-top: 0;
         }
@@ -68,8 +68,7 @@ export default {
             margin-top: $spacer;
             display:flex;
             align-items: flex-start;
-            .checkbox-container {
-                @extend button;
+            .button {
                 width:auto;
                 .checkbox {
                     display:none;
@@ -81,7 +80,7 @@ export default {
                     width:40%;
                     margin: auto;
                     transform: translate(5%, -10%) rotate(45deg);
-                    border: solid $black;
+                    border: solid var(--text-colour);
                     border-width: 0px 3px 3px 0px;
                 }
                 .checkbox:checked ~ .checkmark:after {

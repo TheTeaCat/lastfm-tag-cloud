@@ -1,21 +1,21 @@
 <template>
-  <div id="app" :theme="theme">
+  <div id="app">
     <header>
       <h1>tag cloud generator</h1>
     </header>
 
     <main>
-      <ControlPanel id="control-panel"
-                     :username="username"
-                     :period="period" 
-                     :max_artists="max_artists"
-                     :filtered="filtered"
-                     :state="generator.state"
-                     @update:username="username=$event;updateCookie()"
-                     @update:period="period.selected=$event;updateCookie()"
-                     @update:max_artists="max_artists.selected=$event;updateCookie()"
-                     @update:filtered="filtered=$event;updateCookie()"
-                     @generate="generate"/>
+      <ControlPanel class="control-panel"
+                    :username="username"
+                    :period="period" 
+                    :max_artists="max_artists"
+                    :filtered="filtered"
+                    :state="generator.state"
+                    @update:username="username=$event;updateCookie()"
+                    @update:period="period.selected=$event;updateCookie()"
+                    @update:max_artists="max_artists.selected=$event;updateCookie()"
+                    @update:filtered="filtered=$event;updateCookie()"
+                    @generate="generate"/>
 
       <ResultTitle class="result-title"
                    :fetchedData="result != undefined"
@@ -52,13 +52,12 @@
         <li><a href="https://github.com/TheTeaCat/lastfm-tag-cloud#how-are-the-tags-chosen--scaled">How Are The Tags Chosen & Scaled?</a></li>
         <li><a href="https://github.com/TheTeaCat/lastfm-tag-cloud#what-does-the-tag-filter-do">What Does The Tag Filter Do?</a></li>
       </ul>
+      <button class="theme-button" @click="changeTheme()">{{ theme.label }}</button>
     </footer>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-
 import ControlPanel from "./components/ControlPanel.vue"
 import CloudBox from "./components/CloudBox.vue"
 import ArtistsList from "./components/ArtistsList.vue"
@@ -75,7 +74,6 @@ export default {
     ResultTitle,
   },
   data:function(){return{
-    theme:"light",
     username:'TheTeaCat',
     period:{selected:'3month',
         options:[
@@ -99,12 +97,16 @@ export default {
     error:undefined,
     cloudWords:undefined,
     building:true,
+    theme: { 'label':'System Theme', 'value':''},
+    themes: [{ 'label':'System Theme', 'value':''},
+             { 'label':'Dark Theme', 'value':'dark'},
+             { 'label':'Light Theme', 'value':'light'}]
   }},
   mounted: function(){
-    //Theme preference in the cookie takes preference over the media selector.
-    if (this.$cookies.isKey("theme") && this.$cookies.get("theme") == "dark"
-      || !this.$cookies.isKey("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      this.theme="dark"
+    //Loading theme from cookies.
+    if (this.$cookies.isKey("theme")) {
+      this.theme = this.$cookies.get("theme")
+      document.getElementsByTagName("html")[0].setAttribute("theme", this.theme.value)
     }
 
     //Loading state from cookies.
@@ -145,11 +147,6 @@ export default {
       this.error = response.error
       this.result = response.result
     },
-    toggleTheme() {
-      this.theme = this.theme ==  "dark" ? "light" : "dark"
-      this.$cookies.set("theme",this.theme)
-      Vue.nextTick(this.$refs['cloud-box'] ? this.$refs['cloud-box'].retheme() : null)
-    },
     updateCookie() {
       this.$cookies.set('config',{
         username:this.username,
@@ -158,29 +155,30 @@ export default {
         filtered:this.filtered,
       })
     },
+    changeTheme() {
+      this.theme = this.themes[(this.themes.map(t => {return t.label}).indexOf(this.theme.label)+1) % this.themes.length]
+      document.getElementsByTagName("html")[0].setAttribute("theme", this.theme.value)
+      this.$cookies.set('theme', this.theme)
+    }
   },
 }
 </script>
-
-<style >
-body {
-  background: linear-gradient(180deg, #eeeeee 0, rgba(255,255,255,0) 80px);
-  background-repeat: no-repeat;
-}
-</style>
 
 <style lang="scss" scoped>
 #app { 
   max-width:1080px;
   margin: 0 auto;
   padding: $spacer*2;
+  min-height:100%;
+  display:flex;
+  flex-direction: column;
 }
 header {
   width:100%;
-  padding: $spacer*2;
-  padding-bottom: $spacer*4;
+  padding: $spacer*4;
+  padding-top: $spacer*2;
   h1 { 
-    color: $red;
+    color: var(--text-alt-colour);
     @media(orientation: portrait) {
       width:100%;
       text-align:center;
@@ -188,15 +186,21 @@ header {
   }
 }
 main {
+  flex-grow:1;
   >* {
     margin-bottom: $spacer*4;
   }
-  .artists-list {
+  .control-panel {
+    margin-bottom: $spacer*8;
+  }
+  .artists-list, .tags-list {
     margin-bottom: 0;
   }
 }
 footer {
-  margin-bottom: $spacer*4;
+  margin-bottom: $spacer;
+  margin-top: $spacer*6;
+  position:relative;
   ul {
     >* {
       margin-left: 1em;
@@ -222,6 +226,11 @@ footer {
         }
       }
     }
+  }
+  .theme-button {
+    position:absolute;
+    right:0;
+    bottom:0;
   }
 }
 </style>

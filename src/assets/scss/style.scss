@@ -1,36 +1,47 @@
+@import 'reset.css';
 @import '_vars.scss';
+@import 'themes.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
-#app, input, select, button {
+body, html { min-height:100%; }
+body {
+  background: linear-gradient(180deg, var(--top-gradient) 0, var(--background-colour) 80px);
+  background-repeat: no-repeat;
+}
+body, input, select, button {
   font-family: 'Roboto', sans-serif;
   font-size: $font-size-normal;
+  color: var(--text-colour);
 }
 
-h1, h2 { font-weight: $bold }
 h1 { 
   font-size: $font-size-big;
   font-family: 'Varela Round', sans-serif;
 }
-h2 { font-size: $font-size-medium }
+h2 { 
+  font-size: $font-size-medium 
+}
+h1, h2 { font-weight: $bold }
 @media(orientation:portrait) {
   h1 { font-size: $font-size-big-mob }
   h2 { font-size: $font-size-medium-mob }
 }
 
-a { color: $red; }
-a:visited { color: $red-d; }
+a { color: var(--text-alt-colour); }
+a:visited { color: var(--text-alt-colour-2); }
 
-input, select, button {
-  border: 1px solid $black;
+input, select, button, .button {
+  border: 1px solid var(--border-colour);
   padding: $spacer;
   height: $input-height;
   min-width: $input-height;
   box-sizing: content-box;
-  background: $red-ll;
+  background: var(--input-colour);
+  font-weight: var(--input-weight);
 }
 button:disabled {
-  color: $grey-d;
+  color: $grey;
   border-color: $grey;
   border-style: dashed;
 }

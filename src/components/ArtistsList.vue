@@ -39,9 +39,9 @@ export default {
     }
     ol {
         flex-basis:100%;
-        border: 1px solid $black;
+        border: 1px solid var(--border-colour);
         padding: $spacer*2;
-        background: $red-ll;
+        background: var(--list-red);
         li {
             list-style: decimal;
             margin-left: 2em;
