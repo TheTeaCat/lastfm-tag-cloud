@@ -184,6 +184,7 @@ export default {
         width:100%;
         color:$black;
         background-color:$white;
+        margin: $spacer*2 0;
     }
 }
 </style>
