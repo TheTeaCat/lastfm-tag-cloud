@@ -64,7 +64,7 @@ export default {
             height:90%;
             width:40%;
             margin: auto;
-            transform: translate(10%, -10%) rotate(45deg);
+            transform: translate(5%, -10%) rotate(45deg);
             border: solid $black;
             border-width: 0px 3px 3px 0px;
         }
