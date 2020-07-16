@@ -173,10 +173,12 @@ body {
 #app { 
   max-width:1080px;
   margin: 0 auto;
+  padding: $spacer*2;
 }
 header {
   width:100%;
-  padding: $spacer*4 $spacer*2;
+  padding: $spacer*2;
+  padding-bottom: $spacer*4;
   h1 { 
     color: $red;
     @media(orientation: portrait) {
