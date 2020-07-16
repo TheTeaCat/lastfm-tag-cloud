@@ -189,6 +189,9 @@ main {
   >* {
     margin-bottom: $spacer*4;
   }
+  .artists-list {
+    margin-bottom: 0;
+  }
 }
 footer {
   margin-bottom: $spacer*4;
