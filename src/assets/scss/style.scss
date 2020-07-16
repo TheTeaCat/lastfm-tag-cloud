@@ -28,8 +28,14 @@ h1, h2 { font-weight: $bold }
   h2 { font-size: $font-size-medium-mob }
 }
 
-a { color: var(--text-alt-colour); }
-a:visited { color: var(--text-alt-colour-2); }
+a { 
+  color: var(--text-alt-colour); 
+  font-weight:bold;
+  text-decoration: underline;
+}
+a:visited { 
+  color: var(--text-alt-colour-2); 
+}
 
 input, select, button, .button {
   border: 1px solid var(--border-colour);

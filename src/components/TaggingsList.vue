@@ -30,4 +30,10 @@ export default {
 li {
     display:inline;
 }
+a {
+    text-decoration:none;
+    &:hover {
+        text-decoration:underline;
+    }
+}
 </style>
