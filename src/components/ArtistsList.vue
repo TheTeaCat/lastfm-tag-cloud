@@ -16,20 +16,20 @@
 </template>
 
 <script>
-    import CollapseButton from "./CollapseButton.vue"
+import CollapseButton from "./CollapseButton.vue"
 
-    export default {
-        components: {
-            CollapseButton
+export default {
+    components: {
+        CollapseButton
+    },
+    props: ['artists','listens'],
+    data:function(){return{
+        collapsed:true,
+    }},
+    methods: {
+        collapse: function(){
+            this.collapsed = !this.collapsed
         },
-        props: ['artists','listens'],
-        data:function(){return{
-            collapsed:true,
-        }},
-        methods: {
-            collapse: function(){
-                this.collapsed = !this.collapsed
-            },
-        },
-    }
+    },
+}
 </script>

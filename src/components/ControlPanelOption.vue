@@ -32,7 +32,7 @@
 </template>
 
 <script>
-    export default {
-        props: ['name','type','params'],
-    }
+export default {
+    props: ['name','type','params'],
+}
 </script>

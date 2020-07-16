@@ -19,22 +19,22 @@
 </template>
 
 <script>
-    import CollapseButton from "./CollapseButton.vue"
-    import TaggingsList from "./TaggingsList.vue"
+import CollapseButton from "./CollapseButton.vue"
+import TaggingsList from "./TaggingsList.vue"
 
-    export default {
-        components: {
-            CollapseButton,
-            TaggingsList,
+export default {
+    components: {
+        CollapseButton,
+        TaggingsList,
+    },
+    props: ['tags','taggings','tag_meta','building'],
+    data:function(){return{
+        collapsed:true,
+    }},
+    methods: {
+        collapse: function(){
+            this.collapsed = !this.collapsed
         },
-        props: ['tags','taggings','tag_meta','building'],
-        data:function(){return{
-            collapsed:true,
-        }},
-        methods: {
-            collapse: function(){
-                this.collapsed = !this.collapsed
-            },
-        },
-    }
+    },
+}
 </script>

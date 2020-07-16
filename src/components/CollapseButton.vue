@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    export default {
-        props: ['collapsed'],
-    }
+export default {
+    props: ['collapsed'],
+}
 </script>

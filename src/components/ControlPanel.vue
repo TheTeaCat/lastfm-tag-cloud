@@ -41,18 +41,18 @@
 </template>
 
 <script>
-    import ControlPanelOption from "./ControlPanelOption.vue"
+import ControlPanelOption from "./ControlPanelOption.vue"
 
-    export default {
-        props: ['username','period','max_artists','filtered','state'],
-        components: {
-            ControlPanelOption,
+export default {
+    props: ['username','period','max_artists','filtered','state'],
+    components: {
+        ControlPanelOption,
+    },
+    methods:{
+        submit(){
+            this.$emit('update:username',this.username.replace(/&/g,''))
+            this.$emit('generate')
         },
-        methods:{
-            submit(){
-                this.$emit('update:username',this.username.replace(/&/g,''))
-                this.$emit('generate')
-            },
-        },
-    }
+    },
+}
 </script>

@@ -13,15 +13,15 @@
 </template>
 
 <script>
-    export default {
-        props:['taggings'],
-        data:function(){return{
-            collapsed:true,
-        }},
-        methods: {
-            toggle: function() {
-                this.collapsed = !this.collapsed;
-            },
+export default {
+    props:['taggings'],
+    data:function(){return{
+        collapsed:true,
+    }},
+    methods: {
+        toggle: function() {
+            this.collapsed = !this.collapsed;
         },
-    }
+    },
+}
 </script>
