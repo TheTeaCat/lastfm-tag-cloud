@@ -9,7 +9,7 @@
                         {{ artist }}
                     </a>
                 </span>
-                ({{ listens[artist] }} {{ listens[artist]>1 ? 'listens' : 'listen' }}){{ i == artists.length-1 ? '' : ', '}}
+                ({{ listens[artist] }} {{ listens[artist]>1 ? 'listens' : 'listen' }}){{ i == artists.length-1 ? '' : ','}}
             </li>
         </ol>
     </div>
@@ -45,7 +45,8 @@ export default {
         background: var(--list-red);
         li {
             line-height: $spacer*3;
-            display:inline;
+            display:inline-block;
+            margin-right: $spacer;
             .artist-name>a {
                 font-weight:$bold;
             }
