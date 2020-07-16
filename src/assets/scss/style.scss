@@ -2,6 +2,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
+#app, input, select, button {
+  font-family: 'Roboto', sans-serif;
+  font-size: $font-size-normal;
+}
+
 h1, h2 { font-weight: $bold }
-h1 { font-size: $font-size-big }
+h1 { 
+  font-size: $font-size-big;
+  font-family: 'Varela Round', sans-serif;
+}
 h2 { font-size: $font-size-medium }
+
+a { color: $red; }
+a:visited { color: $red-d; }
+
+input, select, button {
+  border: 1px solid $black;
+  padding: $spacer;
+  height: $input-height;
+  min-width: $input-height;
+  box-sizing: content-box;
+  background: $red-ll;
+}
