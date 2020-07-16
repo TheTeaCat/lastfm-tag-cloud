@@ -1,10 +1,10 @@
 <template>
     <ol>
-        <li v-for='tagging in collapsed ? taggings.slice(0,3) : taggings' 
-            :key='tagging.artist'>{{ tagging.artist }}</li
-        >{{ collapsed && taggings.length > 3 ? ', ' : '. ' }}
+        <li v-for='(tagging, i) of collapsed ? taggings.slice(0,3) : taggings' 
+            :key='i'>{{ tagging.artist + (i == taggings.length-1 ? '. ' : ', ') }}</li
+        >
 
-        <li id="collapser"
+        <li class="collapser"
             v-if="taggings.length > 3" 
             @click="toggle">
             <a>{{ collapsed ? "show more..." : "show less" }}</a>
@@ -25,3 +25,9 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+li {
+    display:inline;
+}
+</style>

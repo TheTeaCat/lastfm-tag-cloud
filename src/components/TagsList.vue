@@ -1,17 +1,21 @@
 <template>
-    <div>
-        <collapse-button :collapsed="collapsed" @collapse="collapse"/>
+    <div class="tags-list">
+        <button @click="collapse" class="collapse-button">{{ collapsed ? '+' : '-' }}</button>
         <h2>Tags:</h2>
         <span>//Don't like a tag? Uncheck it here!</span>
-        <ol id="tag-list" v-if="!collapsed">
-            <button id="apply-changes-button" 
-                    @click="$emit('applyTagChanges')"
-                    :disabled="building">Apply Changes</button> 
-            <li class="tag" v-for='tag in tags' :key='tag' :tag='tag'>
-                <input type="checkbox" v-model="tag_meta[tag].shown"/>
-                <div>
-                    <a :href="tag_meta[tag].url">{{ tag }}</a> ({{ tag_meta[tag].tot_scrobbles }} {{ tag_meta[tag].tot_scrobbles>1 ? 'listens' : 'listen' }}):
-                    <taggings-list class="artist-list" :taggings="taggings[tag]"/>
+
+        <ol v-if="!collapsed">
+            <li v-for='tag in tags' :key='tag' :tag='tag'>
+                <label class="checkbox-container">
+                    <input class="checkbox"
+                        type="checkbox" 
+                        v-model="tag_meta[tag].shown"
+                        @change="$emit('applyTagChanges')"/>
+                    <span class="checkmark"></span>
+                </label>
+                <div class="tag-info">
+                    <a class="tag-name" :href="tag_meta[tag].url">{{ tag }}</a> ({{ tag_meta[tag].tot_scrobbles }} {{ tag_meta[tag].tot_scrobbles>1 ? 'listens' : 'listen' }}):
+                    <taggings-list :taggings="taggings[tag]"/>
                 </div>
             </li>
         </ol>
@@ -19,12 +23,10 @@
 </template>
 
 <script>
-import CollapseButton from "./CollapseButton.vue"
 import TaggingsList from "./TaggingsList.vue"
 
 export default {
     components: {
-        CollapseButton,
         TaggingsList,
     },
     props: ['tags','taggings','tag_meta','building'],
@@ -38,3 +40,62 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+.tags-list {
+    display:flex;
+    flex-wrap:wrap;
+    align-items: center;
+    padding: 0 $spacer*2;
+    .collapse-button {
+        margin: $spacer*2;
+    }
+    >span {
+        color: $red;
+        font-weight: $bold;
+        margin-left: $spacer*2;
+    }
+    >ol {
+        flex-basis:100%;
+        border: 1px solid $black;
+        padding: $spacer*2;
+        background: $red-ll;
+        :first-child {
+            margin-top: 0;
+        }
+        >li {
+            list-style: decimal;
+            margin-top: $spacer;
+            display:flex;
+            align-items: flex-start;
+            .checkbox-container {
+                @extend button;
+                width:auto;
+                .checkbox {
+                    display:none;
+                }
+                .checkmark:after {
+                    display:none;
+                    content:"";
+                    height:90%;
+                    width:40%;
+                    margin: auto;
+                    transform: translate(10%, -10%) rotate(45deg);
+                    border: solid $black;
+                    border-width: 0px 3px 3px 0px;
+                }
+                .checkbox:checked ~ .checkmark:after {
+                    display:block;
+                }
+            }
+            .tag-info {
+                margin-left: $spacer;
+                display:inline;
+                .tag-name {
+                    font-weight:$bold;
+                }
+            }
+        }
+    }
+}
+</style>
