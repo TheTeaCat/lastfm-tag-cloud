@@ -20,54 +20,31 @@
                         @update:filtered="filtered=$event;updateCookie()"
                         @generate="generate"/>
 
-            <h2 v-if="result != undefined && generator.state == undefined">
-                <a :href="'https://www.last.fm/user/'+result.username">
-                    {{ result.username }}
-                </a>{{  result.artists.length > 0 ? 
-                            (result.username[result.username.length-1].toLowerCase() == "s" ? "'" : "'s") 
-                            : null }}
-
-                {{ (result.artists.length > 0 ? 
-                        "tag cloud based upon their top " + result.artists.length + " artists "
-                        : "hasn't listened to anything ")
-
-                   + {'7day':'over the last 7 days',
-                    '1month':'over the last month',
-                    '3month':'over the last 3 months',
-                    '6month':'over the last 6 months',
-                    '12month':'over the last year',
-                    'overall':'overall'}[result.period]
-
-                  + (result.artists.length > 0 ? ':' : "")
-                }}
-            </h2>            
-            <h2 v-else-if="generator.state == undefined && error != undefined">
-                An error occured :'(
-                <br><br>
-                {{ error }}
-            </h2>
-            <h2 v-else-if="generator.state != undefined">
-                <spinner/> {{ generator.state }}
-            </h2>
+            <ResultTitle :fetchedData="result != undefined"
+                         :state="generator.state"
+                         :username="result ? result.username : undefined"
+                         :artistCount="result ? result.artists.length : undefined"
+                         :timePeriod="result ? result.period : undefined"
+                         :error="error"/>
 
             <CloudBox ref="cloud-box"
-                    v-if="result != undefined && result.artists.length > 0"
-                    :result="result"
-                    :building="building"
-                    @building="building=$event;"/>
+                      v-if="result != undefined && result.artists.length > 0"
+                      :result="result"
+                      :building="building"
+                      @building="building=$event;"/>
 
             <artists-list class="list"
-                        v-if="result != undefined && result.artists.length > 0" 
-                        :artists="result.artists" 
-                        :listens="result.listens"/>
+                          v-if="result != undefined && result.artists.length > 0" 
+                          :artists="result.artists" 
+                          :listens="result.listens"/>
 
             <tags-list class="list"
-                    v-if="result != undefined && result.artists.length > 0" 
-                    :tags="result.tags" 
-                    :taggings="result.taggings"
-                    :tag_meta="result.tag_meta"
-                    :building="building"
-                    @applyTagChanges="this.$refs['cloud-box'].generateTagCloud('tags')"/>
+                       v-if="result != undefined && result.artists.length > 0" 
+                       :tags="result.tags" 
+                       :taggings="result.taggings"
+                       :tag_meta="result.tag_meta"
+                       :building="building"
+                       @applyTagChanges="this.$refs['cloud-box'].generateTagCloud('tags')"/>
         </main>
 
         <Footer/>
@@ -79,20 +56,20 @@ import Vue from 'vue'
 
 import ControlPanel from "./components/ControlPanel.vue"
 import Footer from "./components/Footer.vue"
-import Spinner from "./components/Spinner.vue"
 import CloudBox from "./components/CloudBox.vue"
 import ArtistsList from "./components/ArtistsList.vue"
 import TagsList from "./components/TagsList.vue"
+import ResultTitle from "./components/ResultTitle.vue"
 import Generator from "./assets/js/Generator.js"
 
 export default {
     components: {
         ControlPanel,
         Footer,
-        Spinner,
         CloudBox,
         ArtistsList,
         TagsList,
+        ResultTitle,
     },
     data:function(){return{
         theme:"light",
