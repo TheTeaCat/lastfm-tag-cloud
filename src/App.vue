@@ -164,7 +164,7 @@ export default {
 
 <style >
 body {
-  background: linear-gradient(180deg, #eeeeee 0, rgba(255,255,255,1) 80px);
+  background: linear-gradient(180deg, #eeeeee 0, rgba(255,255,255,0) 80px);
   background-repeat: no-repeat;
 }
 </style>
