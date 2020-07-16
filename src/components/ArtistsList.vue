@@ -3,12 +3,13 @@
         <button @click="collapse" class="collapse-button">{{ collapsed ? '+' : '-' }}</button>
         <h2>Artists:</h2>
         <ol v-if="!collapsed">
-            <li v-for='artist in artists' :key='artist' :artist='artist'>
+            <li v-for='(artist, i) of artists' :key='i' :artist='artist'>
                 <span class="artist-name">
-                    <a :href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">
-                        {{ artist }}</a>
+                    {{ i+1 }} - <a :href="'https://www.last.fm/music/'+artist.replace(/ /g,'+')">
+                        {{ artist }}
+                    </a>
                 </span>
-                ({{ listens[artist] }} {{ listens[artist]>1 ? 'listens' : 'listen' }})
+                ({{ listens[artist] }} {{ listens[artist]>1 ? 'listens' : 'listen' }}){{ i == artists.length-1 ? '' : ', '}}
             </li>
         </ol>
     </div>
@@ -43,10 +44,9 @@ export default {
         padding: $spacer*2;
         background: var(--list-red);
         li {
-            list-style: decimal;
-            margin-left: 2em;
-            margin-top: $spacer;
-            .artist-name {
+            line-height: $spacer*3;
+            display:inline;
+            .artist-name>a {
                 font-weight:$bold;
             }
         }
