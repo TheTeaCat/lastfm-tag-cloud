@@ -126,9 +126,9 @@ export default {
       this.filtered = {"true":true,"false":false}[this.$route.query.filtered]
     } if (this.$route.query.username != undefined) { 
       this.username = this.$route.query.username
+      this.$router.push(this.$route.path)
       this.generate()
     }
-    this.$router.push(this.$route.path)
   },
   methods: {
     async generate() {
