@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import './assets/scss/reset.css'
-import './assets/scss/_vars.scss'
-import './assets/scss/style.scss'
-
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 var router = new VueRouter({
