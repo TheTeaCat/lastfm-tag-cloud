@@ -57,7 +57,7 @@ export default {
     }
     >ol {
         flex-basis:100%;
-        border: 1px solid var(--text-colour);
+        border: 1px solid var(--border-colour);
         padding: $spacer*2;
         background: var(--list-red);
         :first-child {
