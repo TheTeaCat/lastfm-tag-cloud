@@ -6,7 +6,7 @@
   --border-colour: #{$black};
   --text-colour: #{$black};
   --text-alt-colour: #{$red};
-  --input-colour: #{$red-ll};
+  --input-colour: #{$red-l};
   --input-weight: #{$normal};
   --list-red: #{$red-ll};
 }
@@ -14,7 +14,7 @@
 @mixin dark {
   --background-colour: #{$black};
   --top-gradient: #{$grey-dd};
-  --border-colour: #{$white};
+  --border-colour: #{$red};
   --text-colour: #{$white};
   --text-alt-colour: #{$white};
   --input-colour: #{$red-d};
