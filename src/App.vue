@@ -52,6 +52,7 @@
         <li><a href="https://github.com/TheTeaCat/lastfm-tag-cloud#how-are-the-tags-chosen--scaled">How Are The Tags Chosen & Scaled?</a></li>
         <li><a href="https://github.com/TheTeaCat/lastfm-tag-cloud#what-does-the-tag-filter-do">What Does The Tag Filter Do?</a></li>
       </ul>
+      <div class="other-projects">Check out my other projects: <a href="http://picto.uk/">Picto</a>, <a href="https://theteacat.github.io/albums-by-year/">Albums-By-Year</a></div>
       <button class="theme-button" @click="changeTheme()">{{ theme.label }}</button>
     </footer>
   </div>
@@ -227,10 +228,16 @@ footer {
       }
     }
   }
+  .other-projects {
+    display:inline-block;
+    margin: 1em 0;
+    @media(orientation: portrait) {
+      margin-left:1em;
+    }
+  }
   .theme-button {
-    position:absolute;
-    right:0;
-    bottom:0;
+    float:right;
+    margin-left: 1em;
   }
 }
 </style>
