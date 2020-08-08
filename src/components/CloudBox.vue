@@ -20,7 +20,7 @@
             <li><input ref="fg-colour" type="color" v-model="fg_colour"/></li>
             <li><input ref="bg-colour" type="color" v-model="bg_colour"/></li>
             <li><button :disabled="building" @click="generateTagCloud()">Reshuffle</button></li>
-            <li><a download="cloud.png"><button @click="downloadTagCloud" :disabled="building">Download</button></a></li>
+            <li><a download="cloud.png" ref="download-link"><button @click="downloadTagCloud" :disabled="building">Download</button></a></li>
             <li class="share-button"><button @click="copyShareLink">
                     <span>Copy Link:</span>
                     <input ref="share-link" :value="share_link" readonly="readonly"/>
