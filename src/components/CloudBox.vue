@@ -17,8 +17,8 @@
                 height="1200"/>
 
         <ul class="options-below">
-            <li><input ref="fg-colour" type="color" v-model="fg_colour" @click="coloursChanged()"/></li>
-            <li><input ref="bg-colour" type="color" v-model="bg_colour" @click="coloursChanged()"/></li>
+            <li><input ref="fg-colour" type="color" v-model="fg_colour" @change="generateTagCloud()" @click="coloursChanged()"/></li>
+            <li><input ref="bg-colour" type="color" v-model="bg_colour" @change="generateTagCloud()" @click="coloursChanged()"/></li>
             <li><button :disabled="building" @click="generateTagCloud()">Reshuffle</button></li>
             <li><a download="cloud.png" ref="download-link"><button @click="downloadTagCloud" :disabled="building">Download</button></a></li>
             <li class="share-button"><button @click="copyShareLink">
