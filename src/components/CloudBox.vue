@@ -85,7 +85,8 @@ export default {
             this.$emit("building",true)
 
             if (!this.colours_changed) {
-                this.retheme()
+                this.bg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['background-color'])
+                this.fg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['color'])
             }
 
             var cloudWords = []
@@ -118,10 +119,6 @@ export default {
                 backgroundColor:this.bg_colour,
                 shuffle:true,
             })
-        },
-        retheme() {
-            this.bg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['background-color'])
-            this.fg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['color'])
         },
         downloadTagCloud() {
             this.$refs["download-link"].href = this.$refs["canvas"].toDataURL()
