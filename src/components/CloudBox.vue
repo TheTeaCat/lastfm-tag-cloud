@@ -17,8 +17,8 @@
                 height="1200"/>
 
         <ul class="options-below">
-            <li><input ref="fg-colour" type="color" v-model="fg_colour"/></li>
-            <li><input ref="bg-colour" type="color" v-model="bg_colour"/></li>
+            <li><input ref="fg-colour" type="color" v-model="fg_colour" @click="coloursChanged()"/></li>
+            <li><input ref="bg-colour" type="color" v-model="bg_colour" @click="coloursChanged()"/></li>
             <li><button :disabled="building" @click="generateTagCloud()">Reshuffle</button></li>
             <li><a download="cloud.png" ref="download-link"><button @click="downloadTagCloud" :disabled="building">Download</button></a></li>
             <li class="share-button"><button @click="copyShareLink">
@@ -74,6 +74,7 @@ export default {
         mode:"tags",
         bg_colour:"#000000",
         fg_colour:"#ffffff",
+        colours_changed:false,
     }},
     methods: {
         async generateTagCloud(mode){
@@ -81,7 +82,9 @@ export default {
 
             this.$emit("building",true)
 
-            this.retheme()
+            if (!this.colours_changed) {
+                this.retheme()
+            }
 
             var cloudWords = []
             if (this.mode == "tags") {
@@ -111,11 +114,8 @@ export default {
             })
         },
         retheme() {
-            if (this.bg_colour == "#000000" && this.fg_colour == "#ffffff" ||
-                this.bg_colour == "#ffffff" && this.fg_colour == "#000000") {
-                this.bg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['background-color'])
-                this.fg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['color'])
-            }
+            this.bg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['background-color'])
+            this.fg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['color'])
         },
         downloadTagCloud() {
             this.$refs["download-link"].href = this.$refs["canvas"].toDataURL()
@@ -125,6 +125,9 @@ export default {
             this.$refs["share-link"].setSelectionRange(0,99999)
             document.execCommand("Copy")
         },
+        coloursChanged() {
+            this.colours_changed = true;
+        }
     },
     computed: {
         share_link:function() {
