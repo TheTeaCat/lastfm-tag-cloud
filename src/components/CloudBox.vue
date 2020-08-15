@@ -111,8 +111,11 @@ export default {
             })
         },
         retheme() {
-            this.bg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['background-color'])
-            this.fg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['color'])
+            if (this.bg_colour == "#000000" && this.fg_colour == "#ffffff" ||
+                this.bg_colour == "#ffffff" && this.fg_colour == "#000000") {
+                this.bg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['background-color'])
+                this.fg_colour = Utils.rgb2hex(getComputedStyle(this.$refs["canvas"])['color'])
+            }
         },
         downloadTagCloud() {
             this.$refs["download-link"].href = this.$refs["canvas"].toDataURL()
