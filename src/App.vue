@@ -28,20 +28,20 @@
       <CloudBox ref="cloud-box"
                 v-if="result != undefined && result.artists.length > 0"
                 :result="result"
-                :building="building"
                 @building="building=$event;"/>
 
       <ArtistsList class="list"
                     v-if="result != undefined && result.artists.length > 0" 
                     :artists="result.artists" 
-                    :listens="result.listens"/>
+                    :listens="result.listens"
+                    :artists_shown="result.artists_shown"
+                    @applyArtistChanges="$refs['cloud-box'].generateTagCloud('artists')"/>
 
       <TagsList class="list"
                  v-if="result != undefined && result.artists.length > 0" 
                  :tags="result.tags" 
                  :taggings="result.taggings"
                  :tag_meta="result.tag_meta"
-                 :building="building"
                  @applyTagChanges="$refs['cloud-box'].generateTagCloud('tags')"/>
     </main>
 
@@ -147,6 +147,11 @@ export default {
                               this.filtered)
       this.error = response.error
       this.result = response.result
+
+      this.result.artists_shown = {}
+      for (var artist of this.result.artists) {
+        this.result.artists_shown[artist] = true;
+      }
     },
     updateCookie() {
       this.$cookies.set('config',{

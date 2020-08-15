@@ -29,7 +29,7 @@ export default {
     components: {
         TaggingsList,
     },
-    props: ['tags','taggings','tag_meta','building'],
+    props: ['tags','taggings','tag_meta'],
     data:function(){return{
         collapsed:true,
     }},

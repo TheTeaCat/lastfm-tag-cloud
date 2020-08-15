@@ -75,6 +75,8 @@ export default {
         bg_colour:"#000000",
         fg_colour:"#ffffff",
         colours_changed:false,
+        cloudTags:[],
+        cloudArtists:[]
     }},
     methods: {
         async generateTagCloud(mode){
@@ -94,7 +96,11 @@ export default {
                     }
                 }
             } else {
-                cloudWords = this.cloudArtists
+                for (var artist of this.cloudArtists) {
+                    if (this.result.artists_shown[artist[0]]) {
+                        cloudWords.push(artist)
+                    }
+                }
             }
 
             this.$refs["canvas"].addEventListener(
