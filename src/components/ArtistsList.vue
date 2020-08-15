@@ -57,6 +57,9 @@ export default {
         border: 1px solid var(--border-colour);
         padding: $spacer*2;
         background: var(--list-red);
+        :first-child {
+            margin-top: 0;
+        }
         li {
             list-style: decimal;
             margin-top: $spacer;
