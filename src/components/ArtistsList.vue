@@ -62,25 +62,6 @@ export default {
             margin-top: $spacer;
             display:flex;
             align-items: center;
-            .button {
-                width:auto;
-                .checkbox {
-                    display:none;
-                }
-                .checkmark:after {
-                    display:none;
-                    content:"";
-                    height:90%;
-                    width:40%;
-                    margin: auto;
-                    transform: translate(5%, -10%) rotate(45deg);
-                    border: solid var(--text-colour);
-                    border-width: 0px 3px 3px 0px;
-                }
-                .checkbox:checked ~ .checkmark:after {
-                    display:block;
-                }
-            }
             .artist-info {
                 margin-left: $spacer;
                 display:inline;
