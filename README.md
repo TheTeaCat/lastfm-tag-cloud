@@ -11,11 +11,11 @@ Each tag has a "count" on each artist that has a maximum value of 100. I am assu
 
 Consider the following three example artists, with the following three sample tags and their corresponding scores:
 
-| Artist      | Scrobbles | Tag 1: Count   | Tag 2: Count   | Tag 3: Count |
-| ----------- | --------- | -------------- | -------------- | ------------ |
-| Tennis      | 2019      | Dream Pop: 60  | Indie Pop: 94  | Lo-Fi: 40    |
-| Men I Trust | 1330      | Dream Pop: 100 | Indie Pop: 100 | Lo-Fi: 47    |
-| Thundercat  | 700       | Indie: 40      | Electronic: 17 | USA: 60      |
+| Artist      | Scrobbles | Tag 1: Count   | Tag 2: Count   | Tag 3: Count  |
+| ----------- | --------- | -------------- | -------------- | ------------- |
+| Tennis      | 2019      | Lo-Fi: 100     | Indie Pop: 100 | Chillwave: 70 |
+| Men I Trust | 1330      | Dream Pop: 100 | Indie: 67      | Indie Pop: 60 |
+| Thundercat  | 700       | Funk: 100      | Electronic: 91 | Jazz: 74      |
 
 Before we move on, the sum of each tag's `count` over all your artists is calculated, and used as a razor - only up to the top 100 tags by this metric are kept, the rest are discarded to avoid reaching the last.fm API's rate limits.
 
@@ -32,7 +32,7 @@ Two metrics about each tag are gotten from last.fm using the `tag.getinfo` endpo
 
 Now we have all the data, we can start using it.
 
-A "score" is created for each tag as the sum of the products of the scores of the tag on each artist and your scrobbles of that artist. For example, "Dream Pop" from the example above would have a score of `(60/100 * 2019) + (100/100 * 1330) = 2541.4`.
+A "score" is created for each tag as the sum of the products of the scores of the tag on each artist and your scrobbles of that artist. For example, "Indie Pop" from the example above would have a score of `(100/100 * 2019) + (60/100 * 1330) = 2541.4`.
 
 This score of each tag is then scaled (multiplied) by: 
 
@@ -40,7 +40,7 @@ This score of each tag is then scaled (multiplied) by:
 - The number of artists within your sample that are tagged that tag, squared.
 - The base-10 logarithm of the `reach` of that tag from the `tag.getinfo` endpoint (so, a tag gets twice as big for every factor of 10 people that use it - 1 would be half the size of 10, 10 half the size of 100, 100 of 1000...).
 
-For "Dream Pop", this would be `2541.4 * ((60 + 100) / 118911) * 2^2 * log_10(24113) = ~59.94`.
+For "Indie Pop", this would be `2541.4 * ((100 + 60) / 367857) * 2^2 * log_10(64939) = ~21.28`.
 
 This value is arbitrary, before it is passed to [timdream's word cloud generator](https://github.com/timdream/wordcloud2.js/) they're all scaled non-linearly to be in the range of 25-200. If you want to see exactly how this is done, check the CloudBox component's Mounted function. It's not that exciting.
 
