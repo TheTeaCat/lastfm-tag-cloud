@@ -25,16 +25,18 @@ Here are some `reach` and `total`/`taggings` values for the tags used above:
 
 | Tag        | Reach  | Total/Taggings |
 | ---------- | ------ | -------------- |
-| Dream Pop  | 24113  | 118911         |
-| Indie Pop  | 64939  | 367857         |
 | Lo-Fi      | 32892  | 160851         |
+| Indie Pop  | 64939  | 367857         |
+| Chillwave  | 7922   | 31368          |
+| Dream Pop  | 24113  | 118911         |
 | Indie      | 253595 | 2017702        |
+| Funk       | 82092  | 422156         |
 | Electronic | 254177 | 2372062        |
-| USA        | 8753   | 142504         |
+| Jazz       | 146580 | 1150923        |
 
 Now we have all the data, we can start using it.
 
-A "score" is created for each tag as the sum of the products of the scores of the tag on each artist, and your scrobbles of that artist. For example, "Indie Pop" from the example above would have a score of `(100/100 * 2019) + (60/100 * 1330) = 2541.4`.
+A "score" is created for each tag as the sum of the products of the scores of the tag on each artist and your scrobbles of that artist. For example, "Indie Pop" from the example above would have a score of `(100/100 * 2019) + (60/100 * 1330) = 2541.4`.
 
 This score of each tag is then scaled (multiplied) by: 
 
