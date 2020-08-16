@@ -17,9 +17,9 @@ Consider the following three example artists, with the following three sample ta
 | Men I Trust | 1330      | Dream Pop: 100 | Indie: 67      | Indie Pop: 60 |
 | Thundercat  | 700       | Funk: 100      | Electronic: 91 | Jazz: 74      |
 
-Before we move on, the sum of each tag's `count` over all your artists is calculated, and used as a razor - only up to the top 100 tags by this metric are kept, the rest are discarded to avoid reaching the last.fm API's rate limits.
+Before we move on, the sum of each tag's `count` over all the artists in your sample is calculated, and used as a razor - only up to the top 100 tags by this metric are kept, the rest are discarded to avoid reaching the last.fm API's rate limits.
 
-Two metrics about each tag are taken from last.fm using the [tag.getinfo](https://www.last.fm/api/show/tag.getInfo) endpoint: the tag's `reach`, which is defined as the number of users who have used the tag; and the tag's `total` (last.fm call this `taggings` in their docs but it's labelled as `total` in the actual data???), which is the total amount of times the tag has been used.
+Two metrics are then taken about each tag from last.fm using the [tag.getinfo](https://www.last.fm/api/show/tag.getInfo) endpoint: the tag's `reach`, which is defined as the number of users who have used the tag; and the tag's `total` (last.fm call this `taggings` in their docs but it's labelled as `total` in the actual data???), which is the total amount of times the tag has been used over all artists on last.fm.
 
 Here are some `reach` and `total`/`taggings` values for the tags used above:
 
@@ -34,7 +34,7 @@ Here are some `reach` and `total`/`taggings` values for the tags used above:
 
 Now we have all the data, we can start using it.
 
-A "score" is created for each tag as the sum of the products of the scores of the tag on each artist and your scrobbles of that artist. For example, "Indie Pop" from the example above would have a score of `(100/100 * 2019) + (60/100 * 1330) = 2541.4`.
+A "score" is created for each tag as the sum of the products of the scores of the tag on each artist, and your scrobbles of that artist. For example, "Indie Pop" from the example above would have a score of `(100/100 * 2019) + (60/100 * 1330) = 2541.4`.
 
 This score of each tag is then scaled (multiplied) by: 
 
