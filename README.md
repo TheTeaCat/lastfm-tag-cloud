@@ -36,7 +36,7 @@ Here are some `reach` and `total`/`taggings` values for the tags used above:
 
 Now we have all the data, we can start using it.
 
-A `score` is created for each tag as the sum of the products of the scores of the tag on each artist and your scrobbles of that artist. For example, "Indie Pop" from the example above would have a `score` of `(100/100 * 2019) + (60/100 * 1330) = 2541.4`.
+A `score` is created for each tag as the sum of the products of the scores of the tag (divided by 100) on each artist, and your scrobbles of that artist. For example, "Indie Pop" from the example above would have a `score` of `(100/100 * 2019) + (60/100 * 1330) = 2541.4`.
 
 This `score` of each tag is then scaled (multiplied) by: 
 
