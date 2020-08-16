@@ -7,7 +7,7 @@ Give it a whirl: [947496893734373.co.uk/](http://947496893734373.co.uk/)
 
 A sample of your artists (up to the size and from the time period you specify) is taken from last.fm via the [user.getTopArtists](https://www.last.fm/api/show/user.getTopArtists) endpoint. For each artist, their top tags are fetched, using [artist.getTopTags](https://www.last.fm/api/show/artist.getTopTags). 
 
-Each tag has a `count` on each artist that has a maximum value of 100. This `count` is a percentage of the people who have tagged that artist that tagged it this tag (e.g. if one person tags an artist "Lo-Fi", and a hundred people tag that artist, then "Lo-Fi" would have a `count` of 1 on that artist.)
+Each tag has a `count` on each artist that has a maximum value of 100. This `count` is a percentage of the people who have tagged that artist that tagged it this tag (e.g. if one person tags an artist "Lo-Fi", and a hundred people tag that artist, then "Lo-Fi" would have a `count` of 1 on that artist.).
 
 Consider the following three example artists, with the following three sample tags and their corresponding counts on each artist:
 
