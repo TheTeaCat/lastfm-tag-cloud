@@ -9,7 +9,7 @@ A sample of your artists (up to the size and from the time period you specify) i
 
 Each tag has a "count" on each artist that has a maximum value of 100. I am assuming this "count" is the number of users who have tagged the artist with that tag, and that last.fm stops counting when it hits 100.
 
-Consider the following three example artists, with the following three sample tags and their corresponding scores:
+Consider the following three example artists, with the following three sample tags and their corresponding counts on each artist:
 
 | Artist      | Scrobbles | Tag 1: Count   | Tag 2: Count   | Tag 3: Count  |
 | ----------- | --------- | -------------- | -------------- | ------------- |
@@ -19,7 +19,7 @@ Consider the following three example artists, with the following three sample ta
 
 Before we move on, the sum of each tag's `count` over all your artists is calculated, and used as a razor - only up to the top 100 tags by this metric are kept, the rest are discarded to avoid reaching the last.fm API's rate limits.
 
-Two metrics about each tag are gotten from last.fm using the `tag.getinfo` endpoint: the tag's `reach`, which is defined as the number of users who have used the tag; and the tag's `total` (last.fm call this `taggings` in their docs but it's labelled as `total` in the actual data???), which is the total amount of times the tag has been used.
+Two metrics about each tag are gotten from last.fm using the [tag.getinfo](https://www.last.fm/api/show/tag.getInfo) endpoint: the tag's `reach`, which is defined as the number of users who have used the tag; and the tag's `total` (last.fm call this `taggings` in their docs but it's labelled as `total` in the actual data???), which is the total amount of times the tag has been used.
 
 | Tag        | Reach  | Total/Taggings |
 | ---------- | ------ | -------------- |
