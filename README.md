@@ -5,60 +5,46 @@ Give it a whirl: [947496893734373.co.uk/](http://947496893734373.co.uk/)
 
 ## How are the tags chosen & scaled?
 
-Initially, the sample of artists (up to the size and of the time period you specify) is iterated through. For each artist, their top tags are fetched, using [artist.getTopTags](https://www.last.fm/api/show/artist.getTopTags). 
+A sample of your artists (up to the size and from the time period you specify) is taken from last.fm. For each artist, their top tags are fetched, using [artist.getTopTags](https://www.last.fm/api/show/artist.getTopTags). 
 
-Each tag in the response has a `count` for that artist.
+Each tag has a "count" on each artist that has a maximum value of 100. I am assuming this "count" is the number of users who have tagged the artist with that tag, and that last.fm stops counting when it hits 100.
 
->**Note:** This `count` doesn't seem to be documented anywhere. They cap out at 100, so I am working under the assumption that they're a kind of confidence % as to how apropriate that tag is for that artist.
+Consider the following three example artists, with the following three sample tags and their corresponding scores:
 
-For each tag on the artist, the tag's `count` is added to that tag's `library_total` metric.
+| Artist      | Scrobbles | Tag 1: Count   | Tag 2: Count   | Tag 3: Count |
+| ----------- | --------- | -------------- | -------------- | ------------ |
+| Tennis      | 2019      | Dream Pop: 60  | Indie Pop: 94  | Lo-Fi: 40    |
+| Men I Trust | 1330      | Dream Pop: 100 | Indie Pop: 100 | Lo-Fi: 47    |
+| Thundercat  | 700       | Indie: 40      | Electronic: 17 | USA: 60      |
 
-This `library_total` metric is created with an initial value of `0` for every tag.
+Before we move on, the sum of each tag's `count` over all your artists is calculated, and used as a razor - only up to the top 100 tags by this metric are kept, the rest are discarded to avoid reaching the last.fm API's rate limits.
 
-Once all of the artists are iterated through, the tags are pruned to the top 100 by this `library_total` metric. This is done to avoid hitting rate limits on the last.fm API in the next step, where I have to call [tag.getInfo](https://www.last.fm/api/show/tag.getInfo) for every tag.
+Two metrics about each tag are gotten from last.fm using the `tag.getinfo` endpoint: the tag's `reach`, which is defined as the number of users who have used the tag; and the tag's `total` (last.fm call this `taggings` in their docs but it's labelled as `total` in the actual data???), which is the total amount of times the tag has been used.
 
-Each of these 100 tags is then scored as per the following code snippet [[source](https://github.com/TheTeaCat/lastfm-tag-cloud/blob/master/src/assets/js/Generator.js)]:
+| Tag        | Reach  | Total/Taggings |
+| ---------- | ------ | -------------- |
+| Dream Pop  | 24113  | 118911         |
+| Indie Pop  | 64939  | 367857         |
+| Lo-Fi      | 32892  | 160851         |
+| Indie      | 253595 | 2017702        |
+| Electronic | 254177 | 2372062        |
+| USA        | 8753   | 142504         |
 
-```javascript
-score_tags(result){
-    for (var tag of result.tags) {
-        result.scores[tag] = 0
-        /**First, each tagging is weighted by the product of:
-         *  - How many times the user has listened to the artist on which the tag was used,
-         * and...
-         *  - The "count" of that tag on the artist.
-         *    I am assuming that this "count" is a confidence % given by last.fm as to the accuracy of the tag on that artist.
-         *    I can't find any doccumentation, but this would make sense, as they cap out at 100.
-         */
-        for (var tagging of result.taggings[tag]) {
-            result.scores[tag] += tagging.count/100 * result.listens[tagging.artist]
-        }
-        /**The sum of all these weighted taggings is then scaled by:
-         * 1. How many of the uses of that tag overall fall within the user's library sample (its "uniqueness" to the sample).
-         * 
-         * 2. How many artists within the sample are tagged with that tag (its "spread" over the sample).
-         * 
-         * 3. The base 10 logarithm of how many people have used that tag overall (its "reach"; see last.fm API docs).
-         *    Base 10 is used so 100 people using the tag makes it twice as significant as 10 people using the tag; a nice balance.
-         *    It's also conveniently provided as a function by Math.
-         */
-        result.scores[tag] = result.scores[tag] 
-                                    * (result.tag_meta[tag].library_total / result.tag_meta[tag].total) 
-                                    * result.taggings[tag].length * result.taggings[tag].length
-                                    * Math.log10(result.tag_meta[tag].reach)
-    }
-}
-```
+Now we have all the data, we can start using it.
 
-`tag_meta[tag].total` is the `taggings` metric for that tag, taken from [tag.getInfo](https://www.last.fm/api/show/tag.getInfo).
+A "score" is created for each tag as the sum of the products of the scores of the tag on each artist and your scrobbles of that artist. For example, "Dream Pop" from the example above would have a score of `(60/100 * 2019) + (100/100 * 1330) = 2541.4`.
 
-`taggings[tag]` is an array of all the artists that were tagged that tag.
+This score of each tag is then scaled (multiplied) by: 
 
-`tag_meta[tag].reach` is the `reach` metric for that tag, taken from [tag.getInfo](https://www.last.fm/api/show/tag.getInfo).
+- The sum of the `count` of that tag on the artists in your sample, divided by the `total` of that tag from the `tag.getinfo` endpoint (this captures how much of the total uses of that tag fall within your sample).
+- The number of artists within your sample that are tagged that tag, squared.
+- The base-10 logarithm of the `reach` of that tag from the `tag.getinfo` endpoint (so, a tag gets twice as big for every factor of 10 people that use it - 1 would be half the size of 10, 10 half the size of 100, 100 of 1000...).
 
-I've tried to make this take into account the "uniqueness" of the tag to a user's library, as if they were all just scored by frequency the biggest tag on everyone's clouds would probably just be "all".
+For "Dream Pop", this would be `2541.4 * ((60 + 100) / 118911) * 2^2 * log_10(24113) = ~59.94`.
 
-If this causes issues for you, I know. See [here](https://github.com/TheTeaCat/lastfm-tag-cloud/issues/10). I don't care. :rowboat:
+This value is arbitrary, before it is passed to [timdream's word cloud generator](https://github.com/timdream/wordcloud2.js/) they're all scaled non-linearly to be in the range of 25-200. If you want to see exactly how this is done, check the CloudBox component's Mounted function. It's not that exciting.
+
+I've tried to make this take into account the "uniqueness" of the tag to a user's library, as if they were all just scored by frequency the biggest tag on everyone's clouds would probably just be "all". If this causes issues for you, I know. See [here](https://github.com/TheTeaCat/lastfm-tag-cloud/issues/10). I don't care. :rowboat:
 
 ## What does the tag filter do?
 
