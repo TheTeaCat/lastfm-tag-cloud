@@ -7,7 +7,7 @@ Give it a whirl: [947496893734373.co.uk/](http://947496893734373.co.uk/)
 
 A sample of your artists (up to the size and from the time period you specify) is taken from last.fm via the [user.getTopArtists](https://www.last.fm/api/show/user.getTopArtists) endpoint. For each artist, their top tags are fetched, using [artist.getTopTags](https://www.last.fm/api/show/artist.getTopTags). 
 
-Each tag has a "count" on each artist that has a maximum value of 100. I am assuming this "count" is the number of users who have tagged the artist with that tag, and that last.fm stops counting when it hits 100.
+Each tag has a `count` on each artist that has a maximum value of 100. This `count` is a percentage of the people who have tagged that artist that tagged it this tag (e.g. if one person tags an artist "Lo-Fi", and a hundred people tag that artist, then "Lo-Fi" would have a `count` of 1 on that artist.)
 
 Consider the following three example artists, with the following three sample tags and their corresponding counts on each artist:
 
@@ -19,7 +19,7 @@ Consider the following three example artists, with the following three sample ta
 
 Before we move on, the sum of each tag's `count` over all the artists in your sample is calculated, and used as a razor - only up to the top 100 tags by this metric are kept, the rest are discarded to avoid reaching the last.fm API's rate limits.
 
-Two metrics are then taken about each tag from last.fm using the [tag.getinfo](https://www.last.fm/api/show/tag.getInfo) endpoint: the tag's `reach`, which is defined as the number of users who have used the tag; and the tag's `total` (last.fm call this `taggings` in their docs but it's labelled as `total` in the actual data???), which is the total amount of times the tag has been used over all artists on last.fm.
+Two metrics are then taken about each tag from last.fm using the [tag.getInfo](https://www.last.fm/api/show/tag.getInfo) endpoint: the tag's `reach`, which is defined as the number of users who have used the tag; and the tag's `total` (last.fm call this `taggings` in their docs but it's labelled as `total` in the actual data???), which is the total amount of times the tag has been used over all artists on last.fm.
 
 Here are some `reach` and `total`/`taggings` values for the tags used above:
 
@@ -36,13 +36,13 @@ Here are some `reach` and `total`/`taggings` values for the tags used above:
 
 Now we have all the data, we can start using it.
 
-A "score" is created for each tag as the sum of the products of the scores of the tag on each artist and your scrobbles of that artist. For example, "Indie Pop" from the example above would have a score of `(100/100 * 2019) + (60/100 * 1330) = 2541.4`.
+A `score` is created for each tag as the sum of the products of the scores of the tag on each artist and your scrobbles of that artist. For example, "Indie Pop" from the example above would have a `score` of `(100/100 * 2019) + (60/100 * 1330) = 2541.4`.
 
-This score of each tag is then scaled (multiplied) by: 
+This `score` of each tag is then scaled (multiplied) by: 
 
-- The sum of the `count` of that tag on the artists in your sample, divided by the `total` of that tag from the `tag.getinfo` endpoint (this captures how much of the total uses of that tag fall within your sample).
+- The sum of the `count` of that tag on the artists in your sample, divided by the `total` of that tag from the `tag.getInfo` endpoint (this is intended to capture how much of the total uses of that tag fall within your sample).
 - The number of artists within your sample that are tagged that tag, squared.
-- The base-10 logarithm of the `reach` of that tag from the `tag.getinfo` endpoint (so, a tag gets twice as big for every factor of 10 people that use it - 1 would be half the size of 10, 10 half the size of 100, 100 of 1000...).
+- The base-10 logarithm of the `reach` of that tag from the `tag.getInfo` endpoint (so, a tag gets twice as big for every factor of 10 people that use it - 1 would be half the size of 10, 10 half the size of 100, 100 of 1000...).
 
 For "Indie Pop", this would be `2541.4 * ((100 + 60) / 367857) * 2^2 * log_10(64939) = ~21.28`.
 
