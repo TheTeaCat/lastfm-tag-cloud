@@ -5,7 +5,7 @@ Give it a whirl: [947496893734373.co.uk/](http://947496893734373.co.uk/)
 
 ## How are the tags chosen & scaled?
 
-A sample of your artists (up to the size and from the time period you specify) is taken from last.fm. For each artist, their top tags are fetched, using [artist.getTopTags](https://www.last.fm/api/show/artist.getTopTags). 
+A sample of your artists (up to the size and from the time period you specify) is taken from last.fm via the [user.getTopArtists](https://www.last.fm/api/show/user.getTopArtists) endpoint. For each artist, their top tags are fetched, using [artist.getTopTags](https://www.last.fm/api/show/artist.getTopTags). 
 
 Each tag has a "count" on each artist that has a maximum value of 100. I am assuming this "count" is the number of users who have tagged the artist with that tag, and that last.fm stops counting when it hits 100.
 
@@ -19,7 +19,9 @@ Consider the following three example artists, with the following three sample ta
 
 Before we move on, the sum of each tag's `count` over all your artists is calculated, and used as a razor - only up to the top 100 tags by this metric are kept, the rest are discarded to avoid reaching the last.fm API's rate limits.
 
-Two metrics about each tag are gotten from last.fm using the [tag.getinfo](https://www.last.fm/api/show/tag.getInfo) endpoint: the tag's `reach`, which is defined as the number of users who have used the tag; and the tag's `total` (last.fm call this `taggings` in their docs but it's labelled as `total` in the actual data???), which is the total amount of times the tag has been used.
+Two metrics about each tag are taken from last.fm using the [tag.getinfo](https://www.last.fm/api/show/tag.getInfo) endpoint: the tag's `reach`, which is defined as the number of users who have used the tag; and the tag's `total` (last.fm call this `taggings` in their docs but it's labelled as `total` in the actual data???), which is the total amount of times the tag has been used.
+
+Here are some `reach` and `total`/`taggings` values for the tags used above:
 
 | Tag        | Reach  | Total/Taggings |
 | ---------- | ------ | -------------- |
