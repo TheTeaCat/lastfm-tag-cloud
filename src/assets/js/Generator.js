@@ -98,7 +98,12 @@ class Generator {
                                                         result.tag_meta[tag.name].tot_scrobbles += result.listens[artist_name]
                                                     }
                                                 }
-                                            }.bind(this))
+                                            }.bind(this)
+                                        ).catch(
+                                            function(error) {
+                                                return error
+                                            }.bind(this)
+                                        )
                                 resolve(true)
                             }.bind(this)
                             )
@@ -180,6 +185,10 @@ class Generator {
                                 if (response.data.tag == undefined ) { return }
                                 result.tag_meta[tag_name].reach = response.data.tag.reach
                                 result.tag_meta[tag_name].total = response.data.tag.total
+                            }.bind(this)
+                        ).catch(
+                            function(error) {
+                                return error
                             }.bind(this)
                         )
                         resolve(true)
