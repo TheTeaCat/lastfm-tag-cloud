@@ -28,6 +28,7 @@
       <CloudBox ref="cloud-box"
                 v-if="result != undefined && result.artists.length > 0"
                 :result="result"
+                :building="building"
                 @building="building=$event;"/>
 
       <ArtistsList class="list"
