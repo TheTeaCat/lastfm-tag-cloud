@@ -143,6 +143,12 @@ class Generator {
                 }
             }
         }
+        /**We also have to remove tags that might have names that are just whitespace, apparently... */
+        for (i in result.tags) {
+            if (result.tags[i].trim() == "") {
+                result.tags.splice(i,1)
+            }
+        }
 
         result.tags.sort(function(a,b){return result.tag_meta[b].library_total - result.tag_meta[a].library_total}.bind(this))
 
