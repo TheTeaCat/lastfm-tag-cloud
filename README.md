@@ -1,7 +1,7 @@
 # lastfm-tag-cloud
 A last.fm tag cloud generator built with Vue!
 
-Give it a whirl: [https://tagcloud.joshuarainbow.co.uk/](https://tagcloud.joshuarainbow.co.uk/)
+Give it a whirl: [https://tagcloud.rainosullivan.com/](https://tagcloud.rainosullivan.com/)
 
 ## How are the tags chosen & scaled?
 
